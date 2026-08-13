@@ -34,28 +34,31 @@ function updateContext(){
   let ctx=editor.querySelector('.contest-workspace-context');
   if(!ctx){ctx=document.createElement('div');ctx.className='contest-workspace-context';editor.querySelector('.contest-editor-nav')?.insertAdjacentElement('beforebegin',ctx)}
   const child=isRetailChild(),master=isRetailMaster();
+  editor.classList.toggle('is-retail-child',child);
+  editor.classList.toggle('is-retail-master',master);
   const publicName=$('contest-public')?.value||'Untitled contest';
   const retailer=$('contest-retailer-name')?.value||'Retailer';
   const parent=$('contest-retail-parent-id')?.value||'';
   const eyebrow=child?'Retailer page':master?'Retail master':'Contest';
   const title=child?retailer:publicName;
-  const sub=child?`${publicName} · Store-specific setup`:master?'Shared campaign settings and assets':'Contest setup';
-  ctx.innerHTML=`<div><span class="cwc-eyebrow">${eyebrow}</span><strong>${escapeHtml(title)}</strong><p>${escapeHtml(sub)}</p></div>${child&&parent?`<button class="admin-btn admin-btn-secondary" type="button" data-clean-open-master="${escapeHtml(parent)}">Open master</button>`:''}`;
+  const sub=child?`${publicName} · Retailer-specific setup`:master?'Shared campaign settings and assets':'Contest setup';
+  ctx.innerHTML=`<div><span class="cwc-eyebrow">${eyebrow}</span><strong>${escapeHtml(title)}</strong><p>${escapeHtml(sub)}</p></div>${child&&parent?`<button class="admin-btn admin-btn-secondary" type="button" data-clean-open-master="${escapeHtml(parent)}">Open master campaign</button>`:''}`;
 
   const nav=editor.querySelector('.contest-editor-nav');
   if(nav){
+    const retailButton=nav.querySelector('[data-contest-section="retail"]');
+    if(retailButton)retailButton.textContent=child?'Retailer':master?'Retailers':'Retailers';
     nav.querySelectorAll('[data-contest-section]').forEach(b=>{
       const k=b.dataset.contestSection;
       if(child)b.hidden=!['retail','dates','entry','review'].includes(k);
       else if(master)b.hidden=false;
       else b.hidden=k==='retail';
     });
-    if(child&&!nav.querySelector('[data-contest-section].is-active:not([hidden])'))nav.querySelector('[data-contest-section="retail"]')?.click();
+    if(child&&!nav.querySelector('[data-contest-section].is-active:not([hidden])'))retailButton?.click();
   }
 }
 function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 
-// Delegated routing works even though the contest list is re-rendered.
 document.addEventListener('click',e=>{
   const edit=e.target.closest('#contest-admin-list [data-edit], #contest-add');
   if(edit){setTimeout(()=>setMode('edit'),0);return;}
@@ -75,7 +78,6 @@ document.addEventListener('click',e=>{
 $('contest-retailer-name')?.addEventListener('input',updateContext);
 $('contest-public')?.addEventListener('input',updateContext);
 
-// Hard-stop legacy leakage even if another stylesheet changes display rules later.
 const oldPanels=editor.querySelector(':scope > .admin-panels');if(oldPanels){oldPanels.hidden=true;oldPanels.style.setProperty('display','none','important')}
 editor.querySelectorAll('.ce-editor-shell,.ce-sticky-actions').forEach(el=>el.style.setProperty('display','none','important'));
 
