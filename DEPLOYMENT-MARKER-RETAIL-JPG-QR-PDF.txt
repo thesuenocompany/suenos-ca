@@ -1,0 +1,4 @@
+Sueños Retail Contest master JPG poster workflow
+Build: 2026-08-06
+Master uploads JPG + draws QR placement.
+Retailer sub-contests inherit and export unique print PDFs.

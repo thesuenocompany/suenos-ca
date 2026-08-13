@@ -1,0 +1,114 @@
+(()=>{
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const fmt=(v,tz='America/Vancouver',opts={dateStyle:'long',timeStyle:'short'})=>v?new Intl.DateTimeFormat('en-CA',{...opts,timeZone:tz}).format(new Date(v)):'';
+const money=v=>v!==null&&v!==undefined&&v!==''?new Intl.NumberFormat('en-CA',{style:'currency',currency:'CAD',maximumFractionDigits:0}).format(Number(v)):'';
+const TURNSTILE_SITE_KEY='0x4AAAAAAD9MP21ca7C8BGsS';
+const LEGAL_AGE=Object.freeze({AB:18,MB:18,QC:18,BC:19,SK:19,ON:19,NB:19,NS:19,PE:19,NL:19,YT:19,NT:19,NU:19});
+const PROVINCES=[['BC','British Columbia'],['AB','Alberta'],['SK','Saskatchewan'],['MB','Manitoba'],['ON','Ontario'],['QC','Quebec'],['NB','New Brunswick'],['NS','Nova Scotia'],['PE','Prince Edward Island'],['NL','Newfoundland and Labrador'],['YT','Yukon'],['NT','Northwest Territories'],['NU','Nunavut']];
+const MAILCHIMP_ACTION='https://canooligans.us8.list-manage.com/subscribe/post?u=54180635caa88c03ba452c3bc&id=db7e420555&f_id=00f530e3f0';
+const MAILCHIMP_FRAME='suenos-mailchimp-retail-contest-submit';
+const legalAgeFor=(province,c)=>c.age_requirement_mode==='regional'?(LEGAL_AGE[String(province||'').toUpperCase()]||19):Math.max(1,Number(c.minimum_age)||19);
+const latestEligibleBirthDate=age=>{const now=new Date();const d=new Date(now.getFullYear()-age,now.getMonth(),now.getDate());return d.toISOString().slice(0,10)};
+const isOldEnough=(value,age)=>{if(!/^\d{4}-\d{2}-\d{2}$/.test(String(value||'')))return false;const [y,m,d]=String(value).split('-').map(Number);const born=new Date(y,m-1,d);if(born.getFullYear()!==y||born.getMonth()!==m-1||born.getDate()!==d)return false;const today=new Date();const cutoff=new Date(today.getFullYear()-age,today.getMonth(),today.getDate());return born<=cutoff;};
+const ensureMailchimpFrame=()=>{let frame=document.querySelector(`iframe[name="${MAILCHIMP_FRAME}"]`);if(frame)return frame;frame=document.createElement('iframe');frame.name=MAILCHIMP_FRAME;frame.title='Mailing-list signup response';frame.hidden=true;frame.tabIndex=-1;frame.setAttribute('aria-hidden','true');document.body.appendChild(frame);return frame;};
+const submitSocietySignup=payload=>{if(!payload?.marketingConsent||!payload?.email||!payload?.birthDate)return false;const parts=String(payload.birthDate).split('-');if(parts.length!==3)return false;ensureMailchimpFrame();const form=document.createElement('form');form.method='post';form.action=MAILCHIMP_ACTION;form.target=MAILCHIMP_FRAME;form.hidden=true;const fields={EMAIL:payload.email,'MMERGE5[day]':parts[2],'MMERGE5[month]':parts[1],'MMERGE5[year]':parts[0],'gdpr[42876]':'Y','b_54180635caa88c03ba452c3bc_db7e420555':'',subscribe:'Subscribe'};Object.entries(fields).forEach(([name,value])=>{const input=document.createElement('input');input.type='hidden';input.name=name;input.value=String(value||'');form.appendChild(input)});document.body.appendChild(form);form.submit();setTimeout(()=>form.remove(),1500);return true;};
+const uploadReceipt=async file=>{const formData=new FormData();formData.append('receipt',file);const response=await fetch('/api/contest-entry-receipt',{method:'POST',body:formData});const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.message||'Receipt upload failed.');return data;};
+
+window.renderRetailContest=async function(page,c,track){
+  document.body.classList.add('retail-contest-page');
+  const active=c.state==='live',coming=c.state==='scheduled';
+  const eligible=(Array.isArray(c.eligible_provinces)&&c.eligible_provinces.length?c.eligible_provinces:PROVINCES.map(x=>x[0])).map(x=>String(x).toUpperCase());
+  const retailer=c.retailer_name||'Participating Retailer';
+  const prizeImage=c.prize_image_url||(Array.isArray(c.prize_image_urls)&&c.prize_image_urls[0])||'';
+  const rulesTrigger=window.ContestRulesModal?.triggerHtml(c,'Full Rules','contest-rules-trigger rc-rules-button')||`<button class="contest-rules-trigger rc-rules-button" type="button" data-contest-rules-open>Full Rules</button>`;
+  const rulesSource=window.ContestRulesModal?.modalHtml(c)||`<template class="contest-rules-source">${c.full_rules_html||'<p>Official Rules will be published before entries open.</p>'}</template>`;
+  const heroMarkup=c.desktop_hero_url?`<div class="rc-hero-blur" aria-hidden="true" style="position:absolute!important;inset:-48px!important;background-image:url('${esc(c.desktop_hero_url)}')!important;background-size:cover!important;background-position:center!important;filter:blur(34px) brightness(.62) saturate(.9)!important;transform:scale(1.1)!important;z-index:0!important;pointer-events:none!important"></div><picture style="position:relative!important;z-index:2!important;display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;height:100%!important;overflow:hidden!important">${c.mobile_hero_url?`<source media="(max-width:720px)" srcset="${esc(c.mobile_hero_url)}">`:''}<img src="${esc(c.desktop_hero_url)}" alt="${esc(c.hero_alt||c.public_name)}" style="display:block!important;height:100%!important;width:auto!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:${esc(c.hero_object_position||'50% 50%')}!important"></picture>`:`<div class="rc-hero-fallback" aria-hidden="true"><span>Paradise is a state of Sueños.</span></div>`;
+  const bonusEnabled=Boolean(c.receipt_bonus_enabled);
+  const bonusPerItem=Math.max(1,Number(c.receipt_bonus_per_item)||1);
+  const bonusMax=Math.max(1,Number(c.receipt_bonus_max_per_receipt)||10);
+  const receiptHelp=c.receipt_bonus_help_text||`Upload one full receipt showing your Sueños purchase to earn ${bonusPerItem} bonus entr${bonusPerItem===1?'y':'ies'} per Sueños item, up to ${bonusMax}.`;
+  const noPurchaseBonus=c.receipt_bonus_no_purchase_method||'An equivalent no-purchase bonus-entry method is available in the Full Rules.';
+
+  page.className='contest-page retail-contest-page-main';
+  page.innerHTML=`<article class="rc-shell">
+    <section class="rc-hero" style="position:relative!important;isolation:isolate!important;overflow:hidden!important;display:flex!important;align-items:center!important;justify-content:center!important;height:clamp(420px,46vw,720px)!important;background:#071012!important">${heroMarkup}</section>
+    <section class="rc-brand-strip">
+      <div class="rc-brand-strip-inner">
+        <div class="rc-retailer-lockup">${c.retailer_logo_url?`<img src="${esc(c.retailer_logo_url)}" alt="${esc(retailer)} logo">`:''}<div><span>Enter at</span><strong>${esc(retailer)}</strong>${c.retailer_display_address?`<small>${esc(c.retailer_display_address)}</small>`:''}</div></div>
+        <div class="rc-strip-copy"><span>${esc(c.eyebrow||'RETAIL CONTEST')}</span><strong>${esc(c.public_name)}</strong></div>
+        ${active?'<a class="rc-strip-button" href="#retail-entry">Enter now</a>':`<span class="rc-strip-status">${coming?'Coming soon':'Closed'}</span>`}
+      </div>
+    </section>
+
+    <section class="rc-intro">
+      <div class="rc-intro-copy"><p class="rc-kicker">${esc(c.eyebrow||'SUEÑOS RETAIL CONTEST')}</p><h1>${esc(c.headline||c.public_name)}</h1><p>${esc(c.intro_copy||'Enter for your chance to win. No purchase necessary.')}</p><div class="rc-meta"><span>Closes ${esc(fmt(c.close_at,c.timezone))}</span><span>${eligible.join(', ')}</span><span>Legal drinking age required</span></div></div>
+      <div class="rc-prize-card">${prizeImage?`<div class="rc-prize-image"><img src="${esc(prizeImage)}" alt="${esc(c.prize_title||'Contest prize')}"></div>`:''}<div class="rc-prize-copy"><p class="rc-kicker">THE PRIZE</p><h2>${esc(c.prize_title||c.public_name)}</h2>${c.prize_description?`<p>${esc(c.prize_description)}</p>`:''}${c.prize_value?`<strong>${money(c.prize_value)} approximate retail value</strong>`:''}${c.included_items?`<div><b>Included</b><p>${esc(c.included_items)}</p></div>`:''}${c.excluded_items?`<div><b>Not included</b><p>${esc(c.excluded_items)}</p></div>`:''}</div></div>
+    </section>
+
+    <section id="retail-entry" class="rc-entry-section">
+      <div class="rc-entry-heading"><p class="rc-kicker">${active?'ENTER NOW':coming?'COMING SOON':'CONTEST CLOSED'}</p><h2>${esc(c.public_name)}</h2><p>${active?'Complete the form below. One base entry per email. You can use the same email again later to submit additional unique receipts for bonus entries.':coming?`Entries open ${esc(fmt(c.start_at,c.timezone))}.`:`Entries closed ${esc(fmt(c.close_at,c.timezone))}.`}</p></div>
+      <div class="rc-entry-card">${active?`<div id="rc-errors" class="rc-errors" role="alert"></div><form id="rc-form" novalidate>
+        <div class="rc-field"><label for="rc-first">First name</label><input id="rc-first" name="firstName" autocomplete="given-name" required></div>
+        <div class="rc-field"><label for="rc-last">Last name</label><input id="rc-last" name="lastName" autocomplete="family-name" required></div>
+        <div class="rc-field rc-full"><label for="rc-email">Email address</label><input id="rc-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="rc-field"><label for="rc-phone">Phone number</label><input id="rc-phone" name="phone" type="tel" autocomplete="tel" required></div>
+        <div class="rc-field"><label for="rc-birth">Date of birth</label><input id="rc-birth" name="birthDate" type="date" autocomplete="bday" required><small id="rc-age-help">Select your province to confirm the required legal age.</small></div>
+        ${c.retail_require_address!==false?`<div class="rc-field rc-full"><label for="rc-address1">Street address</label><input id="rc-address1" name="addressLine1" autocomplete="address-line1" required></div><div class="rc-field rc-full"><label for="rc-address2">Apartment, suite or unit <span>Optional</span></label><input id="rc-address2" name="addressLine2" autocomplete="address-line2"></div>`:''}
+        <div class="rc-field"><label for="rc-city">City</label><input id="rc-city" name="city" autocomplete="address-level2" required></div>
+        <div class="rc-field"><label for="rc-postal">Postal code</label><input id="rc-postal" name="postalCode" autocomplete="postal-code" required></div>
+        <div class="rc-field rc-full"><label for="rc-province">Province or territory</label><select id="rc-province" name="province" autocomplete="address-level1" required><option value="">Select</option>${PROVINCES.filter(([code])=>eligible.includes(code)).map(([code,name])=>`<option value="${code}">${esc(name)}</option>`).join('')}</select></div>
+        ${c.custom_question_enabled?`<div class="rc-field rc-full"><label for="rc-custom">${esc(c.custom_question_label||'Question')}</label>${c.custom_question_type==='short'?'<input id="rc-custom" name="customResponse">':`<select id="rc-custom" name="customResponse">${(c.custom_question_options||[]).map(x=>`<option>${esc(x)}</option>`).join('')}</select>`}</div>`:''}
+        ${bonusEnabled?`<section class="rc-field rc-full rc-receipt-card"><div class="rc-receipt-pill">Bonus receipt entries</div><h3>Upload your receipt for bonus entries</h3><p>${esc(receiptHelp)}</p><label for="rc-receipt">Receipt image</label><input class="rc-receipt-file" id="rc-receipt" name="receiptFile" type="file" accept="image/jpeg,image/png,image/webp"><small class="rc-receipt-hint">Upload the full receipt from this retailer. Receipts from another store or venue will not qualify. Duplicate receipts are blocked automatically. JPG, PNG or WebP only.</small><p class="rc-receipt-hint"><strong>No purchase necessary:</strong> ${esc(noPurchaseBonus)}</p><div id="rc-receipt-feedback" class="rc-note"></div></section>`:''}
+        <label class="rc-check rc-full"><input type="checkbox" name="rulesConfirmed" required><span>I confirm the information above is accurate and I agree to the Official Contest Rules.</span></label>
+        ${c.marketing_enabled?`<label class="rc-check rc-full"><input type="checkbox" name="marketingConsent"><span>${esc(c.marketing_consent_text)}</span></label><p class="rc-note rc-full">Marketing consent is optional and is not required to enter.</p>`:''}
+        <div class="rc-field rc-full rc-verification"><label>Verification</label><div id="rc-turnstile"></div><small id="rc-turnstile-help">Verification will run when you submit.</small></div>
+        <input class="rc-honeypot" name="website" tabindex="-1" autocomplete="off"><input type="hidden" name="formStartedAt" value="${Date.now()}">
+        <button class="rc-submit rc-full" type="submit">Submit entry</button><p id="rc-status" class="rc-status rc-full" role="status" aria-live="polite"></p>
+        <div class="rc-abbrev rc-full">${esc(c.abbreviated_rules||'No purchase necessary. Open to eligible Canadian residents of legal drinking age. Odds depend on the number of eligible entries received. A skill-testing question is required.')} <span class="rc-rules-action">${rulesTrigger}</span></div>
+      </form>`:`<div class="rc-closed"><h3>${coming?'Opening soon':'Entries are closed'}</h3><p>${coming?`Come back ${esc(fmt(c.start_at,c.timezone))}.`:'Thank you to everyone who entered.'}</p></div>`}</div>
+    </section>
+
+    <section class="rc-rules-section"><div><p class="rc-kicker">HOW IT WORKS</p><h2>Simple entry. One retailer. One draw.</h2></div><ol><li>Complete the retailer-specific entry form.</li><li>${bonusEnabled?'Optionally upload a full receipt for bonus entries.':'Submit before the closing date.'}</li><li>A potential winner is selected from this retailer’s eligible entries.</li><li>The selected entrant must satisfy the Official Rules and answer a skill-testing question.</li></ol></section>
+    <section class="rc-legal"><div>${rulesTrigger}</div><p>${esc(c.platform_disclaimer||'This promotion is not sponsored, endorsed, administered by or associated with Facebook, Instagram or Meta.')}</p>${rulesSource}</section>
+  </article>`;
+
+  const form=document.getElementById('rc-form'); if(!form)return;
+  const province=document.getElementById('rc-province'),birth=document.getElementById('rc-birth'),ageHelp=document.getElementById('rc-age-help'),status=document.getElementById('rc-status'),button=form.querySelector('button[type=submit]'),turnstileHelp=document.getElementById('rc-turnstile-help'),receiptInput=document.getElementById('rc-receipt'),receiptFeedback=document.getElementById('rc-receipt-feedback');
+  let widgetId=null,pending=false,attempts=0;
+  const updateAge=()=>{const code=province.value;const age=legalAgeFor(code,c);birth.max=latestEligibleBirthDate(age);ageHelp.textContent=code?`You must be ${age}+ to enter from ${PROVINCES.find(x=>x[0]===code)?.[1]||code}.`:`Select your province to confirm the required legal age.`;return age;};
+  province.addEventListener('change',updateAge);updateAge();
+  if(receiptInput&&receiptFeedback){receiptInput.addEventListener('change',()=>{if(receiptInput.files?.[0])receiptFeedback.innerHTML='<span class="rc-receipt-warning">Receipt selected. It will upload when you submit your entry.</span>';else receiptFeedback.textContent='';});}
+  const resetTurnstile=message=>{pending=false;button.disabled=false;if(turnstileHelp)turnstileHelp.textContent=message||'Verification will run when you submit.';try{if(window.turnstile&&widgetId!==null)window.turnstile.reset(widgetId)}catch{}};
+  const submitEntry=async token=>{
+    const fd=new FormData(form),params=new URLSearchParams(location.search),payload=Object.fromEntries(fd.entries());
+    try{
+      if(receiptInput?.files?.[0]){
+        if(receiptFeedback)receiptFeedback.innerHTML='<span class="rc-receipt-warning">Uploading receipt…</span>';
+        status.textContent='Uploading receipt…';
+        const uploaded=await uploadReceipt(receiptInput.files[0]);
+        payload.receiptAssetKey=uploaded.key;
+        payload.receiptImageHash=uploaded.imageHash;
+        payload.receiptOriginalName=uploaded.originalName||receiptInput.files[0].name||'';
+        payload.receiptMime=uploaded.mime;
+        payload.receiptSize=uploaded.size;
+        if(receiptFeedback)receiptFeedback.innerHTML='<span class="rc-receipt-success">Receipt uploaded. We’ll review it for bonus entries.</span>';
+      }
+      Object.assign(payload,{slug:c.slug,birthDate:fd.get('birthDate'),ageConfirmed:true,rulesConfirmed:fd.get('rulesConfirmed')==='on',marketingConsent:fd.get('marketingConsent')==='on',turnstileToken:token,utmSource:params.get('utm_source'),utmMedium:params.get('utm_medium'),utmCampaign:params.get('utm_campaign'),utmContent:params.get('utm_content'),referrer:document.referrer});
+      status.textContent='Saving your entry…';
+      const r=await fetch('/api/contests',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)}),d=await r.json().catch(()=>({}));
+      if(!r.ok)throw Object.assign(new Error(d.message||'Entry could not be submitted.'),{code:d.code||'',turnstileError:d.turnstileError||''});
+      if(typeof track==='function')track('contest_entry_success',c);
+      const subscribed=submitSocietySignup(payload);
+      if(subscribed&&typeof track==='function')track('newsletter_signup_submit',{source:'retail_contest',contest_slug:c.slug,retailer:c.retailer_code||''});
+      const receiptCopy=d.receipt?.publicMessage?`<p>${esc(d.receipt.publicMessage)}</p>`:'';
+      form.outerHTML=`<div class="rc-success"><p class="rc-kicker">ENTRY RECEIVED</p><h2>${esc(d.confirmation?.heading||'You’re in. Paradise may be calling.')}</h2><p>${esc(d.confirmation?.message||'Your entry has been received.')}</p>${receiptCopy}${subscribed?'<p>Check your inbox to confirm your Sueños Society signup.</p>':''}${bonusEnabled?'<p><button class="rc-submit" type="button" onclick="location.reload()">Submit another receipt</button></p>':''}</div>`;
+    }catch(err){
+      status.textContent=err.message||'Please check the form and try again.';
+      resetTurnstile(err.code==='turnstile'?'Verification refreshed. Tap Submit Entry again.':'Verification will run again when you retry.');
+    }
+  };
+  const renderTurnstile=()=>{if(widgetId!==null)return;if(!window.turnstile?.render){attempts+=1;if(attempts<120){setTimeout(renderTurnstile,100);return}turnstileHelp.textContent='Verification could not load. Refresh and try again.';return}widgetId=window.turnstile.render('#rc-turnstile',{sitekey:TURNSTILE_SITE_KEY,action:'contest-retail',execution:'execute',appearance:'interaction-only','refresh-expired':'auto',callback:token=>{if(turnstileHelp)turnstileHelp.textContent='Verification complete. Finishing your entry…';if(pending)submitEntry(token)},'expired-callback':()=>resetTurnstile('Verification expired. Tap Submit Entry again.'),'error-callback':()=>{resetTurnstile('Verification could not be completed. Tap Submit Entry again.');return true;}});};
+  renderTurnstile();
+  form.addEventListener('submit',e=>{e.preventDefault();const errors=[];const age=updateAge();if(!province.value)errors.push('Select your province or territory.');if(!birth.value||!isOldEnough(birth.value,age))errors.push(`You must be ${age}+ to enter from your selected province or territory.`);if(receiptInput?.files?.[0]&&!/^image\/(jpeg|png|webp)$/i.test(receiptInput.files[0].type||''))errors.push('Receipt image must be JPG, PNG or WebP.');if(!form.reportValidity())errors.push('Complete the required fields.');const box=document.getElementById('rc-errors');if(errors.length){box.style.display='block';box.innerHTML='<strong>Please correct:</strong><ul>'+[...new Set(errors)].map(x=>`<li>${esc(x)}</li>`).join('')+'</ul>';box.scrollIntoView({behavior:'smooth',block:'center'});return}box.style.display='none';button.disabled=true;status.textContent='Verifying…';pending=true;if(typeof track==='function')track('contest_entry_submit',c);try{window.turnstile.execute(widgetId)}catch{resetTurnstile('Verification could not start. Tap Submit Entry again.')}});
+};
+})();

@@ -1,0 +1,16 @@
+/  /en-ca/  301!
+/find-suenos  /en-ca/find-a-bottle/  301!
+/find-suenos/ /en-ca/find-a-bottle/  301!
+
+/cocktails/jalisco-haze /en-ca/cocktails/jalisco-haze/ 301!
+/cocktails/jalisco-haze/ /en-ca/cocktails/jalisco-haze/ 301!
+
+# Existing static cocktail pages keep priority. New recipe slugs use the dynamic recipe shell.
+/en-ca/cocktails/:slug/ /en-ca/cocktails/recipe/index.html?slug=:slug 200
+/en-ca/cocktails/:slug /en-ca/cocktails/recipe/index.html?slug=:slug 200
+/es-mx/cocteles/:slug/ /es-mx/cocteles/recipe/index.html?slug=:slug 200
+/es-mx/cocteles/:slug /es-mx/cocteles/recipe/index.html?slug=:slug 200
+
+# Private contest routes. Not listed in navigation or sitemap.
+/en-ca/contests/:slug/ /en-ca/contests/contest/index.html?slug=:slug 200
+/en-ca/contests/:slug /en-ca/contests/contest/index.html?slug=:slug 200

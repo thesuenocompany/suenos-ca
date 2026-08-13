@@ -1,0 +1,10 @@
+Validated before packaging:
+- contest admin JavaScript syntax: passed
+- retail contest renderer JavaScript syntax: passed
+- public contest router JavaScript syntax: passed
+- contest admin Netlify Function syntax: passed
+- public contest Netlify Function syntax: passed
+- admin and public HTML parsing: passed
+- Supabase migration applied successfully to project dowfjjthshbbgnvwxzjv
+- contest_type constraint accepts: standard, photo_scrapbook, retail
+- age_requirement_mode constraint accepts: fixed, regional

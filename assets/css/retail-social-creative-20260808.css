@@ -1,0 +1,43 @@
+.retail-social-designer{margin-top:26px;padding:22px;border:1px solid rgba(84,224,236,.28);border-radius:18px;background:#0b1415}.retail-social-heading{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:18px}.retail-social-heading h4{margin:0 0 6px;font-size:22px}.retail-social-heading p{margin:0;color:#aeb9ba}.retail-social-badge{padding:6px 10px;border-radius:999px;background:#123c40;color:#8ee3eb;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.retail-social-slots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0}.retail-social-slot{border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:10px;background:#0d1111;cursor:pointer}.retail-social-slot.is-selected{border-color:#58dfea;box-shadow:0 0 0 2px rgba(88,223,234,.15)}.retail-social-slot-preview{aspect-ratio:1.1;background:#161c1d;border-radius:9px;overflow:hidden;display:grid;place-items:center;margin-bottom:10px}.retail-social-slot-preview img{width:100%;height:100%;object-fit:cover}.retail-social-slot-preview span{font-size:30px;font-weight:900;color:#546264}.retail-social-slot strong,.retail-social-slot small{display:block}.retail-social-slot small{color:#8e9a9c;min-height:34px;margin:4px 0 8px}.retail-social-slot input[type=file]{width:100%;font-size:11px;margin-bottom:7px}.retail-social-workspace{margin-top:18px}.retail-social-canvas-shell{position:relative;width:min(920px,100%);margin:0 auto;background:#111;overflow:hidden;touch-action:none}.retail-social-canvas-shell>img{display:block;width:100%;height:100%;object-fit:contain}.retail-social-selection{position:absolute;border:3px solid #25f37a;background:rgba(37,243,122,.12);box-shadow:0 0 0 1px #000;pointer-events:none;display:grid;place-items:center}.retail-social-selection span{background:#07110b;color:#62ff9b;font-weight:900;font-size:11px;padding:5px 8px;border-radius:5px;text-transform:uppercase;letter-spacing:.06em}.retail-social-readout{margin:10px 0 14px;color:#aeb9ba;font-size:13px}.retail-social-child-summary{padding:14px;border-left:4px solid #58dfea;background:rgba(88,223,234,.07);margin-bottom:14px}.retail-social-child-summary strong,.retail-social-child-summary span{display:block}.retail-social-downloads{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12)}.retail-social-downloads h4{margin:0 0 5px}.retail-social-downloads p{margin:0 0 12px;color:#aeb9ba}.retail-social-downloads>.admin-btn{margin-top:10px}.retail-social-status{margin-top:12px}.retail-social-status.is-error{color:#ff7a72}@media(max-width:1000px){.retail-social-slots{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.retail-social-slots{grid-template-columns:1fr}.retail-social-heading{display:block}.retail-social-badge{display:inline-flex;margin-top:8px}}
+
+/* 2026-08-08 social pack gets a real full-width asset workspace */
+.retail-social-designer{padding:28px!important}
+.retail-social-heading{max-width:1200px}
+.retail-social-slots{
+  grid-template-columns:repeat(4,minmax(220px,1fr))!important;
+  gap:18px!important;
+  width:100%!important;
+}
+.retail-social-slot{
+  padding:14px!important;
+  min-width:0!important;
+}
+.retail-social-slot-preview{
+  aspect-ratio:16/10!important;
+  min-height:150px!important;
+  margin-bottom:12px!important;
+  background:#141b1c!important;
+}
+.retail-social-slot-preview img{
+  object-fit:contain!important;
+  padding:6px!important;
+  box-sizing:border-box!important;
+}
+.retail-social-slot strong{font-size:16px!important}
+.retail-social-slot small{min-height:0!important;margin:6px 0 12px!important;word-break:break-word}
+.retail-social-slot input[type=file]{font-size:12px!important;margin:8px 0!important}
+.retail-social-slot .admin-btn{width:100%!important;justify-content:center!important;min-height:44px!important}
+.retail-social-workspace{margin-top:26px!important}
+.retail-social-canvas-shell{width:min(1280px,100%)!important;max-height:78vh!important}
+.retail-social-canvas-shell>img{max-height:78vh!important;object-fit:contain!important}
+.retail-social-readout{font-size:14px!important;margin:12px auto 16px!important;max-width:1280px!important}
+#retail-social-master-actions{max-width:1280px!important;margin:0 auto!important}
+
+@media(max-width:1250px){
+  .retail-social-slots{grid-template-columns:repeat(2,minmax(240px,1fr))!important}
+}
+@media(max-width:650px){
+  .retail-social-designer{padding:18px!important}
+  .retail-social-slots{grid-template-columns:1fr!important}
+  .retail-social-slot-preview{min-height:190px!important}
+}

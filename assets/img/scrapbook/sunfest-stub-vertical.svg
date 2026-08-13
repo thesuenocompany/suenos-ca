@@ -1,0 +1,17 @@
+<svg width="120" height="320" viewBox="0 0 120 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="grain" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="noise"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.08"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  <path d="M14 10H106V310H14V280C22 278 26 271 26 260C26 249 22 242 14 240V80C22 78 26 71 26 60C26 49 22 42 14 40V10Z" fill="#E7D6B3" stroke="#8A6A44" stroke-width="3"/>
+  <path d="M25 21H95V299H25V21Z" stroke="#927550" stroke-width="2" stroke-dasharray="6 5"/>
+  <g filter="url(#grain)"><rect x="14" y="10" width="92" height="300" fill="#000" opacity="0.7"/></g>
+  <g transform="translate(60 160) rotate(90)">
+    <text x="0" y="0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800" letter-spacing="4" fill="#54412A">SUNFEST · 2026</text>
+  </g>
+</svg>

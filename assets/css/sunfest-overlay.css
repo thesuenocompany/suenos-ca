@@ -1,0 +1,642 @@
+body.sunfest-overlay-active{background:linear-gradient(180deg,#051113 0%,#08181b 42%,#071215 100%)}
+body.sunfest-overlay-active .site-header,
+body.sunfest-overlay-active .footer{position:relative;overflow:hidden}
+body.sunfest-overlay-active .site-header::before,
+body.sunfest-overlay-active .footer::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 12% -20%,rgba(255,191,106,.18),transparent 35%),radial-gradient(circle at 88% 0,rgba(67,213,220,.12),transparent 32%)}
+body.sunfest-overlay-active .site-header{z-index:1100;background:linear-gradient(180deg,rgba(4,10,11,.98),rgba(5,12,13,.94));border-bottom:1px solid rgba(201,153,63,.42);box-shadow:0 18px 40px rgba(0,0,0,.28)}
+body.sunfest-overlay-active .header-inner{position:relative;z-index:2;padding:.95rem 0 1rem;align-items:center}
+body.sunfest-overlay-active .site-header .brand img{width:158px;filter:drop-shadow(0 8px 20px rgba(0,0,0,.3))}
+body.sunfest-overlay-active .nav{gap:1.1rem}
+body.sunfest-overlay-active .nav a{color:#f5efe4;font-size:.77rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+body.sunfest-overlay-active .nav a:hover,
+body.sunfest-overlay-active .nav a.active{color:#f3c790}
+body.sunfest-overlay-active .nav .switch{border-color:rgba(243,199,144,.4);background:rgba(243,199,144,.08);color:#f5efe4}
+
+.sunfest-partner-bar{position:relative;z-index:1200;background:linear-gradient(90deg,#091719 0%,#102328 50%,#091719 100%);color:#fff;font:800 .74rem/1.2 Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid rgba(201,153,63,.35)}
+.sunfest-partner-bar a{max-width:1440px;margin:auto;padding:.68rem 1.2rem;display:flex;justify-content:center;gap:1rem;align-items:center;color:inherit;text-decoration:none}
+.sunfest-partner-bar span{color:#f3ecde}.sunfest-partner-bar strong{padding:.42rem .72rem;border:1px solid #43d5dc;color:#43d5dc;white-space:nowrap}
+
+.sunfest-nav-overlay{position:relative;z-index:2;border-bottom:1px solid rgba(201,153,63,.24);background:linear-gradient(90deg,rgba(9,18,20,.98) 0%,rgba(19,30,34,.92) 54%,rgba(9,18,20,.98) 100%)}
+.sunfest-nav-overlay::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(120deg,transparent 0 40%,rgba(255,255,255,.04) 40.2%,transparent 40.8%),radial-gradient(circle at 84% 18%,rgba(255,170,60,.15),transparent 28%)}
+.sunfest-nav-overlay-inner{position:relative;display:grid;grid-template-columns:minmax(0,.95fr) auto auto;gap:1rem;align-items:center;padding:.74rem 0}
+.sunfest-nav-partnership{color:#43d5dc;font:900 .7rem/1.2 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase}
+.sunfest-nav-brandlockup{display:flex;align-items:center;gap:.85rem;justify-self:center}.sunfest-nav-brandlockup img{width:118px;max-height:52px;object-fit:contain;filter:drop-shadow(0 8px 18px rgba(0,0,0,.24))}.sunfest-nav-brandlockup span{color:#f3c790;font:800 .66rem/1.2 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
+.sunfest-nav-actions{display:flex;gap:.5rem;justify-self:end;flex-wrap:wrap}.sunfest-nav-link{display:inline-flex;align-items:center;min-height:37px;padding:.72rem .9rem;border:1px solid rgba(255,255,255,.16);color:#f3ecde;font:900 .66rem/1 Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;background:rgba(255,255,255,.03)}.sunfest-nav-link-primary{border-color:#43d5dc;color:#081619;background:#43d5dc}
+
+.sunfest-original-hero{display:none!important}
+.sunfest-hero-takeover{position:relative;overflow:hidden;color:#fff;border-top:1px solid rgba(201,153,63,.2);border-bottom:1px solid rgba(201,153,63,.28);background:
+  linear-gradient(90deg,#031214 0%,#07181c 35%,rgba(7,24,28,.4) 55%,rgba(7,24,28,.1) 100%),
+  radial-gradient(circle at 70% 22%,rgba(255,193,111,.45),transparent 22%),
+  linear-gradient(180deg,rgba(3,17,20,.12) 0%,rgba(3,17,20,.7) 100%),
+  url('/assets/images/hero-beach-wide.webp') center center/cover no-repeat;
+}
+.sunfest-hero-takeover::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(3,18,20,.32),transparent 36%),linear-gradient(180deg,transparent 56%,rgba(4,11,13,.55) 100%)}
+.sunfest-hero-stage-lines{position:absolute;left:0;right:0;bottom:11.25rem;height:96px;opacity:.2;pointer-events:none;background:repeating-linear-gradient(90deg,rgba(243,199,144,.85) 0 40px,transparent 40px 95px)}
+.sunfest-hero-grid{width:min(1500px,100%);margin:auto;display:grid;grid-template-columns:minmax(0,1.02fr) minmax(380px,.82fr);gap:1.6rem;align-items:stretch;padding:1.5rem clamp(1rem,4vw,3rem) 0}
+
+.sunfest-hero-copy-panel{position:relative;z-index:2;align-self:start;margin-top:1rem;max-width:760px;padding:clamp(1.6rem,3vw,2.4rem) clamp(1.2rem,3vw,2.4rem) 1.8rem;background:linear-gradient(180deg,rgba(2,10,11,.95),rgba(4,14,16,.88));border:1px solid rgba(201,153,63,.2);box-shadow:0 22px 50px rgba(0,0,0,.34);clip-path:polygon(0 0,92% 0,100% 15%,100% 100%,0 100%)}
+.sunfest-hero-copy-panel::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,#0000 0%,rgba(201,153,63,.95) 18%,rgba(201,153,63,.95) 82%,#0000 100%)}
+.sunfest-co-brand-row{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:1.25rem}.sunfest-kicker{margin:0 0 .8rem;color:#43d5dc;font:900 .83rem/1.2 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase}.sunfest-date-line{margin:0;color:#f3c790;font:900 .8rem/1.2 Arial,sans-serif;letter-spacing:.19em;text-transform:uppercase}.sunfest-hero-logo{width:152px;max-height:70px;object-fit:contain;filter:drop-shadow(0 8px 20px rgba(0,0,0,.28))}
+.sunfest-display-headline{margin:0;line-height:.86;text-transform:uppercase;text-wrap:balance;text-shadow:0 12px 24px rgba(0,0,0,.26)}
+.sunfest-display-headline .line{display:block;font-family:Georgia,"Times New Roman",serif;font-weight:900;letter-spacing:-.04em}
+.sunfest-display-headline .line-1{font-size:clamp(4.2rem,7.8vw,7.6rem)}
+.sunfest-display-headline .line-2{font-size:clamp(3.8rem,7vw,6.9rem);margin-top:-.08em}
+.sunfest-display-headline .line-3{font-size:clamp(2.35rem,4.4vw,4.2rem);margin-top:.02em;letter-spacing:.01em}
+.sunfest-display-headline .cream{color:#f0e6d4}
+.sunfest-display-headline .teal{color:#2fa9b3}
+.sunfest-hero-body{max-width:640px;margin:1.4rem 0 0;color:#f3f0ea;font-size:clamp(1.05rem,1.35vw,1.24rem);line-height:1.5}
+.sunfest-hero-actions{display:flex;gap:.72rem;flex-wrap:wrap;align-items:center;margin-top:1.65rem}
+.sunfest-primary,.sunfest-secondary{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:1rem 1.25rem;text-decoration:none;font:900 .76rem/1 Arial,sans-serif;text-transform:uppercase;letter-spacing:.11em}
+.sunfest-primary{background:#43d5dc;color:#061416;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.sunfest-secondary{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.65);color:#fff}
+.sunfest-tertiary{position:relative;color:#f3c790;text-decoration:none;font:900 .82rem/1 Arial,sans-serif;text-transform:uppercase;letter-spacing:.11em;padding-bottom:.35rem}.sunfest-tertiary::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(243,199,144,.7)}
+.sunfest-product-line{margin:1.55rem 0 0;color:#c9d5d2;font:800 .72rem/1.35 Arial,sans-serif;letter-spacing:.17em;text-transform:uppercase}
+
+.sunfest-hero-scene{position:relative;min-height:780px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+.sunfest-sky-glow{position:absolute;inset:0;background:radial-gradient(circle at 62% 22%,rgba(255,213,147,.88) 0%,rgba(255,167,59,.28) 23%,transparent 48%),linear-gradient(180deg,rgba(255,194,122,.07) 0%,transparent 50%)}
+.sunfest-stage-rings{position:absolute;inset:2rem 2rem 4rem;pointer-events:none}.sunfest-stage-rings::before,.sunfest-stage-rings::after{content:"";position:absolute;border:1px solid rgba(209,174,104,.28);border-radius:50%}.sunfest-stage-rings::before{width:560px;height:560px;left:36%;top:12%}.sunfest-stage-rings::after{width:720px;height:720px;left:24%;top:1%}
+.sunfest-palm{position:absolute;top:0;width:240px;height:280px;opacity:.35;filter:blur(.2px)}
+.sunfest-palm::before,.sunfest-palm::after{content:"";position:absolute;background:#081414}
+.sunfest-palm::before{width:9px;height:100%;left:48%;transform:skew(-10deg)}
+.sunfest-palm::after{inset:0;background:radial-gradient(ellipse at 50% 22%,rgba(7,20,20,.95) 0 18%,transparent 19%),conic-gradient(from 220deg at 50% 18%,transparent 0 15deg,#091616 15deg 28deg,transparent 28deg 43deg,#091616 43deg 56deg,transparent 56deg 72deg,#091616 72deg 88deg,transparent 88deg 102deg,#091616 102deg 116deg,transparent 116deg 132deg,#091616 132deg 146deg,transparent 146deg 162deg,#091616 162deg 176deg,transparent 176deg 360deg);mask:radial-gradient(circle at 50% 22%,#000 0 16%,transparent 17%),linear-gradient(#000 0 0)}
+.sunfest-palm-right{right:-1rem;transform:scale(1.05)}
+.sunfest-palm-left{left:-2rem;top:5rem;transform:scale(.75);opacity:.18}
+.sunfest-stage{position:absolute;right:4%;bottom:10.5rem;width:min(42vw,420px);height:170px;background:linear-gradient(180deg,rgba(50,34,18,.25),rgba(18,13,8,.58));border:2px solid rgba(18,9,5,.7);box-shadow:0 0 0 3px rgba(255,190,92,.08),0 16px 40px rgba(0,0,0,.28)}
+.sunfest-stage::before{content:"";position:absolute;left:6%;right:6%;top:24%;height:6px;background:rgba(16,12,9,.75);box-shadow:0 24px 0 rgba(16,12,9,.75),0 -24px 0 rgba(16,12,9,.75)}
+.sunfest-stage::after{content:"";position:absolute;left:10%;right:10%;top:36%;height:64px;background:radial-gradient(circle at 10% 50%,rgba(255,198,105,.95) 0 5px,transparent 6px),radial-gradient(circle at 26% 50%,rgba(255,198,105,.95) 0 5px,transparent 6px),radial-gradient(circle at 42% 50%,rgba(255,198,105,.95) 0 5px,transparent 6px),radial-gradient(circle at 58% 50%,rgba(255,198,105,.95) 0 5px,transparent 6px),radial-gradient(circle at 74% 50%,rgba(255,198,105,.95) 0 5px,transparent 6px),radial-gradient(circle at 90% 50%,rgba(255,198,105,.95) 0 5px,transparent 6px),radial-gradient(circle at 50% 64%,rgba(255,222,178,.9) 0 22px,rgba(255,168,52,.24) 23px,transparent 56px)}
+.sunfest-string-lights{position:absolute;right:10%;top:38%;width:min(48vw,520px);height:88px;border-top:2px solid rgba(222,193,126,.6);transform:rotate(4deg)}
+.sunfest-string-lights::before,.sunfest-string-lights::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 8% 48%,rgba(255,200,118,.95) 0 4px,transparent 5px),radial-gradient(circle at 24% 55%,rgba(255,200,118,.95) 0 4px,transparent 5px),radial-gradient(circle at 40% 62%,rgba(255,200,118,.95) 0 4px,transparent 5px),radial-gradient(circle at 56% 68%,rgba(255,200,118,.95) 0 4px,transparent 5px),radial-gradient(circle at 72% 72%,rgba(255,200,118,.95) 0 4px,transparent 5px),radial-gradient(circle at 88% 74%,rgba(255,200,118,.95) 0 4px,transparent 5px)}
+.sunfest-crowd{position:absolute;left:8%;right:0;bottom:7.2rem;height:180px;background:radial-gradient(circle at 4% 82%,#0b1011 0 24px,transparent 25px),radial-gradient(circle at 12% 76%,#0b1011 0 30px,transparent 31px),radial-gradient(circle at 20% 79%,#0b1011 0 28px,transparent 29px),radial-gradient(circle at 31% 80%,#0b1011 0 34px,transparent 35px),radial-gradient(circle at 42% 75%,#0b1011 0 32px,transparent 33px),radial-gradient(circle at 53% 82%,#0b1011 0 28px,transparent 29px),radial-gradient(circle at 64% 79%,#0b1011 0 29px,transparent 30px),radial-gradient(circle at 74% 77%,#0b1011 0 34px,transparent 35px),radial-gradient(circle at 84% 80%,#0b1011 0 30px,transparent 31px),radial-gradient(circle at 94% 78%,#0b1011 0 28px,transparent 29px);opacity:.88}
+.sunfest-crowd::after{content:"";position:absolute;left:0;right:0;bottom:0;height:105px;background:linear-gradient(180deg,transparent 0,#0a1011 100%)}
+.sunfest-wood-deck{position:absolute;left:0;right:0;bottom:0;height:108px;background:linear-gradient(180deg,rgba(50,33,21,.8),rgba(24,16,11,.98));box-shadow:inset 0 1px 0 rgba(255,210,130,.12)}
+.sunfest-wood-deck::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(67,44,29,.95) 0 110px,rgba(34,22,15,.95) 110px 112px);opacity:.95}
+.sunfest-bottle{position:absolute;z-index:3;bottom:3rem;right:22%;display:block;width:min(300px,44%);height:auto;max-height:610px;object-fit:contain;filter:drop-shadow(0 26px 34px rgba(0,0,0,.4))}
+.sunfest-product-note{position:absolute;z-index:4;right:6%;bottom:2.6rem;width:min(310px,44%);padding:1rem 1.1rem;background:#e96d21;color:#0b1011;box-shadow:0 18px 40px rgba(0,0,0,.3);transform:rotate(-1.5deg)}
+.sunfest-product-note span,.sunfest-product-note strong{display:block;text-transform:uppercase}.sunfest-product-note span{font:900 .62rem/1.2 Arial,sans-serif;letter-spacing:.13em}.sunfest-product-note strong{margin-top:.45rem;font:900 1.12rem/1.02 Arial,sans-serif;letter-spacing:.03em}
+
+.sunfest-hero-ribbon{display:grid;grid-template-columns:auto auto auto auto;gap:0;align-items:center;padding:1.05rem 1.25rem;background:#081518;border-top:1px solid rgba(201,153,63,.24)}
+.sunfest-hero-ribbon span{display:flex;align-items:center;justify-content:center;min-height:60px;padding:0 1rem;color:#f3c790;font:900 .76rem/1.2 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;border-right:1px solid rgba(201,153,63,.22)}
+.sunfest-hero-ribbon span:last-child{border-right:0}
+.sunfest-hero-ribbon img{justify-self:center;width:130px;max-height:54px;object-fit:contain;filter:drop-shadow(0 8px 16px rgba(0,0,0,.24))}
+
+body.sunfest-overlay-active .entity-intro{padding-top:4rem}
+.sunfest-partner-badge{position:fixed;right:18px;bottom:18px;width:154px;padding:.85rem;background:rgba(8,9,9,.96);border:1px solid rgba(255,255,255,.22);z-index:900;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.sunfest-partner-badge span{display:block;color:#43d5dc;font:800 .54rem/1.2 Arial,sans-serif;letter-spacing:.12em;text-align:center;margin-bottom:.5rem;text-transform:uppercase}.sunfest-partner-badge img{width:100%;display:block}
+
+body.sunfest-overlay-active .footer{margin-top:0;padding-top:0;background:linear-gradient(180deg,#091417 0%,#081114 100%);border-top:1px solid rgba(255,255,255,.08)}
+.sunfest-footer-banner{position:relative;z-index:2;border-bottom:1px solid rgba(201,153,63,.16);background:linear-gradient(90deg,rgba(6,17,20,.96) 0%,rgba(18,33,37,.92) 52%,rgba(6,17,20,.96) 100%)}
+.sunfest-footer-banner::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(118deg,transparent 0 52%,rgba(255,255,255,.05) 52.2%,transparent 52.8%),radial-gradient(circle at 84% 15%,rgba(255,170,60,.15),transparent 28%)}
+.sunfest-footer-banner-inner{position:relative;display:grid;grid-template-columns:minmax(0,1.2fr) auto;gap:2rem;align-items:center;padding:2rem 0}.sunfest-footer-copy h2{margin:.2rem 0 .6rem;font:900 clamp(1.8rem,3vw,2.8rem)/.94 Arial,sans-serif;letter-spacing:-.04em;text-transform:uppercase}.sunfest-footer-copy p{margin:.45rem 0;color:#e7ddcd;max-width:700px}.sunfest-footer-kicker,.sunfest-footer-date{font:900 .72rem/1.2 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase}.sunfest-footer-kicker{color:#43d5dc}.sunfest-footer-date{color:#f3c790;margin-top:1rem}
+.sunfest-footer-branding{display:grid;justify-items:center;gap:1rem;min-width:240px}.sunfest-footer-branding img{width:min(220px,30vw);max-height:110px;object-fit:contain;filter:drop-shadow(0 8px 20px rgba(0,0,0,.24))}.sunfest-footer-button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:.86rem 1.2rem;background:#43d5dc;color:#061416;font:900 .75rem/1 Arial,sans-serif;letter-spacing:.09em;text-transform:uppercase;text-decoration:none}
+body.sunfest-overlay-active .footer .container:last-child{position:relative;z-index:2;padding-top:2rem;padding-bottom:2.4rem}body.sunfest-overlay-active .footer-grid{gap:1.4rem}body.sunfest-overlay-active .footer-nav a{color:#f3ecde}body.sunfest-overlay-active .footer-bottom{color:#cabb9f;border-top-color:rgba(255,255,255,.12)}body.sunfest-overlay-active .footer-legal-link:hover{color:#f3c790}
+
+.sunfest-overlay-preview:before{content:"SUNFEST PREVIEW";position:fixed;left:10px;bottom:10px;z-index:1300;background:#43d5dc;color:#071013;padding:.45rem .65rem;font:900 .65rem Arial,sans-serif;letter-spacing:.12em}.sunfest-preview-error{position:fixed;z-index:99999;top:0;left:0;right:0;padding:14px 20px;background:#8b1e1e;color:#fff;font:600 14px/1.4 Arial,sans-serif;text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.28)}
+
+@media(max-width:1200px){
+  .sunfest-nav-overlay-inner{grid-template-columns:1fr;gap:.72rem;justify-items:start}
+  .sunfest-nav-brandlockup,.sunfest-nav-actions{justify-self:start}
+  .sunfest-hero-grid{grid-template-columns:1fr;gap:1rem;padding-bottom:0}
+  .sunfest-hero-copy-panel{max-width:none}
+  .sunfest-hero-scene{min-height:620px}
+  .sunfest-bottle{right:26%;width:min(280px,38%)}
+  .sunfest-product-note{right:12%}
+  .sunfest-footer-banner-inner{grid-template-columns:1fr;justify-items:start}
+  .sunfest-footer-branding{justify-items:start}
+}
+@media(max-width:720px){
+  .sunfest-partner-bar a{justify-content:space-between;gap:.6rem;padding:.62rem .78rem}.sunfest-partner-bar span{font-size:.57rem;letter-spacing:.06em}.sunfest-partner-bar strong{font-size:.54rem}
+  body.sunfest-overlay-active .header-inner{padding:.8rem 0 1rem;align-items:flex-start}body.sunfest-overlay-active .nav{gap:.7rem}
+  .sunfest-nav-partnership,.sunfest-footer-kicker,.sunfest-footer-date,.sunfest-date-line,.sunfest-nav-brandlockup span,.sunfest-kicker{font-size:.62rem}
+  .sunfest-nav-brandlockup img{width:108px}.sunfest-nav-link{min-height:36px;padding:.7rem .8rem;font-size:.62rem}
+  .sunfest-hero-grid{padding:1rem .9rem 0}.sunfest-hero-copy-panel{padding:1.2rem .95rem 1.4rem;clip-path:none}.sunfest-co-brand-row{gap:.8rem;flex-wrap:wrap}.sunfest-hero-logo{width:124px;max-height:60px}
+  .sunfest-display-headline .line-1{font-size:clamp(3rem,15vw,4.6rem)}.sunfest-display-headline .line-2{font-size:clamp(2.6rem,13vw,4rem)}.sunfest-display-headline .line-3{font-size:clamp(1.7rem,7.7vw,2.5rem)}
+  .sunfest-hero-body{font-size:1rem}.sunfest-hero-actions{gap:.6rem}.sunfest-primary,.sunfest-secondary{flex:1 1 calc(50% - .3rem);min-width:136px;padding:.86rem .8rem;font-size:.67rem}.sunfest-tertiary{flex-basis:100%}
+  .sunfest-product-line{font-size:.63rem}
+  .sunfest-hero-scene{min-height:445px}.sunfest-stage-rings::before{width:280px;height:280px;left:26%;top:13%}.sunfest-stage-rings::after{width:380px;height:380px;left:14%;top:2%}.sunfest-stage{width:240px;height:110px;right:7%;bottom:6.4rem}.sunfest-string-lights{width:250px;top:36%;right:4%;height:62px}.sunfest-crowd{left:0;height:120px;bottom:4.8rem}.sunfest-wood-deck{height:72px}.sunfest-bottle{bottom:1.7rem;right:28%;width:170px;max-height:330px}.sunfest-product-note{right:.9rem;bottom:1rem;width:160px;padding:.72rem .8rem}.sunfest-product-note strong{font-size:.78rem}
+  .sunfest-palm-right{right:-5rem;top:1rem;transform:scale(.8)}.sunfest-palm-left{left:-5rem;top:6rem;transform:scale(.55)}
+  .sunfest-hero-ribbon{grid-template-columns:1fr 1fr;gap:0;padding:.5rem 0}.sunfest-hero-ribbon img{grid-column:1/-1;order:-1;margin:0 auto 0.25rem}.sunfest-hero-ribbon span{min-height:48px;padding:.35rem .4rem;font-size:.54rem;letter-spacing:.1em;border-right:0}.sunfest-hero-ribbon span:nth-of-type(2){border-left:1px solid rgba(201,153,63,.2)}
+  .sunfest-partner-badge{width:112px;right:10px;bottom:10px}
+  .sunfest-footer-copy h2{font-size:1.8rem}.sunfest-footer-button{width:100%}
+}
+@media(prefers-reduced-motion:no-preference){
+  .sunfest-hero-copy-panel,.sunfest-hero-scene{animation:sunfest-in .55s ease-out both}
+  .sunfest-nav-overlay,.sunfest-footer-banner,.sunfest-hero-ribbon{animation:sunfest-fade .45s ease-out both}
+  @keyframes sunfest-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @keyframes sunfest-fade{from{opacity:0}to{opacity:1}}
+}
+
+/* v5 graphic hero override */
+.sunfest-hero-graphic-mode{
+  min-height:auto;
+  background:#071417;
+  padding:0;
+}
+.sunfest-hero-graphic-mode::before,
+.sunfest-hero-graphic-mode .sunfest-hero-stage-lines,
+.sunfest-hero-graphic-mode .sunfest-hero-ribbon,
+.sunfest-hero-graphic-mode .sunfest-hero-grid{display:none!important}
+.sunfest-hero-graphic-wrap{
+  position:relative;
+  width:min(1460px,100%);
+  margin:0 auto;
+  padding:clamp(1rem,2vw,1.5rem) clamp(.8rem,2vw,1.2rem) 1.25rem;
+}
+.sunfest-hero-artwork,
+.sunfest-hero-artwork img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+.sunfest-hero-artwork img{
+  border:1px solid rgba(201,153,63,.24);
+  box-shadow:0 24px 55px rgba(0,0,0,.32);
+  background:#061416;
+}
+.sunfest-hero-cta-layer{
+  position:absolute;
+  left:clamp(2rem,5vw,5.5rem);
+  bottom:clamp(2rem,5vw,3.4rem);
+  display:flex;
+  gap:.8rem;
+  flex-wrap:wrap;
+  align-items:center;
+  max-width:42%;
+}
+.sunfest-hero-graphic-mode .sunfest-primary,
+.sunfest-hero-graphic-mode .sunfest-secondary{
+  min-height:52px;
+  padding:.95rem 1.2rem;
+  font-size:.76rem;
+}
+.sunfest-hero-graphic-mode .sunfest-tertiary{
+  background:rgba(4,12,14,.55);
+  color:#f3c790;
+  border:1px solid rgba(243,199,144,.36);
+  padding:.95rem 1rem;
+  min-height:52px;
+  display:inline-flex;
+  align-items:center;
+  text-decoration:none;
+}
+.sunfest-hero-graphic-mode .sunfest-tertiary::after{display:none}
+.sr-only{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
+@media (max-width: 980px){
+  .sunfest-hero-cta-layer{
+    left:1.6rem;
+    right:1.6rem;
+    bottom:1.8rem;
+    max-width:none;
+  }
+}
+@media (max-width: 720px){
+  .sunfest-hero-graphic-wrap{padding:.75rem .75rem 1rem}
+  .sunfest-hero-cta-layer{
+    left:1.05rem;
+    right:1.05rem;
+    bottom:1.1rem;
+    gap:.55rem;
+  }
+  .sunfest-hero-graphic-mode .sunfest-primary,
+  .sunfest-hero-graphic-mode .sunfest-secondary,
+  .sunfest-hero-graphic-mode .sunfest-tertiary{
+    flex:1 1 100%;
+    justify-content:center;
+    min-height:48px;
+    padding:.85rem .85rem;
+    font-size:.68rem;
+  }
+}
+
+
+/* v6 single top bar + full-width hero */
+.sunfest-partner-bar{
+  position:relative;
+  z-index:1200;
+  background:linear-gradient(90deg,#d5a33c 0%,#e1b24b 50%,#d39a2f 100%);
+  color:#111;
+  border-bottom:1px solid rgba(0,0,0,.18);
+}
+.sunfest-partner-bar-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:.8rem 0;
+}
+.sunfest-partner-bar-copy{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+.sunfest-partner-label,
+.sunfest-partner-date{
+  font:900 .76rem/1.2 Arial,sans-serif;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#111;
+}
+.sunfest-partner-logo{width:112px;max-height:46px;object-fit:contain}
+.sunfest-partner-actions{display:flex;gap:.55rem;flex-wrap:wrap}
+.sunfest-partner-button{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:40px;padding:.78rem 1rem;
+  border:1px solid rgba(17,17,17,.45);
+  color:#111;text-decoration:none;
+  font:900 .68rem/1 Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;
+  background:rgba(255,255,255,.14);
+}
+.sunfest-partner-button-primary{background:#111;color:#f5f1e7;border-color:#111}
+.sunfest-nav-overlay{display:none!important}
+body.sunfest-overlay-active .site-header{top:0}
+
+.sunfest-hero-graphic-wrap{
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:0;
+}
+.sunfest-hero-artwork img{
+  width:100%;
+  border:0;
+  box-shadow:none;
+}
+.sunfest-hero-graphic-mode{
+  width:100%;
+  border-top:1px solid rgba(201,153,63,.22);
+}
+.sunfest-hero-cta-layer{
+  left:clamp(1.5rem,6vw,5rem);
+  bottom:clamp(1.5rem,5vw,3rem);
+  max-width:min(42%,560px);
+}
+@media (max-width: 980px){
+  .sunfest-partner-bar-inner{flex-direction:column;align-items:flex-start}
+  .sunfest-partner-actions{width:100%}
+  .sunfest-hero-cta-layer{left:1.25rem;right:1.25rem;max-width:none}
+}
+@media (max-width: 720px){
+  .sunfest-partner-bar-inner{padding:.7rem 0}
+  .sunfest-partner-bar-copy{gap:.6rem}
+  .sunfest-partner-label,.sunfest-partner-date{font-size:.62rem;letter-spacing:.1em}
+  .sunfest-partner-logo{width:88px;max-height:36px}
+  .sunfest-partner-actions{gap:.45rem}
+  .sunfest-partner-button{flex:1 1 calc(50% - .25rem);min-height:38px;padding:.72rem .7rem;font-size:.61rem}
+  .sunfest-hero-cta-layer{left:.9rem;right:.9rem;bottom:.9rem}
+}
+
+
+/* v7 refined Sunfest top bar */
+.sunfest-partner-bar{
+  background:linear-gradient(90deg,#d59a31 0%,#e0aa43 48%,#cf9029 100%);
+  color:#111;
+  border-bottom:1px solid rgba(0,0,0,.16);
+  box-shadow:inset 0 -1px 0 rgba(255,255,255,.18);
+}
+.sunfest-partner-bar::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0) 55%),
+             linear-gradient(90deg,rgba(0,0,0,.04),transparent 18%,transparent 82%,rgba(0,0,0,.04));
+}
+.sunfest-partner-bar-inner{
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto auto;
+  gap:1.2rem;
+  align-items:center;
+  padding:.88rem 0;
+}
+.sunfest-partner-bar-copy{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+.sunfest-partner-label{
+  font:900 .78rem/1.15 Arial,sans-serif;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#141414;
+}
+.sunfest-partner-date{
+  font:900 .72rem/1.15 Arial,sans-serif;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#2a2117;
+  opacity:.9;
+  white-space:nowrap;
+}
+.sunfest-partner-logo{
+  width:118px;
+  max-height:50px;
+  object-fit:contain;
+  justify-self:center;
+  background:rgba(14,14,14,.82);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:999px;
+  padding:.45rem .95rem;
+  box-shadow:0 6px 18px rgba(0,0,0,.16);
+}
+.sunfest-partner-actions{
+  display:flex;
+  gap:.55rem;
+  justify-self:end;
+  flex-wrap:wrap;
+}
+.sunfest-partner-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:40px;
+  padding:.82rem 1rem;
+  border-radius:999px;
+  border:1px solid rgba(17,17,17,.45);
+  color:#111;
+  text-decoration:none;
+  font:900 .66rem/1 Arial,sans-serif;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  background:rgba(255,255,255,.18);
+  box-shadow:0 2px 0 rgba(255,255,255,.16) inset;
+}
+.sunfest-partner-button:hover{background:rgba(255,255,255,.28)}
+.sunfest-partner-button-primary{
+  background:#111;
+  color:#f6f1e7;
+  border-color:#111;
+  box-shadow:0 8px 18px rgba(0,0,0,.18);
+}
+.sunfest-partner-button-primary:hover{background:#000}
+@media (max-width: 980px){
+  .sunfest-partner-bar-inner{
+    grid-template-columns:1fr;
+    gap:.8rem;
+    align-items:flex-start;
+  }
+  .sunfest-partner-logo{justify-self:start}
+  .sunfest-partner-actions{justify-self:start;width:100%}
+}
+@media (max-width: 720px){
+  .sunfest-partner-bar-inner{padding:.75rem 0}
+  .sunfest-partner-bar-copy{gap:.55rem}
+  .sunfest-partner-label{font-size:.62rem;letter-spacing:.11em}
+  .sunfest-partner-date{font-size:.58rem;letter-spacing:.12em}
+  .sunfest-partner-logo{width:96px;max-height:40px;padding:.36rem .75rem}
+  .sunfest-partner-actions{gap:.45rem}
+  .sunfest-partner-button{flex:1 1 calc(50% - .25rem);min-height:38px;padding:.72rem .7rem;font-size:.6rem}
+}
+
+/* v8 premium Sunfest marquee bar */
+.sunfest-partner-bar{
+  position:relative;
+  overflow:hidden;
+  background:#071719;
+  color:#f5efe4;
+  border-top:5px solid #dca237;
+  border-bottom:5px solid #dca237;
+  box-shadow:0 10px 24px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.05);
+}
+.sunfest-partner-bar::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 50% -40%,rgba(220,162,55,.18),transparent 42%),
+    linear-gradient(112deg,transparent 0 44%,rgba(255,255,255,.035) 44.2%,transparent 44.7%),
+    linear-gradient(68deg,transparent 0 72%,rgba(255,255,255,.025) 72.2%,transparent 72.7%);
+}
+.sunfest-partner-frame{
+  position:absolute;
+  left:0;
+  right:0;
+  top:50%;
+  height:1px;
+  background:linear-gradient(90deg,transparent 0%,rgba(220,162,55,.32) 12%,transparent 24%,transparent 76%,rgba(220,162,55,.32) 88%,transparent 100%);
+  pointer-events:none;
+}
+.sunfest-partner-bar-inner{
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(260px,1fr) auto minmax(260px,1fr);
+  align-items:center;
+  gap:1.5rem;
+  min-height:96px;
+  padding:.85rem 0;
+}
+.sunfest-partner-message{
+  display:grid;
+  gap:.24rem;
+  justify-self:start;
+}
+.sunfest-partner-eyebrow{
+  color:#43d5dc;
+  font:900 .66rem/1.1 Arial,sans-serif;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+}
+.sunfest-partner-title{
+  color:#f4ead9;
+  font:900 1.05rem/1.05 Georgia,"Times New Roman",serif;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.sunfest-partner-lockup{
+  position:relative;
+  display:grid;
+  grid-template-columns:auto auto auto;
+  grid-template-rows:auto auto;
+  align-items:center;
+  justify-items:center;
+  column-gap:.75rem;
+  row-gap:.25rem;
+  min-width:330px;
+  padding:.45rem 1.45rem .5rem;
+  background:linear-gradient(180deg,rgba(220,162,55,.16),rgba(220,162,55,.05));
+  border:1px solid rgba(220,162,55,.42);
+  clip-path:polygon(8% 0,92% 0,100% 50%,92% 100%,8% 100%,0 50%);
+}
+.sunfest-partner-logo{
+  grid-column:2;
+  grid-row:1;
+  width:128px;
+  max-height:54px;
+  object-fit:contain;
+  background:transparent;
+  border:0;
+  border-radius:0;
+  padding:0;
+  box-shadow:none;
+  filter:drop-shadow(0 7px 16px rgba(0,0,0,.35));
+}
+.sunfest-partner-star{
+  color:#dca237;
+  font-size:.9rem;
+  line-height:1;
+}
+.sunfest-partner-date{
+  grid-column:1/-1;
+  grid-row:2;
+  color:#f0c477;
+  font:900 .61rem/1.1 Arial,sans-serif;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.sunfest-partner-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:.6rem;
+  justify-self:end;
+  flex-wrap:wrap;
+}
+.sunfest-partner-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:42px;
+  padding:.84rem 1rem;
+  border-radius:0;
+  border:1px solid rgba(220,162,55,.55);
+  background:rgba(220,162,55,.08);
+  color:#f4ead9;
+  text-decoration:none;
+  font:900 .66rem/1 Arial,sans-serif;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  box-shadow:none;
+}
+.sunfest-partner-button:hover{
+  background:rgba(220,162,55,.17);
+  border-color:#dca237;
+}
+.sunfest-partner-button-primary{
+  background:#dca237;
+  color:#071719;
+  border-color:#dca237;
+  box-shadow:0 8px 18px rgba(0,0,0,.18);
+}
+.sunfest-partner-button-primary:hover{
+  background:#efbb55;
+  border-color:#efbb55;
+}
+@media(max-width:1100px){
+  .sunfest-partner-bar-inner{
+    grid-template-columns:1fr auto;
+    grid-template-areas:
+      "message actions"
+      "lockup lockup";
+    gap:.8rem 1rem;
+    padding:.8rem 0 .95rem;
+  }
+  .sunfest-partner-message{grid-area:message}
+  .sunfest-partner-actions{grid-area:actions}
+  .sunfest-partner-lockup{grid-area:lockup;justify-self:center}
+}
+@media(max-width:720px){
+  .sunfest-partner-bar{border-top-width:4px;border-bottom-width:4px}
+  .sunfest-partner-bar-inner{
+    grid-template-columns:1fr;
+    grid-template-areas:
+      "lockup"
+      "message"
+      "actions";
+    min-height:auto;
+    gap:.7rem;
+    padding:.72rem 0 .82rem;
+  }
+  .sunfest-partner-message{justify-self:center;text-align:center}
+  .sunfest-partner-title{font-size:.9rem}
+  .sunfest-partner-eyebrow{font-size:.58rem}
+  .sunfest-partner-lockup{min-width:min(100%,330px);width:100%;padding:.4rem 1rem .45rem}
+  .sunfest-partner-logo{width:112px;max-height:48px}
+  .sunfest-partner-date{font-size:.55rem;letter-spacing:.12em;white-space:normal;text-align:center}
+  .sunfest-partner-actions{width:100%;justify-self:stretch}
+  .sunfest-partner-button{flex:1 1 calc(50% - .3rem);min-height:40px;padding:.76rem .7rem;font-size:.6rem}
+}
+
+/* v9 hero CTA placement fix */
+.sunfest-hero-graphic-wrap{
+  display:flex;
+  flex-direction:column;
+  background:#071719;
+}
+.sunfest-hero-artwork{order:1}
+.sunfest-hero-cta-layer{
+  position:static;
+  order:2;
+  width:100%;
+  max-width:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.75rem;
+  padding:1rem clamp(1rem,4vw,2.5rem) 1.1rem;
+  background:linear-gradient(180deg,#081719 0%,#061315 100%);
+  border-top:1px solid rgba(220,162,55,.35);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.sunfest-hero-graphic-mode .sunfest-primary,
+.sunfest-hero-graphic-mode .sunfest-secondary,
+.sunfest-hero-graphic-mode .sunfest-tertiary{
+  min-height:46px;
+  padding:.88rem 1.15rem;
+  margin:0;
+}
+.sunfest-hero-graphic-mode .sunfest-tertiary{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:transparent;
+  border:1px solid rgba(220,162,55,.48);
+  color:#f0c477;
+}
+@media(max-width:720px){
+  .sunfest-hero-cta-layer{
+    position:static;
+    display:grid;
+    grid-template-columns:1fr;
+    padding:.8rem .85rem .95rem;
+    gap:.55rem;
+  }
+  .sunfest-hero-graphic-mode .sunfest-primary,
+  .sunfest-hero-graphic-mode .sunfest-secondary,
+  .sunfest-hero-graphic-mode .sunfest-tertiary{
+    width:100%;
+    min-height:44px;
+  }
+}
+
+/* Sunfest location map modal */
+body.sunfest-map-open{overflow:hidden}
+.sunfest-map-modal{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;padding:clamp(.8rem,3vw,2rem)}
+.sunfest-map-modal.is-open{display:flex}
+.sunfest-map-backdrop{position:absolute;inset:0;background:rgba(0,12,14,.88);backdrop-filter:blur(8px)}
+.sunfest-map-panel{position:relative;width:min(92vw,760px);max-height:92vh;overflow:auto;background:#071719;border:1px solid rgba(222,166,59,.7);box-shadow:0 24px 80px rgba(0,0,0,.55);padding:clamp(.85rem,2vw,1.4rem)}
+.sunfest-map-panel img{display:block;width:100%;height:auto;background:#fff;border:1px solid rgba(255,255,255,.2)}
+.sunfest-map-heading{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;padding:.1rem 3.2rem .85rem 0;color:#f5efe4;text-transform:uppercase}
+.sunfest-map-heading span{font:900 .7rem/1 Arial,sans-serif;letter-spacing:.18em;color:#43d5dc}
+.sunfest-map-heading strong{font:900 clamp(.9rem,2vw,1.15rem)/1.1 Arial,sans-serif;letter-spacing:.05em;text-align:right}
+.sunfest-map-close{position:absolute;top:.65rem;right:.65rem;z-index:2;width:42px;height:42px;border:1px solid rgba(255,255,255,.35);background:#111;color:#fff;font-size:1.7rem;line-height:1;cursor:pointer}
+.sunfest-map-note{margin:.85rem 0 .1rem;color:#f5efe4;font:700 .82rem/1.45 Arial,sans-serif;letter-spacing:.03em}
+@media(max-width:600px){
+  .sunfest-map-modal{padding:.45rem}
+  .sunfest-map-panel{width:100%;max-height:96vh;padding:.65rem}
+  .sunfest-map-heading{display:block;padding:.25rem 3rem .65rem 0}
+  .sunfest-map-heading strong{display:block;margin-top:.4rem;text-align:left}
+  .sunfest-map-close{top:.45rem;right:.45rem;width:38px;height:38px}
+  .sunfest-map-note{font-size:.74rem}
+}

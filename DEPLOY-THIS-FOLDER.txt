@@ -1,0 +1,3 @@
+Upload this entire folder to Netlify Drop.
+This release removes any stale NETLIFY-HOTLINE-SETUP files during the Netlify build and excludes those legacy paths from secret scanning.
+Do not merge these files into an older extracted folder. Use a fresh extraction.

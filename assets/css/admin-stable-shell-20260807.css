@@ -1,0 +1,15 @@
+/* Stable Admin shell. Intentionally no fixed overlays and no runtime DOM re-parenting. */
+#admin-panel{position:relative;isolation:isolate;pointer-events:auto!important}
+#admin-panel[hidden]{display:none!important}
+#admin-panel .admin-app-layout,#admin-panel .admin-navigation,#admin-panel .admin-workspace{pointer-events:auto!important}
+#admin-panel .admin-navigation button,#admin-panel .admin-workspace button,#admin-panel .admin-workspace a,#admin-panel .admin-workspace input,#admin-panel .admin-workspace select,#admin-panel .admin-workspace textarea{pointer-events:auto!important}
+#admin-panel .admin-app-layout{position:relative;z-index:2}
+#admin-panel .admin-navigation{position:sticky;z-index:3}
+#admin-panel .admin-workspace{position:relative;z-index:2}
+#admin-panel .admin-content-section[hidden]{display:none!important}
+#admin-gate[hidden]{display:none!important}
+/* Anything modal-like must stay inert when hidden. */
+#admin-panel [hidden]{pointer-events:none!important}
+#admin-panel [hidden] *{pointer-events:none!important}
+/* Avoid stale editor action bars escaping hidden contest workspaces. */
+#admin-section-contests[hidden] .ce-sticky-actions,#contest-editor[hidden] .ce-sticky-actions{display:none!important}

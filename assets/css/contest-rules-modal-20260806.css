@@ -1,0 +1,23 @@
+html.contest-rules-open,html.contest-rules-open body{overflow:hidden}
+.contest-rules-modal[hidden]{display:none!important}
+.contest-rules-modal{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;padding:18px}
+.contest-rules-backdrop{position:absolute;inset:0;background:rgba(2,8,9,.78);backdrop-filter:blur(5px)}
+.contest-rules-dialog{position:relative;width:min(920px,100%);max-height:min(90vh,940px);display:grid;grid-template-rows:auto minmax(0,1fr) auto;background:#fbf7ef;color:#151515;border:1px solid rgba(255,255,255,.24);box-shadow:0 30px 90px rgba(0,0,0,.42)}
+.contest-rules-dialog>header{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:22px 26px;background:#07191b;color:#fff;border-bottom:5px solid #d8a43b}
+.contest-rules-dialog>header p{margin:0 0 5px;color:#61ccd5;font:800 11px/1 Arial,sans-serif;letter-spacing:.2em}
+.contest-rules-dialog>header h2{margin:0;font:800 clamp(24px,4vw,36px)/1.05 Arial,sans-serif}
+.contest-rules-close{width:42px;height:42px;flex:0 0 42px;border:1px solid rgba(255,255,255,.34);background:transparent;color:#fff;font:300 31px/1 Arial,sans-serif;cursor:pointer}
+.contest-rules-modal-body{overflow:auto;padding:28px clamp(20px,5vw,48px);overscroll-behavior:contain}
+.contest-rules-document>h2{margin:0 0 28px;font:800 clamp(27px,4vw,42px)/1.05 Arial,sans-serif;color:#07191b}
+.contest-rules-document section{padding:0 0 22px;margin:0 0 22px;border-bottom:1px solid #d9d0c0}
+.contest-rules-document section:last-child{border-bottom:0}
+.contest-rules-document h3{margin:0 0 10px;font:800 19px/1.25 Arial,sans-serif;color:#0b6f78}
+.contest-rules-document p,.contest-rules-document li,.contest-rules-document address{font:15px/1.65 Arial,sans-serif;color:#332f2a}
+.contest-rules-document p{margin:0 0 12px}.contest-rules-document ul{margin:8px 0 16px;padding-left:22px}.contest-rules-document address{font-style:normal;margin:0 0 12px}
+.contest-rules-document a{color:#087b85;text-underline-offset:2px}
+.contest-rules-dialog>footer{display:flex;justify-content:flex-end;gap:10px;padding:15px 20px;background:#eee7da;border-top:1px solid #d9d0c0}
+.contest-rules-dialog>footer button,.contest-rules-trigger{min-height:44px;padding:0 18px;border:1px solid #087d86;background:#087d86;color:#fff;font:800 11px/1 Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;text-decoration:none}
+.contest-rules-dialog>footer .contest-rules-print{background:transparent;color:#087d86}
+@media(max-width:640px){.contest-rules-modal{padding:0}.contest-rules-dialog{width:100%;height:100%;max-height:none}.contest-rules-dialog>header{padding:18px}.contest-rules-modal-body{padding:22px 18px}.contest-rules-dialog>footer{padding:12px}.contest-rules-dialog>footer button{flex:1}}
+@media print{body>*:not(.contest-rules-modal){display:none!important}.contest-rules-modal{position:static;padding:0}.contest-rules-backdrop,.contest-rules-dialog>header,.contest-rules-dialog>footer{display:none!important}.contest-rules-dialog{display:block;max-height:none;box-shadow:none;border:0}.contest-rules-modal-body{overflow:visible;padding:0}}
+.contest-rules-action,.rc-rules-action{display:inline-flex;margin-left:10px;vertical-align:middle}.contest-rules-action .contest-rules-trigger,.rc-rules-action .contest-rules-trigger{min-height:34px;padding:0 13px;font-size:10px}.ps-rules-cta{align-self:center}.ps-rules-cta>p:not(.ps-kicker){max-width:520px;margin-bottom:22px}.rc-legal>div{margin-bottom:18px}

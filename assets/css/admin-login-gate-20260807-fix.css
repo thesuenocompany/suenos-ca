@@ -1,0 +1,25 @@
+/* Login gate isolation: nothing in the authenticated admin app may intercept the sign-in screen. */
+#admin-gate:not([hidden]){
+  position:relative!important;
+  z-index:2147483000!important;
+  pointer-events:auto!important;
+  isolation:isolate;
+}
+#admin-gate:not([hidden]) *,
+#admin-gate:not([hidden]) input,
+#admin-gate:not([hidden]) button,
+#admin-gate:not([hidden]) a{
+  pointer-events:auto!important;
+}
+#admin-gate:not([hidden]) input,
+#admin-gate:not([hidden]) button,
+#admin-gate:not([hidden]) a{
+  position:relative;
+  z-index:2;
+}
+#admin-gate:not([hidden])::before,
+#admin-gate:not([hidden])::after{pointer-events:none!important}
+#admin-panel[hidden]{display:none!important;pointer-events:none!important;visibility:hidden!important}
+body.admin-login-mode .admin-top{position:relative!important;z-index:1!important}
+body.admin-login-mode .admin-card{position:relative!important;overflow:hidden!important}
+body.admin-login-mode #admin-panel{display:none!important;pointer-events:none!important}

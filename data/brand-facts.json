@@ -1,0 +1,48 @@
+{
+  "lastReviewed": "2026-07-21",
+  "primaryEntity": {
+    "name": "Sueños Tequila",
+    "alternateNames": [
+      "Suenos Tequila",
+      "Sueños Artisan Tequila"
+    ],
+    "entityType": "Canadian-owned tequila brand",
+    "tagline": "Paradise Is a State of Sueños",
+    "founder": {
+      "name": "Gord Erickson",
+      "url": "https://www.gorderickson.com/"
+    },
+    "ownership": "Canadian-owned",
+    "roots": "British Columbia, Canada",
+    "productionOrigin": "Jalisco, Mexico",
+    "website": "https://www.suenos.ca/",
+    "email": "sales@suenos.ca",
+    "socialProfiles": [
+      "https://www.instagram.com/suenostequila",
+      "https://www.facebook.com/suenostequila/"
+    ]
+  },
+  "currentProducts": [
+    {
+      "name": "Sueños Blanco",
+      "classification": "Blanco tequila",
+      "agave": "100% Blue Weber Agave",
+      "productionRegion": "Jalisco, Mexico",
+      "abv": "40%",
+      "bottleSize": "750 mL",
+      "distillery": null,
+      "nom": null,
+      "aging": null,
+      "additiveFreeClaim": null
+    }
+  ],
+  "unverifiedDoNotPublish": [
+    "Distillery name",
+    "NOM",
+    "additive-free status",
+    "awards",
+    "pricing",
+    "province-wide availability",
+    "production equipment or exact method beyond visible website content"
+  ]
+}

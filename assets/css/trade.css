@@ -1,0 +1,90 @@
+.trade-page .page-hero p{max-width:56rem}
+.trade-page-shell{background:linear-gradient(180deg,#e8decc 0%,#d9c8ad 100%);color:var(--ink)}
+.trade-intro-grid{display:grid;gap:1rem;margin-bottom:1.25rem}
+.trade-intro-card{background:#090909;color:var(--cream);padding:1.2rem;box-shadow:var(--shadow)}
+.trade-intro-card .kicker{color:var(--teal);font-size:.78rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase}
+.trade-intro-card h2{margin:.35rem 0 .65rem;font-size:clamp(1.8rem,7vw,3rem);line-height:.96;text-transform:uppercase}
+.trade-intro-card p{margin:0;color:#e0d4c1}
+.trade-form-card{background:#090909;color:var(--cream);padding:clamp(1rem,4vw,1.5rem);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.trade-form-card:before{content:"";position:absolute;inset:0 0 auto;height:6px;background:linear-gradient(90deg,var(--teal),var(--orange),var(--gold))}
+.trade-progress{margin:0 0 1.35rem;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.45rem}
+.trade-progress li{min-width:0}
+.trade-progress-item{width:100%;min-height:52px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.035);color:#bcae99;display:flex;align-items:center;gap:.5rem;padding:.55rem;text-align:left;font:inherit;cursor:default}
+.trade-progress-item .trade-progress-number{flex:0 0 28px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);font-weight:900;color:#efe4d1}
+.trade-progress-item .trade-progress-label{font-size:.69rem;font-weight:900;line-height:1.1;letter-spacing:.05em;text-transform:uppercase}
+.trade-progress-item[aria-current="step"]{border-color:var(--teal);background:rgba(43,168,173,.13);color:#fff}
+.trade-progress-item[aria-current="step"] .trade-progress-number{background:var(--teal);color:#061214}
+.trade-progress-item.is-complete{border-color:rgba(43,168,173,.38);color:#d9eee9}
+.trade-progress-item.is-complete .trade-progress-number{background:rgba(43,168,173,.28)}
+.trade-form-status{display:none;margin:0 0 1rem;padding:1rem;border-left:4px solid var(--orange);background:rgba(255,255,255,.06);color:#f2e6d4;font-weight:700}
+.trade-form-status:not(:empty){display:block}
+.trade-form-status.is-error{border-color:#ff7a68;background:rgba(255,122,104,.1);color:#ffd7cf}
+.trade-form-status.is-info{border-color:var(--teal);background:rgba(43,168,173,.1);color:#d9f6f4}
+.trade-step{border:0;margin:0;padding:0;min-width:0}
+.trade-step[hidden]{display:none!important}
+.trade-step legend{width:100%;margin:0 0 1rem;padding:0;color:var(--cream);font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;font-size:clamp(2rem,8vw,3.4rem);line-height:.94;text-transform:uppercase}
+.trade-step-copy{margin:-.45rem 0 1rem;color:#cfc2ae}
+.trade-grid{display:grid;grid-template-columns:1fr;gap:.85rem}
+.trade-form .field{min-width:0}
+.trade-form .field.full{grid-column:1/-1}
+.trade-form .field label,.trade-field-label{display:block;margin:0 0 .35rem;color:#e9ddca;font-size:.74rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.trade-required{color:#ff8a70}
+.trade-optional{color:#9f927f;font-weight:700;letter-spacing:.02em;text-transform:none}
+.trade-form input[type="text"],.trade-form input[type="email"],.trade-form input[type="tel"],.trade-form input[type="number"],.trade-form select,.trade-form textarea{width:100%;min-height:50px;padding:.9rem 1rem;border:2px solid transparent;border-radius:0;background:var(--cream);color:#111;font:inherit;line-height:1.25}
+.trade-form textarea{min-height:145px;resize:vertical}
+.trade-form input:focus,.trade-form select:focus,.trade-form textarea:focus{outline:3px solid rgba(43,168,173,.36);outline-offset:2px;border-color:var(--teal)}
+.trade-form [aria-invalid="true"]{border-color:#ff7a68;background:#fff3ef}
+.trade-help{display:block;margin:.35rem 0 0;color:#aa9c88;font-size:.8rem}
+.trade-field-error{display:block;min-height:1.2rem;margin:.28rem 0 0;color:#ff8c78;font-size:.8rem;font-weight:800}
+.trade-radio-group,.trade-check-group{display:grid;gap:.55rem}
+.trade-choice{display:flex;align-items:flex-start;gap:.65rem;padding:.75rem;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.035);cursor:pointer}
+.trade-choice input{flex:0 0 auto;width:20px;height:20px;margin:.05rem 0 0;accent-color:var(--teal)}
+.trade-choice span{line-height:1.35;color:#e7dccb}
+.trade-choice a{color:#65d4d1;text-decoration:underline;text-underline-offset:3px}
+.trade-products{display:grid;grid-template-columns:1fr;gap:.55rem}
+.trade-honeypot{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+.trade-turnstile-wrap{padding:.8rem;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.035)}
+.trade-turnstile-wrap:focus{outline:3px solid rgba(43,168,173,.36);outline-offset:2px}
+.trade-actions{display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;margin-top:1.25rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.1)}
+.trade-actions-right{display:flex;gap:.65rem;margin-left:auto}
+.trade-back,.trade-next{min-height:48px;justify-content:center}
+.trade-back[hidden],.trade-next[hidden],.trade-submit[hidden]{display:none!important}
+.trade-submit{position:relative;min-width:210px;justify-content:center}
+.trade-submit[disabled]{cursor:wait;opacity:.75}
+.trade-submit.is-loading:before{content:"";width:16px;height:16px;margin-right:.55rem;border:2px solid rgba(22,11,7,.35);border-top-color:#160b07;border-radius:50%;animation:trade-spin .75s linear infinite}
+.trade-result{background:#090909;color:var(--cream);padding:clamp(1.2rem,5vw,2rem);box-shadow:var(--shadow);border-top:6px solid var(--teal)}
+.trade-result[hidden]{display:none!important}
+.trade-result .kicker{color:var(--teal);font-size:.78rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase}
+.trade-result h2{margin:.35rem 0 .7rem;font-size:clamp(2.2rem,9vw,4.4rem);line-height:.92;text-transform:uppercase}
+.trade-result-message{max-width:50rem;color:#e4d7c4;font-size:1.05rem}
+.trade-rep-card{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:center;margin-top:1.2rem;padding:1rem;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.045)}
+.trade-rep-photo{width:84px;height:84px;border-radius:50%;object-fit:cover;border:3px solid var(--teal);background:#172326}
+.trade-rep-placeholder{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:rgba(43,168,173,.15);border:3px solid var(--teal);color:var(--teal);font-size:1.7rem;font-weight:900}
+.trade-rep-card h3{margin:0 0 .2rem;font-size:1.35rem;text-transform:uppercase}
+.trade-rep-card p{margin:.1rem 0;color:#cbbda8}
+.trade-rep-card a{color:#65d4d1;text-decoration:underline;text-underline-offset:3px}
+.trade-result-actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.2rem}
+.trade-result-note{margin-top:1rem;color:#ac9e89;font-size:.84rem}
+.trade-no-js{margin-bottom:1rem}
+.trade-cta-panel{margin-top:1rem}
+@keyframes trade-spin{to{transform:rotate(360deg)}}
+@media(min-width:720px){
+  .trade-intro-grid{grid-template-columns:.8fr 1.2fr}
+  .trade-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .trade-products{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:620px){
+  .trade-progress{gap:.25rem}
+  .trade-progress-item{min-height:46px;justify-content:center;padding:.4rem}
+  .trade-progress-item .trade-progress-label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .trade-progress-item .trade-progress-number{width:30px;height:30px;flex-basis:30px}
+  .trade-actions{align-items:stretch}
+  .trade-actions-right{width:100%;margin-left:0;display:grid;grid-template-columns:1fr}
+  .trade-back,.trade-next,.trade-submit{width:100%}
+  .trade-rep-card{grid-template-columns:1fr;text-align:center}
+  .trade-rep-photo,.trade-rep-placeholder{margin:auto}
+}
+@media(prefers-reduced-motion:reduce){
+  .trade-submit.is-loading:before{animation:none}
+  .trade-form *{scroll-behavior:auto!important;transition:none!important}
+}

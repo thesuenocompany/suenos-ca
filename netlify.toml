@@ -1,0 +1,72 @@
+[build]
+  command = "find . -maxdepth 2 -type f \\( -name 'NETLIFY-HOTLINE-SETUP*.md' -o -name 'NETLIFY-HOTLINE-SETUP*.txt' \\) -delete"
+  publish = "."
+  functions = "netlify/functions"
+
+[build.environment]
+  SECRETS_SCAN_OMIT_PATHS = "NETLIFY-HOTLINE-SETUP.md,NETLIFY-HOTLINE-SETUP-FIXED.md"
+
+[functions]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/find-suenos"
+  to = "/en-ca/find-a-bottle/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/find-suenos/"
+  to = "/en-ca/find-a-bottle/"
+  status = 301
+  force = true
+
+[[redirects]]
+from = "/cocktails/jalisco-haze"
+to = "/en-ca/cocktails/jalisco-haze/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/cocktails/jalisco-haze/"
+to = "/en-ca/cocktails/jalisco-haze/"
+status = 301
+force = true
+
+# Existing static cocktail pages keep priority. New recipe slugs use the dynamic recipe shell.
+[[redirects]]
+  from = "/en-ca/cocktails/:slug/"
+  to = "/en-ca/cocktails/recipe/index.html?slug=:slug"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/en-ca/cocktails/:slug"
+  to = "/en-ca/cocktails/recipe/index.html?slug=:slug"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/es-mx/cocteles/:slug/"
+  to = "/es-mx/cocteles/recipe/index.html?slug=:slug"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/es-mx/cocteles/:slug"
+  to = "/es-mx/cocteles/recipe/index.html?slug=:slug"
+  status = 200
+  force = false
+
+# Dynamic contest pages. The slug is loaded by the reusable contest shell.
+[[redirects]]
+  from = "/en-ca/contests/:slug/"
+  to = "/en-ca/contests/contest/index.html?slug=:slug"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/en-ca/contests/:slug"
+  to = "/en-ca/contests/contest/index.html?slug=:slug"
+  status = 200
+  force = true
