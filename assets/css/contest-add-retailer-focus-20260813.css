@@ -1,2 +1,95 @@
-body.ar-open{overflow:hidden}.ar-modal[hidden]{display:none!important}.ar-modal{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;padding:24px}.ar-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(7px)}.ar-dialog{position:relative;width:min(640px,calc(100vw - 32px));max-height:calc(100vh - 48px);overflow:auto;background:#091315;border:1px solid #244247;border-radius:18px;box-shadow:0 28px 80px rgba(0,0,0,.5);color:#f6f0e5}.ar-head{display:flex;justify-content:space-between;gap:24px;padding:28px 30px 20px;border-bottom:1px solid rgba(255,255,255,.08)}.ar-head h2{font-size:28px;margin:3px 0 5px}.ar-kicker{margin:0;color:#40d9e5;text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:800}.ar-campaign{margin:0;color:#9fb0b3}.ar-close{appearance:none;border:0;background:transparent;color:#9fb0b3;font-size:30px;line-height:1;cursor:pointer;padding:0 4px;height:38px}.ar-body{padding:26px 30px}.ar-step,.ar-next{display:flex;gap:14px;align-items:flex-start;margin-bottom:18px}.ar-step>span,.ar-next>span{display:grid;place-items:center;flex:0 0 30px;height:30px;border-radius:50%;background:#12373b;color:#73e8ef;font-weight:800}.ar-step strong,.ar-next strong{display:block;font-size:16px}.ar-step p,.ar-next p{margin:3px 0 0;color:#9fb0b3;line-height:1.45}.ar-field{display:grid;gap:7px;margin:14px 0}.ar-field>span{font-size:13px;font-weight:700}.ar-field input{width:100%;box-sizing:border-box;background:#061012;border:1px solid #29484d;border-radius:9px;color:#fff;padding:13px 14px;font:inherit;outline:none}.ar-field input:focus{border-color:#40d9e5;box-shadow:0 0 0 3px rgba(64,217,229,.12)}.ar-field small{color:#879a9d}.ar-advanced{margin:12px 0 20px;border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07);padding:12px 0}.ar-advanced summary{cursor:pointer;color:#9fb0b3;font-weight:700}.ar-inherits{background:#0e2528;border-left:3px solid #40d9e5;border-radius:0 10px 10px 0;padding:16px 18px;margin:20px 0}.ar-inherits strong{display:block;margin-bottom:11px}.ar-inherit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px;color:#c7d5d6;font-size:13px}.ar-next{margin:22px 0 0}.ar-error{min-height:20px;color:#ff8c83;font-weight:700;margin-top:14px}.ar-actions{display:flex;justify-content:flex-end;gap:10px;padding:18px 30px 26px;border-top:1px solid rgba(255,255,255,.08)}#ar-create.is-busy{position:relative;opacity:.85}#ar-create.is-busy:before{content:"";display:inline-block;width:13px;height:13px;margin-right:8px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;vertical-align:-2px;animation:arspin .7s linear infinite}@keyframes arspin{to{transform:rotate(360deg)}}@media(max-width:560px){.ar-modal{padding:12px}.ar-head,.ar-body,.ar-actions{padding-left:20px;padding-right:20px}.ar-inherit-grid{grid-template-columns:1fr}.ar-actions{flex-direction:column-reverse}.ar-actions button{width:100%}}
+body.ar-open{overflow:hidden}.ar-modal[hidden]{display:none!important}.ar-modal{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;padding:24px}.ar-backdrop{position:absolute;inset:0;background:rgba(8,16,17,.55);backdrop-filter:blur(7px)}.ar-dialog{position:relative;width:min(640px,calc(100vw - 32px));max-height:calc(100vh - 48px);overflow:auto;background:#fff;border:1px solid #d8ded8;border-radius:18px;box-shadow:0 28px 80px rgba(0,0,0,.24);color:#18201f}.ar-head{display:flex;justify-content:space-between;gap:24px;padding:28px 30px 20px;border-bottom:1px solid #e7ebe6}.ar-head h2{font-size:28px;margin:3px 0 5px;color:#18201f}.ar-kicker{margin:0;color:#14777d;text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:800}.ar-campaign{margin:0;color:#64706d}.ar-close{appearance:none;border:0;background:transparent;color:#64706d;font-size:30px;line-height:1;cursor:pointer;padding:0 4px;height:38px}.ar-body{padding:26px 30px}.ar-step,.ar-next{display:flex;gap:14px;align-items:flex-start;margin-bottom:18px}.ar-step>span,.ar-next>span{display:grid;place-items:center;flex:0 0 30px;height:30px;border-radius:50%;background:#e7f2f0;color:#14777d;font-weight:800}.ar-step strong,.ar-next strong{display:block;font-size:16px}.ar-step p,.ar-next p{margin:3px 0 0;color:#64706d;line-height:1.45}.ar-field{display:grid;gap:7px;margin:14px 0}.ar-field>span{font-size:13px;font-weight:700}.ar-field input{width:100%;box-sizing:border-box;background:#fff;border:1px solid #cbd4cf;border-radius:9px;color:#18201f;padding:13px 14px;font:inherit;outline:none}.ar-field input:focus{border-color:#14777d;box-shadow:0 0 0 3px rgba(20,119,125,.12)}.ar-field small{color:#87908e}.ar-advanced{margin:12px 0 20px;border-top:1px solid #e7ebe6;border-bottom:1px solid #e7ebe6;padding:12px 0}.ar-advanced summary{cursor:pointer;color:#64706d;font-weight:700}.ar-inherits{background:#f2f8f6;border-left:3px solid #14777d;border-radius:0 10px 10px 0;padding:16px 18px;margin:20px 0}.ar-inherits strong{display:block;margin-bottom:11px}.ar-inherit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px;color:#42514e;font-size:13px}.ar-next{margin:22px 0 0}.ar-error{min-height:20px;color:#c9443d;font-weight:700;margin-top:14px}.ar-actions{display:flex;justify-content:flex-end;gap:10px;padding:18px 30px 26px;border-top:1px solid #e7ebe6}#ar-create.is-busy{position:relative;opacity:.85}#ar-create.is-busy:before{content:"";display:inline-block;width:13px;height:13px;margin-right:8px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;vertical-align:-2px;animation:arspin .7s linear infinite}@keyframes arspin{to{transform:rotate(360deg)}}
+
+/* Retailer child pages show retailer work only. Master-only tools stay on the master campaign. */
+#contest-editor.is-retail-child #contest-retail-copy-tools,
+#contest-editor.is-retail-child #contest-retail-summary,
+#contest-editor.is-retail-child label:has(#contest-retail-master){display:none!important}
+#contest-editor.is-retail-child #contest-receipt-bonus-settings>label:has(#contest-receipt-bonus-enabled),
+#contest-editor.is-retail-child #contest-receipt-bonus-settings>.admin-field-grid,
+#contest-editor.is-retail-child #contest-receipt-bonus-settings>.admin-field:has(#contest-receipt-bonus-help),
+#contest-editor.is-retail-child #contest-receipt-bonus-settings>.admin-note{display:none!important}
+#contest-editor.is-retail-child #contest-receipt-bonus-settings{padding:16px!important}
+#contest-editor.is-retail-child #contest-receipt-bonus-settings h4{margin-bottom:10px!important}
+#contest-editor.is-retail-child #contest-receipt-bonus-override-wrap{margin-bottom:0!important}
+
+/* Final light-theme correction for legacy retailer tools. */
+#contest-editor .contest-workspace-context,
+#contest-editor .contest-section-body,
+#contest-editor .retail-copy-tools,
+#contest-editor .retail-qr-tools,
+#contest-editor #contest-receipt-bonus-settings,
+#contest-editor .retail-print-designer,
+#contest-editor .retail-social-designer,
+#contest-editor .retail-print-controls,
+#contest-editor .retail-social-slot,
+#contest-editor .retail-social-workspace,
+#contest-editor #contest-retail-summary{background:#fff!important;color:#18201f!important;border-color:#d9e1dc!important;box-shadow:none!important}
+#contest-editor .contest-workspace-context strong,
+#contest-editor .contest-section-head h3,
+#contest-editor .retail-copy-tools h4,
+#contest-editor .retail-qr-tools h4,
+#contest-editor #contest-receipt-bonus-settings h4,
+#contest-editor .retail-print-heading h4,
+#contest-editor .retail-social-heading h4,
+#contest-editor .retail-social-downloads h4,
+#contest-editor .retail-social-slot strong,
+#contest-editor .retail-print-designer label,
+#contest-editor .retail-social-designer label{color:#18201f!important}
+#contest-editor .contest-workspace-context p,
+#contest-editor .contest-section-head p,
+#contest-editor .retail-print-heading p,
+#contest-editor .retail-social-heading p,
+#contest-editor .retail-social-slot small,
+#contest-editor .retail-social-readout,
+#contest-editor .retail-social-downloads p,
+#contest-editor .retail-print-status,
+#contest-editor .retail-social-status{color:#64706d!important}
+#contest-editor .contest-workspace-context{border:1px solid #d6ded9!important}
+#contest-editor .contest-workspace-context .cwc-eyebrow{color:#14777d!important}
+#contest-editor .contest-editor-nav{background:#e8ece7!important;border-color:#d4dbd5!important}
+#contest-editor .contest-editor-nav button{color:#64706d!important}
+#contest-editor .contest-editor-nav button:hover{background:#f6f8f5!important;color:#18201f!important}
+#contest-editor .contest-editor-nav button.is-active{background:#fff!important;color:#174e52!important;box-shadow:0 1px 4px rgba(24,33,31,.09)!important}
+#contest-editor .contest-sticky-actions{background:rgba(255,255,255,.97)!important;border-color:#d4dbd6!important;box-shadow:0 12px 32px rgba(20,30,28,.12)!important}
+#contest-editor .contest-save-state{color:#64706d!important}
+#contest-editor .admin-field label{color:#34403e!important}
+#contest-editor .admin-field small{color:#87908e!important}
+#contest-editor input,#contest-editor select,#contest-editor textarea{background:#fff!important;color:#18201f!important;border-color:#cbd4cf!important}
+#contest-editor input[readonly],#contest-editor textarea[readonly]{background:#f3f5f2!important;color:#687572!important}
+
+/* Receipt settings */
+#contest-editor #contest-receipt-bonus-settings{border:1px solid #dbe4df!important}
+#contest-editor #contest-receipt-bonus-settings .admin-note{background:#f4faf8!important;color:#42514e!important;border-color:#d7e2df!important}
+
+/* Retail print tools */
+#contest-editor .retail-print-designer{padding:20px!important;border-radius:14px!important}
+#contest-editor .retail-print-badge{background:#e4f1ef!important;color:#14777d!important}
+#contest-editor .retail-print-file-field input[type=file]{background:#f7f8f6!important;color:#34403e!important;border-color:#cbd4cf!important}
+#contest-editor .retail-print-child-summary,
+#contest-editor .retail-print-instructions{background:#f0f8f7!important;border-left-color:#14777d!important;color:#283a37!important}
+#contest-editor .retail-print-child-summary span{color:#14777d!important}
+#contest-editor .retail-print-child-summary p{color:#52625f!important}
+#contest-editor .retail-print-workspace{border-top-color:#e1e6e2!important}
+#contest-editor .retail-print-readout{background:#f6f8f5!important;border-color:#d8dfda!important;color:#42514e!important}
+#contest-editor .retail-print-readout.is-warning{background:#fff8e8!important;border-color:#e2c67b!important;color:#7d5b08!important}
+#contest-editor .retail-print-canvas-shell{background:#111!important}
+
+/* Retail social tools */
+#contest-editor .retail-social-designer{padding:20px!important;border-radius:14px!important}
+#contest-editor .retail-social-badge{background:#e4f1ef!important;color:#14777d!important}
+#contest-editor .retail-social-slot{border:1px solid #dce3dd!important}
+#contest-editor .retail-social-slot.is-selected{border-color:#14777d!important;box-shadow:0 0 0 2px rgba(20,119,125,.09)!important}
+#contest-editor .retail-social-slot-preview{background:#f1f3f0!important}
+#contest-editor .retail-social-slot-preview span{color:#84908d!important}
+#contest-editor .retail-social-child-summary{background:#f0f8f7!important;border-left-color:#14777d!important;color:#344642!important}
+#contest-editor .retail-social-child-summary span{color:#14777d!important}
+#contest-editor .retail-social-downloads{border-top-color:#dfe5e1!important}
+#contest-editor .retail-social-canvas-shell{background:#111!important}
+
+/* Campaign retailer summary, shown only on the master. */
+#contest-editor #contest-retail-summary .admin-recipe-card{background:#f8faf7!important;border:1px solid #dde4df!important;color:#18201f!important}
+#contest-editor #contest-retail-summary .admin-recipe-card strong{color:#18201f!important}
+#contest-editor #contest-retail-summary .admin-recipe-card small{color:#64706d!important}
+
+@media(max-width:560px){.ar-modal{padding:12px}.ar-head,.ar-body,.ar-actions{padding-left:20px;padding-right:20px}.ar-inherit-grid{grid-template-columns:1fr}.ar-actions{flex-direction:column-reverse}.ar-actions button{width:100%}}
 @media(prefers-reduced-motion:reduce){#ar-create.is-busy:before{animation:none}}
