@@ -1,103 +1,14 @@
-/* Sueños Contest Workspace v3: one screen, one job */
+/* Contest workspace routing with light admin styling inherited from admin-system. */
 #admin-section-contests{min-width:0}
-#admin-section-contests.contest-mode-list #contest-editor,
-#admin-section-contests.contest-mode-list #contest-entries-panel{display:none!important}
-#admin-section-contests.contest-mode-edit > .admin-section-heading,
-#admin-section-contests.contest-mode-edit > .admin-note,
-#admin-section-contests.contest-mode-edit > .contest-list-intro,
-#admin-section-contests.contest-mode-edit > #contest-admin-list,
-#admin-section-contests.contest-mode-entries > .admin-section-heading,
-#admin-section-contests.contest-mode-entries > .admin-note,
-#admin-section-contests.contest-mode-entries > .contest-list-intro,
-#admin-section-contests.contest-mode-entries > #contest-admin-list{display:none!important}
+#admin-section-contests.contest-mode-list #contest-editor,#admin-section-contests.contest-mode-list #contest-entries-panel{display:none!important}
+#admin-section-contests.contest-mode-edit > .contest-list-intro,#admin-section-contests.contest-mode-edit > #contest-admin-list,#admin-section-contests.contest-mode-entries > .contest-list-intro,#admin-section-contests.contest-mode-entries > #contest-admin-list{display:none!important}
 #admin-section-contests.contest-mode-edit #contest-editor{display:block!important}
 #admin-section-contests.contest-mode-entries #contest-entries-panel{display:block!important}
-
-/* Never allow legacy form containers to leak below the active editor section. */
-#contest-editor .admin-panels[hidden],
-#contest-editor .admin-lang[hidden],
-#contest-editor .ce-editor-shell,
-#contest-editor .ce-step-sidebar,
-#contest-editor .ce-step-content,
-#contest-editor .ce-sticky-actions,
-#contest-editor .ce-type-picker,
-#contest-editor .ce-step-summary,
-#contest-editor .ce-step-panel{display:none!important}
 #contest-editor > .admin-panels{display:none!important}
-#contest-editor .contest-ux-sections{display:block!important}
 #contest-editor .contest-ux-section{display:none!important}
 #contest-editor .contest-ux-section.is-active{display:block!important}
-
-#contest-editor{max-width:1180px;margin:0 auto;padding-bottom:110px}
-#contest-editor .contest-editor-heading{position:relative;display:flex!important;align-items:flex-start;justify-content:space-between;gap:20px;margin:0 0 12px;padding:0 0 18px;border-bottom:1px solid #263436}
-#contest-editor .contest-editor-heading h2{font-size:28px;line-height:1.15;margin:0}
-#contest-editor .contest-editor-heading-actions{display:flex;align-items:center;gap:8px}
-#contest-editor .contest-publish-toggle{font-size:12px!important;padding:9px 12px!important;box-shadow:none!important}
-
-.contest-workspace-context{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 0 18px;padding:14px 16px;border:1px solid #284044;border-radius:12px;background:#0c1517}
-.contest-workspace-context .cwc-eyebrow{display:block;margin-bottom:4px;color:#5ed9e4;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
-.contest-workspace-context strong{display:block;color:#f4f1ea;font-size:16px}
-.contest-workspace-context p{margin:3px 0 0;color:#95a3a5;font-size:12px;line-height:1.45}
-.contest-workspace-context .admin-btn{flex:0 0 auto}
-
-#contest-editor .contest-editor-nav{position:sticky;top:0;z-index:45;display:flex!important;gap:4px;margin:0 0 20px;padding:7px;border:1px solid #273638;border-radius:12px;background:rgba(9,14,15,.97);overflow-x:auto;scrollbar-width:none}
-#contest-editor .contest-editor-nav::-webkit-scrollbar{display:none}
-#contest-editor .contest-editor-nav button{flex:0 0 auto;border:0;border-radius:8px;padding:10px 13px;background:transparent;color:#929fa1;font-size:12px;font-weight:750;cursor:pointer;white-space:nowrap}
-#contest-editor .contest-editor-nav button:hover{background:#152124;color:#fff}
-#contest-editor .contest-editor-nav button.is-active{background:#143a3e;color:#77e8f0}
 #contest-editor .contest-editor-nav button[hidden]{display:none!important}
-
-#contest-editor .contest-ux-section{animation:none!important}
-#contest-editor .admin-form-section{padding:0;border:0;background:transparent}
-#contest-editor .contest-section-head{margin:0 0 18px}
-#contest-editor .contest-section-head h3{margin:0 0 5px;color:#f4f1ea;font-size:24px;line-height:1.2}
-#contest-editor .contest-section-head p{max-width:720px;margin:0;color:#8e9b9e;font-size:13px;line-height:1.5}
-#contest-editor .contest-section-body{display:block;padding:22px;border:1px solid #283638;border-radius:14px;background:#0d1415}
-#contest-editor .contest-section-body > * + *{margin-top:18px}
-#contest-editor .admin-field-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-#contest-editor .admin-field{min-width:0}
-#contest-editor .admin-field label{margin-bottom:7px;color:#b9c3c5;font-size:11px;font-weight:750;letter-spacing:.02em}
-#contest-editor input,#contest-editor select,#contest-editor textarea{width:100%;min-width:0;box-sizing:border-box}
-#contest-editor textarea{min-height:110px}
-#contest-editor .admin-note{border-radius:10px}
-#contest-editor .admin-advanced{margin-top:18px;border:1px solid #253235;border-radius:10px;background:#0a1011}
-#contest-editor .admin-advanced summary{padding:13px 14px;color:#a9b5b7;cursor:pointer;font-weight:700}
-#contest-editor .admin-advanced-body{padding:0 14px 14px}
-
-/* Retail settings are a workspace, not another giant card inside a card. */
-#contest-editor #contest-retail-settings{margin:0!important;padding:0!important;border:0!important;background:transparent!important}
-#contest-editor #contest-retail-settings > h3,
-#contest-editor #contest-retail-settings > p{display:none!important}
-#contest-editor .retail-copy-tools,#contest-editor .retail-qr-tools,#contest-editor #contest-receipt-bonus-settings,#contest-editor #retail-print-poster-admin,#contest-editor #retail-social-master-panel,#contest-editor #retail-social-retailer-panel{margin-top:20px!important;padding:18px!important;border:1px solid #27383a!important;border-radius:12px!important;background:#0a1112!important}
-
-/* Social creative master: usable asset workspace. */
-#contest-editor .retail-social-master-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
-#contest-editor .retail-social-card{min-width:0!important}
-#contest-editor .retail-social-card-preview{aspect-ratio:16/9!important;min-height:180px!important;max-height:300px!important}
-#contest-editor #retail-social-canvas-shell{width:100%!important;max-width:100%!important;min-height:420px!important;margin-top:16px!important}
-#contest-editor #retail-social-image{max-height:680px!important;object-fit:contain!important}
-
-/* One sticky save bar only. */
-#contest-editor .contest-sticky-actions{position:sticky;bottom:14px;z-index:60;display:flex!important;align-items:center;justify-content:flex-end;gap:8px;margin-top:28px;padding:12px 14px;border:1px solid #344245;border-radius:12px;background:rgba(10,15,16,.96);box-shadow:0 14px 35px rgba(0,0,0,.35)}
-#contest-editor .contest-save-state{margin-right:auto;color:#869497;font-size:11px}
-
-/* Contest list stays calm. */
-#contest-admin-list{max-width:1440px}
-.jf-campaign{border-radius:14px!important}
-.jf-campaign-summary{grid-template-columns:minmax(330px,1.35fr) 92px 92px minmax(250px,.9fr)!important}
-.jf-retailer-grid,.jf-retailer-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
-.jf-retailer-card,.jf-retailer-row{min-width:0!important}
-
-@media(max-width:1050px){
- #contest-editor{max-width:none}
- #contest-editor .admin-field-grid{grid-template-columns:1fr}
- #contest-editor .retail-social-master-grid{grid-template-columns:1fr!important}
- .jf-retailer-grid,.jf-retailer-cards{grid-template-columns:1fr!important}
-}
-@media(max-width:700px){
- #contest-editor .contest-editor-heading{flex-direction:column}
- .contest-workspace-context{align-items:flex-start;flex-direction:column}
- #contest-editor .contest-section-body{padding:16px}
- #contest-editor .contest-sticky-actions{bottom:8px;flex-wrap:wrap}
- #contest-editor .contest-save-state{width:100%;margin:0 0 4px}
-}
+.jf-campaign-actions [data-retail-copy]{background:#f26a21!important;color:#1a0f09!important;border-color:#f26a21!important;font-size:14px!important;padding-left:18px!important;padding-right:18px!important}
+.jf-campaign-actions [data-retail-copy]::before{content:'+ ';font-weight:900}
+#contest-retail-copy-tools{background:#fff4ed!important;border:1px solid #f4b48e!important;border-radius:14px!important;padding:20px!important}
+#contest-create-retailer{min-height:46px!important;font-size:14px!important}
