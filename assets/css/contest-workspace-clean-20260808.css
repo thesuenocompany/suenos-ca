@@ -88,11 +88,27 @@
 .jf-retailer-grid,.jf-retailer-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
 .jf-retailer-card,.jf-retailer-row{min-width:0!important}
 
+/* Structural recovery: keep campaign and creative assets compact in the light admin. */
+.jf-campaign-summary{display:grid!important;gap:14px!important;align-items:stretch!important}
+.jf-campaign-dates,.jf-campaign-stat,.jf-campaign-assets{min-width:0!important}
+.jf-asset-strip{display:flex!important;gap:7px!important;flex-wrap:wrap!important;margin-top:8px!important}
+.jf-asset-thumb{display:inline-grid!important;place-items:center!important;width:42px!important;height:42px!important;border-radius:7px!important;overflow:hidden!important}
+.jf-asset-thumb img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important}
+.jf-retailer-list{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;width:100%!important;min-width:0!important}
+.jf-retailer-row{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;grid-template-areas:"identity state" "dates dates" "metrics assets" "actions actions"!important;gap:13px 18px!important;align-items:start!important;min-width:0!important;padding:18px!important;overflow:hidden!important}
+.jf-retailer-identity{grid-area:identity!important;display:flex!important;align-items:center!important;gap:11px!important;min-width:0!important}.jf-retailer-identity>div{min-width:0!important}
+.jf-retailer-logo{flex:0 0 40px!important;width:40px!important;height:40px!important;display:grid!important;place-items:center!important;overflow:hidden!important}.jf-retailer-logo img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important}
+.jf-retailer-state{grid-area:state!important;justify-self:end!important}.jf-retailer-dates{grid-area:dates!important;min-width:0!important}.jf-retailer-entries{grid-area:metrics!important;display:flex!important;align-items:baseline!important;gap:6px!important;min-width:0!important}.jf-retailer-assets{grid-area:assets!important;justify-self:end!important;min-width:0!important;text-align:right!important}.jf-retailer-actions{grid-area:actions!important;display:flex!important;align-items:center!important;gap:7px!important;flex-wrap:wrap!important}
+.jf-social-strip{display:flex!important;gap:5px!important;justify-content:flex-end!important;flex-wrap:wrap!important}.jf-social-thumb{position:relative!important;width:38px!important;height:38px!important;padding:0!important;overflow:hidden!important}.jf-social-thumb img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important}
+.jf-inline-dates{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto!important;gap:8px!important;align-items:end!important;width:100%!important;min-width:0!important}.jf-inline-dates label{min-width:0!important}.jf-inline-dates input{width:100%!important;min-width:0!important}
+.retail-social-heading{display:flex!important;justify-content:space-between!important;gap:18px!important;align-items:flex-start!important}.retail-social-slots{display:grid!important;grid-template-columns:repeat(4,minmax(180px,1fr))!important;gap:12px!important;margin:18px 0 24px!important}.retail-social-slot{display:flex!important;flex-direction:column!important;min-width:0!important;padding:12px!important;overflow:hidden!important}.retail-social-slot-preview{width:100%!important;height:180px!important;overflow:hidden!important;margin:0 0 10px!important;display:grid!important;place-items:center!important}.retail-social-slot-preview img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important}.retail-social-slot input[type=file]{width:100%!important;min-width:0!important}.retail-social-slot .admin-btn{width:100%!important}.retail-social-workspace{width:100%!important;margin-top:20px!important}.retail-social-canvas-shell{position:relative!important;width:min(100%,1200px)!important;max-width:1200px!important;max-height:70vh!important;margin:16px auto!important;overflow:hidden!important;display:grid!important;place-items:center!important}.retail-social-canvas-shell img{display:block!important;width:auto!important;max-width:100%!important;height:auto!important;max-height:70vh!important;object-fit:contain!important}.retail-social-master-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}.retail-social-card{min-width:0!important;overflow:hidden!important}.retail-social-card-preview{width:100%!important;aspect-ratio:16/9!important;min-height:180px!important;max-height:300px!important;overflow:hidden!important}.retail-social-card-preview img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important}
+
 @media(max-width:1050px){
  #contest-editor{max-width:none}
  #contest-editor .admin-field-grid{grid-template-columns:1fr}
  #contest-editor .retail-social-master-grid{grid-template-columns:1fr!important}
- .jf-retailer-grid,.jf-retailer-cards{grid-template-columns:1fr!important}
+ .jf-retailer-grid,.jf-retailer-cards,.jf-retailer-list{grid-template-columns:1fr!important}
+ .retail-social-slots{grid-template-columns:repeat(2,minmax(180px,1fr))!important}
 }
 @media(max-width:700px){
  #contest-editor .contest-editor-heading{flex-direction:column}
@@ -100,4 +116,6 @@
  #contest-editor .contest-section-body{padding:16px}
  #contest-editor .contest-sticky-actions{bottom:8px;flex-wrap:wrap}
  #contest-editor .contest-save-state{width:100%;margin:0 0 4px}
+ .jf-retailer-row{grid-template-columns:1fr!important;grid-template-areas:"identity" "state" "dates" "metrics" "assets" "actions"!important}
+ .jf-retailer-state,.jf-retailer-assets{justify-self:start!important;text-align:left!important}.jf-social-strip{justify-content:flex-start!important}.jf-inline-dates{grid-template-columns:1fr!important}.retail-social-slots{grid-template-columns:1fr!important}
 }
