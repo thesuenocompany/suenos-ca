@@ -1,5 +1,6 @@
 (function(){
   const TOKEN_KEY='suenos-hotline-admin-token-v3';
+  const AUTH_RELOAD_KEY='suenos-admin-reload-after-auth';
   const gate=document.getElementById('admin-gate');
   const panel=document.getElementById('admin-panel');
   if(!gate||!panel)return;
@@ -59,6 +60,7 @@
     const url=typeof source==='string'?source:String(source?.url||'');
     const isAdminLogin=url.includes('/api/hotline-auth');
     if(response.status===401&&!isAdminLogin){
+      sessionStorage.setItem(AUTH_RELOAD_KEY,'1');
       queueMicrotask(()=>showLogin('Admin session expired. Please log in again.'));
     }
     return response;
@@ -119,7 +121,18 @@
   };
   const login=async()=>{
     setBusy(loginButton,true,'Checking…');loginStatus.textContent='';
-    try{const result=await request('/api/hotline-auth',{method:'POST',body:JSON.stringify({password:passwordInput.value})});sessionStorage.setItem(TOKEN_KEY,result.token);passwordInput.value='';showPanel();await loadContent();}
+    try{
+      const result=await request('/api/hotline-auth',{method:'POST',body:JSON.stringify({password:passwordInput.value})});
+      sessionStorage.setItem(TOKEN_KEY,result.token);
+      passwordInput.value='';
+      if(sessionStorage.getItem(AUTH_RELOAD_KEY)==='1'){
+        sessionStorage.removeItem(AUTH_RELOAD_KEY);
+        location.reload();
+        return;
+      }
+      showPanel();
+      await loadContent();
+    }
     catch(error){loginStatus.textContent=error.message;}
     finally{setBusy(loginButton,false);}
   };
