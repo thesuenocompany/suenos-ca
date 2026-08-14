@@ -27,6 +27,18 @@
   let currentContent=structuredClone(defaults);
 
   const token=()=>sessionStorage.getItem(TOKEN_KEY)||'';
+  const tokenIsValid=()=>{
+    const value=token();
+    if(!value)return false;
+    try{
+      const payload=value.split('.')[0];
+      if(!payload)return false;
+      const normalized=payload.replace(/-/g,'+').replace(/_/g,'/');
+      const padded=normalized+'='.repeat((4-normalized.length%4)%4);
+      const data=JSON.parse(atob(padded));
+      return data?.role==='hotline-admin'&&Number(data?.exp)>Date.now();
+    }catch{return false;}
+  };
   const setBusy=(button,busy,label)=>{
     if(!button)return;
     if(busy){button.dataset.originalText=button.textContent;button.textContent=label;button.disabled=true;}
@@ -39,6 +51,19 @@
     passwordInput.focus();
   };
   const showPanel=()=>{document.body.classList.remove('admin-login-mode');gate.hidden=true;panel.hidden=false;loginStatus.textContent='';loadAdminShell();document.dispatchEvent(new CustomEvent('suenos:admin-authenticated'));};
+
+  const nativeFetch=window.fetch.bind(window);
+  window.fetch=async(...args)=>{
+    const response=await nativeFetch(...args);
+    const source=args[0];
+    const url=typeof source==='string'?source:String(source?.url||'');
+    const isAdminLogin=url.includes('/api/hotline-auth');
+    if(response.status===401&&!isAdminLogin){
+      queueMicrotask(()=>showLogin('Admin session expired. Please log in again.'));
+    }
+    return response;
+  };
+
   const lines=value=>Array.isArray(value)?value:[];
   const sourceGroup=(source,key)=>lines(source[key]).length?lines(source[key]):lines(source.advice);
 
@@ -117,6 +142,11 @@
     const blob=new Blob([JSON.stringify(collect(),null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const anchor=document.createElement('a');anchor.href=url;anchor.download='suenos-don-terry-hotline-content.json';anchor.click();setTimeout(()=>URL.revokeObjectURL(url),300);liveStatus.textContent='Exported the welcome messages and all three response banks as JSON.';
   });
   logoutButton.addEventListener('click',()=>showLogin('Logged out.'));
-  document.body.classList.toggle('admin-login-mode',!token());
-  if(token()){showPanel();loadContent().catch(error=>{liveStatus.textContent=error.message;if(error.status===401)showLogin(error.message);});}
+  document.body.classList.toggle('admin-login-mode',!tokenIsValid());
+  if(tokenIsValid()){
+    showPanel();
+    loadContent().catch(error=>{liveStatus.textContent=error.message;if(error.status===401)showLogin(error.message);});
+  }else{
+    showLogin(token()?'Admin session expired. Please log in again.':'');
+  }
 })();
