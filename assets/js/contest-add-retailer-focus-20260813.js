@@ -17,7 +17,7 @@
         <div class="ar-step"><span>1</span><div><strong>Name the location</strong><p>This is the only thing required to create the page.</p></div></div>
         <label class="ar-field"><span>Retailer name</span><input id="ar-name" autocomplete="organization" placeholder="e.g. Lighthouse Liquor Store"></label>
         <details class="ar-advanced"><summary>Advanced</summary><label class="ar-field"><span>Retailer code</span><input id="ar-code" placeholder="lighthouse-liquor"><small>Generated automatically. Only change it when you have a reason.</small></label></details>
-        <div class="ar-inherits"><strong>Already handled by the master</strong><div class="ar-inherit-grid"><span>✓ Hero images</span><span>✓ Prize & rules</span><span>✓ Social creative</span><span>✓ Poster template</span><span>✓ Receipt defaults</span><span>✓ Campaign setup</span></div></div>
+        <div class="ar-inherits"><strong>Already handled by the master</strong><div class="ar-inherit-grid"><span>✓ Hero images</span><span>✓ Prize & rules</span><span>✓ Social creative</span><span>✓ 8 × 12 poster</span><span>✓ 11 × 17 poster</span><span>✓ Receipt defaults</span><span>✓ Campaign setup</span></div></div>
         <div class="ar-next"><span>2</span><div><strong>Then finish the retailer details</strong><p>After creation, we’ll take you directly to that retailer page to add its logo/address, confirm dates and turn it public when ready.</p></div></div>
         <div id="ar-error" class="ar-error" role="alert"></div>
       </div>
@@ -83,3 +83,5 @@
     },100);
   }
 })();
+
+import('/assets/js/retail-print-poster-11x17-20260814.js').catch(error=>console.error('11x17 retail poster module',error));
