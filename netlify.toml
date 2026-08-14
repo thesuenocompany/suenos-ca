@@ -37,6 +37,21 @@
   [headers.values]
     Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"
 
+[[headers]]
+  for = "/assets/js/retail-poster-formats-20260814.js"
+  [headers.values]
+    Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"
+
+[[headers]]
+  for = "/assets/js/retail-print-poster-11x17-20260814.js"
+  [headers.values]
+    Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"
+
+[[headers]]
+  for = "/assets/js/retail-poster-upload-fix-20260814.js"
+  [headers.values]
+    Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"
+
 [[redirects]]
   from = "/find-suenos"
   to = "/en-ca/find-a-bottle/"
