@@ -9,6 +9,34 @@
 [functions]
   node_bundler = "esbuild"
 
+# Admin is an operational surface. Always revalidate it so fixes and auth/session
+# handling are not stranded behind a stale browser copy.
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"
+    Pragma = "no-cache"
+
+[[headers]]
+  for = "/assets/js/admin.js"
+  [headers.values]
+    Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"
+
+[[headers]]
+  for = "/assets/js/contest-admin-20260806-rules.js"
+  [headers.values]
+    Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"
+
+[[headers]]
+  for = "/assets/js/contest-add-retailer-focus-20260813.js"
+  [headers.values]
+    Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"
+
+[[headers]]
+  for = "/assets/js/admin-router-stable-20260807.js"
+  [headers.values]
+    Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"
+
 [[redirects]]
   from = "/find-suenos"
   to = "/en-ca/find-a-bottle/"
