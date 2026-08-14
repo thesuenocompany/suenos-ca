@@ -1,5 +1,5 @@
 (()=>{
-  const MODULE_URL='/assets/js/retail-print-poster-11x17-20260814.js?v=20260814d';
+  const MODULE_URL='/assets/js/retail-print-poster-11x17-20260814.js?v=20260814e';
   let loading11x17=false;
 
   const setText=(element,text)=>{if(element&&element.textContent!==text)element.textContent=text;};
