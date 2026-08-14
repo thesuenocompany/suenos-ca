@@ -85,3 +85,4 @@
 })();
 
 import('/assets/js/retail-poster-formats-20260814.js?v=20260814d').catch(error=>console.error('retail poster formats',error));
+import('/assets/js/retail-poster-upload-fix-20260814.js?v=20260814a').catch(error=>console.error('retail poster upload fix',error));
