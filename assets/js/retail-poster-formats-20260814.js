@@ -2,6 +2,8 @@
   const MODULE_URL='/assets/js/retail-print-poster-11x17-20260814.js?v=20260814d';
   let loading11x17=false;
 
+  const setText=(element,text)=>{if(element&&element.textContent!==text)element.textContent=text;};
+
   function addStyles(){
     if(document.getElementById('retail-poster-format-styles'))return;
     const style=document.createElement('style');
@@ -32,16 +34,11 @@
 
   function relabelEightByTwelve(){
     if(!isRetailMaster())return;
-    const title=document.getElementById('retail-print-title');
-    const description=document.getElementById('retail-print-description');
-    const fileLabel=document.querySelector('label[for="retail-print-poster-file"]');
-    const upload=document.getElementById('retail-print-upload');
-    const save=document.getElementById('retail-print-save');
-    if(title)title.textContent='8 × 12 Poster & QR';
-    if(description)description.textContent='Your current 8 × 12 poster. Upload or replace the artwork here and set its QR placement.';
-    if(fileLabel)fileLabel.textContent='8 × 12 poster JPG';
-    if(upload)upload.textContent='Upload / Replace 8 × 12 Poster';
-    if(save)save.textContent='Save 8 × 12 Poster & Placement';
+    setText(document.getElementById('retail-print-title'),'8 × 12 Poster & QR');
+    setText(document.getElementById('retail-print-description'),'Your current 8 × 12 poster. Upload or replace the artwork here and set its QR placement.');
+    setText(document.querySelector('label[for="retail-print-poster-file"]'),'8 × 12 poster JPG');
+    setText(document.getElementById('retail-print-upload'),'Upload / Replace 8 × 12 Poster');
+    setText(document.getElementById('retail-print-save'),'Save 8 × 12 Poster & Placement');
   }
 
   function ensurePicker(){
@@ -84,16 +81,16 @@
     const s8=document.getElementById('retail-poster-8x12-status');
     if(s8){
       const ready=Boolean(document.getElementById('retail-print-poster-url')?.value);
-      s8.textContent=ready?'Configured':'Not configured';
+      setText(s8,ready?'Configured':'Not configured');
       s8.classList.toggle('is-ready',ready);
     }
     const s11=document.getElementById('retail-poster-11x17-status');
     const panel11=document.getElementById('retail-print-11x17-designer');
     const url11=document.getElementById('retail-print-11x17-url')?.value||'';
     if(s11){
-      if(url11){s11.textContent='Configured';s11.classList.add('is-ready');}
-      else if(panel11){s11.textContent='Ready to configure';s11.classList.remove('is-ready');}
-      else{s11.textContent='Optional';s11.classList.remove('is-ready');}
+      if(url11){setText(s11,'Configured');s11.classList.add('is-ready');}
+      else if(panel11){setText(s11,'Ready to configure');s11.classList.remove('is-ready');}
+      else{setText(s11,'Optional');s11.classList.remove('is-ready');}
     }
   }
 
@@ -125,14 +122,13 @@
     }
   }
 
-  const observer=new MutationObserver(()=>ensurePicker());
-  observer.observe(document.documentElement,{childList:true,subtree:true});
+  const refreshSoon=()=>setTimeout(()=>{ensurePicker();updateStatus();},120);
   document.addEventListener('change',event=>{
-    if(event.target?.id==='contest-type'||event.target?.id==='contest-retail-master')setTimeout(ensurePicker,0);
+    if(event.target?.id==='contest-type'||event.target?.id==='contest-retail-master')refreshSoon();
   });
   document.addEventListener('click',event=>{
-    if(event.target.closest('[data-edit],[data-retail-summary-edit],[data-contest-step="retail"],button[data-step="retail"]'))setTimeout(ensurePicker,120);
+    if(event.target.closest('[data-edit],[data-retail-summary-edit],[data-contest-step="retail"],button[data-step="retail"]'))refreshSoon();
   });
-  setInterval(()=>{ensurePicker();updateStatus();},700);
+  setInterval(()=>{ensurePicker();updateStatus();},1200);
   ensurePicker();
 })();
