@@ -67,7 +67,6 @@
     }catch(error){err.textContent=error.message;createBtn.disabled=false;createBtn.classList.remove('is-busy');createBtn.textContent=original;}
   });
 
-  // After creating a retailer, reopen that record automatically instead of dumping the user back into the campaign list.
   const target=sessionStorage.getItem('suenos-open-contest-after-reload');
   if(target){
     sessionStorage.removeItem('suenos-open-contest-after-reload');
@@ -87,3 +86,4 @@
 import('/assets/js/retail-poster-formats-20260814.js?v=20260814d').catch(error=>console.error('retail poster formats',error));
 import('/assets/js/retail-poster-upload-fix-20260814.js?v=20260814a').catch(error=>console.error('retail poster upload fix',error));
 import('/assets/js/retail-receipt-allowed-items-20260814.js?v=20260814a').catch(error=>console.error('retailer receipt exceptions',error));
+import('/assets/js/retail-poster-download-actions-20260814.js?v=20260814a').catch(error=>console.error('retailer poster downloads',error));
