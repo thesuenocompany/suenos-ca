@@ -86,4 +86,4 @@
 import('/assets/js/retail-poster-formats-20260814.js?v=20260814d').catch(error=>console.error('retail poster formats',error));
 import('/assets/js/retail-poster-upload-fix-20260814.js?v=20260814a').catch(error=>console.error('retail poster upload fix',error));
 import('/assets/js/retail-receipt-allowed-items-20260814.js?v=20260814a').catch(error=>console.error('retailer receipt exceptions',error));
-import('/assets/js/retail-poster-download-actions-20260814.js?v=20260814a').catch(error=>console.error('retailer poster downloads',error));
+import('/assets/js/retail-poster-download-actions-20260814.js?v=20260814b').catch(error=>console.error('retailer poster downloads',error));
