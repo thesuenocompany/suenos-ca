@@ -8,7 +8,12 @@
     document.querySelectorAll('button[data-download-poster]').forEach(button=>{
       if(button.textContent.trim()==='Poster')button.textContent='8 × 12';
       const id=button.dataset.downloadPoster;
-      if(!id||button.parentElement?.querySelector(`button[data-download-poster-11x17="${CSS.escape(id)}"]`))return;
+      if(!id)return;
+      const actions=button.parentElement;
+      if(!actions)return;
+      const matches=[...actions.querySelectorAll('button[data-download-poster-11x17]')].filter(x=>x.dataset.downloadPoster11x17===id);
+      matches.slice(1).forEach(x=>x.remove());
+      if(matches[0])return;
       const second=document.createElement('button');
       second.type='button';
       second.className='admin-btn admin-btn-secondary';
@@ -92,9 +97,9 @@
     finally{button.disabled=false;button.textContent=original;}
   },true);
 
-  document.addEventListener('suenos:admin-authenticated',()=>setTimeout(enhanceRows,300));
-  document.addEventListener('suenos:admin-section',event=>{if(event.detail?.section==='contests')setTimeout(enhanceRows,300);});
-  document.addEventListener('click',event=>{if(event.target.closest('[data-admin-tab="contests"],#contest-editor-close'))setTimeout(enhanceRows,350);});
-  setInterval(enhanceRows,1200);
+  const scheduleEnhance=delay=>setTimeout(enhanceRows,delay);
+  document.addEventListener('suenos:admin-authenticated',()=>scheduleEnhance(300));
+  document.addEventListener('suenos:admin-section',event=>{if(event.detail?.section==='contests'){scheduleEnhance(100);scheduleEnhance(450);}});
+  document.addEventListener('click',event=>{if(event.target.closest('[data-admin-tab="contests"],#contest-editor-close')){scheduleEnhance(100);scheduleEnhance(450);}});
   enhanceRows();
 })();
