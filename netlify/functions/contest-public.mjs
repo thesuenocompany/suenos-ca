@@ -68,12 +68,15 @@ const merchantTokens=value=>clean(value,200).toLowerCase().normalize('NFD').repl
 const merchantMatch=(detected,expected)=>{const a=merchantTokens(detected),b=merchantTokens(expected);if(!a.length||!b.length)return null;const common=a.filter(x=>b.includes(x));return common.length>=Math.min(2,b.length)||common.length/Math.max(1,b.length)>=0.6;};
 const parseNumberMaybe=v=>{const n=Number(String(v??'').replace(/[^0-9.-]/g,''));return Number.isFinite(n)?n:null;};
 const receiptMimeForKey=key=>key?.endsWith('.png')?'image/png':key?.endsWith('.webp')?'image/webp':'image/jpeg';
+const normalizeAllowedReceiptItems=value=>{const raw=Array.isArray(value)?value:[],seen=new Set(),items=[];for(const v of raw){const item=clean(v,120);if(!item)continue;const k=item.toLowerCase();if(seen.has(k))continue;seen.add(k);items.push(item);if(items.length>=30)break;}return items;};
 
-async function analyzeReceiptWithAI(buffer,mime='image/jpeg',expectedRetailer=''){
+async function analyzeReceiptWithAI(buffer,mime='image/jpeg',expectedRetailer='',allowedItems=[]){
   const apiKey=process.env.CONTEST_RECEIPT_OPENAI_API_KEY||process.env.OPENAI_API_KEY||'';
   const model=process.env.CONTEST_RECEIPT_OPENAI_MODEL||'gpt-4.1-mini';
   if(!apiKey)return{status:'pending',reason:'missing_ai_key',publicMessage:'Your receipt was received and is pending manual review for bonus entries.'};
-  const prompt=`You are validating a retail receipt image for a contest. The expected retailer for this contest is: ${expectedRetailer||'unknown'}. Read the receipt carefully and return ONLY JSON with these keys: is_full_receipt_visible (boolean), has_suenos_purchase (boolean), suenos_quantity (integer), receipt_number (string or null), retailer_name (string or null), retailer_matches_expected (boolean or null), purchase_date_iso (YYYY-MM-DD or null), total_amount (number or null), confidence (0 to 1), matched_lines (array of strings), notes (string). Count Sueños purchases even if they appear as multiple separate lines or as a quantity on one line. Treat OCR variations like SUENOS, SUEÑOS, SUEÑOS TEQUILA, SUENOS MARGARITA, DON TERRY, SUENOS PALOMA, or abbreviated store POS line items as valid only if they clearly refer to Sueños products or cocktails. Compare the merchant/store identity on the receipt to the expected retailer. Small formatting differences, abbreviations, 'Liquor Store' vs 'Liquor', or legal suffixes may still be a match. If the receipt is clearly from a different merchant, retailer_matches_expected must be false. If the image is partial, blurry, or the whole receipt is not visible, set is_full_receipt_visible false.`;
+  const allowed=normalizeAllowedReceiptItems(allowedItems);
+  const allowedRule=allowed.length?`For THIS retailer only, the following menu or POS item names also count as eligible Sueños purchases even if the printed receipt line does not contain the word Sueños: ${allowed.map(x=>JSON.stringify(x)).join(', ')}. Accept obvious case, punctuation, OCR and reasonable POS abbreviation variants of these configured names, but do not invent additional qualifying items.`:'There are no retailer-specific qualifying aliases configured for this receipt.';
+  const prompt=`You are validating a retail receipt image for a contest. The expected retailer for this contest is: ${expectedRetailer||'unknown'}. ${allowedRule} Read the receipt carefully and return ONLY JSON with these keys: is_full_receipt_visible (boolean), has_suenos_purchase (boolean), suenos_quantity (integer, direct Sueños-labelled eligible units only), custom_allowed_quantity (integer, eligible units matched only because of the retailer-specific configured item list), eligible_quantity (integer, total eligible units after de-duplicating any line that could qualify both ways), receipt_number (string or null), retailer_name (string or null), retailer_matches_expected (boolean or null), purchase_date_iso (YYYY-MM-DD or null), total_amount (number or null), confidence (0 to 1), matched_lines (array of strings), matched_allowed_items (array of configured item names that matched), notes (string). Count quantities shown on a line and multiple eligible lines. Never double-count the same purchased unit. Treat OCR variations like SUENOS, SUEÑOS, SUEÑOS TEQUILA, SUENOS MARGARITA, DON TERRY, SUENOS PALOMA, or abbreviated store POS line items as valid only if they clearly refer to Sueños products or cocktails, unless the line matches one of the retailer-specific configured items above. has_suenos_purchase should be true when eligible_quantity is greater than zero. Compare the merchant/store identity on the receipt to the expected retailer. Small formatting differences, abbreviations, 'Liquor Store' vs 'Liquor', or legal suffixes may still be a match. If the receipt is clearly from a different merchant, retailer_matches_expected must be false. If the image is partial, blurry, or the whole receipt is not visible, set is_full_receipt_visible false.`;
   const dataUrl=`data:${mime};base64,${buffer.toString('base64')}`;
   const response=await fetch('https://api.openai.com/v1/chat/completions',{
     method:'POST',
@@ -85,7 +88,7 @@ async function analyzeReceiptWithAI(buffer,mime='image/jpeg',expectedRetailer=''
         {role:'system',content:'Return JSON only.'},
         {role:'user',content:[{type:'text',text:prompt},{type:'image_url',image_url:{url:dataUrl}}]}
       ],
-      max_tokens:500
+      max_tokens:650
     })
   });
   const result=await response.json().catch(()=>({}));
@@ -93,12 +96,18 @@ async function analyzeReceiptWithAI(buffer,mime='image/jpeg',expectedRetailer=''
   const content=result?.choices?.[0]?.message?.content||'{}';
   let parsed={};
   try{parsed=JSON.parse(content)}catch{parsed={}};
+  const directQty=Math.max(0,parseInt(parsed.suenos_quantity||0,10)||0);
+  const customQty=Math.max(0,parseInt(parsed.custom_allowed_quantity||0,10)||0);
+  const reportedEligible=Math.max(0,parseInt(parsed.eligible_quantity||0,10)||0);
+  const eligibleQty=Math.max(reportedEligible,directQty+customQty);
   return {
     status:'ok',
     parsed:{
       is_full_receipt_visible:Boolean(parsed.is_full_receipt_visible),
-      has_suenos_purchase:Boolean(parsed.has_suenos_purchase),
-      suenos_quantity:Math.max(0,parseInt(parsed.suenos_quantity||0,10)||0),
+      has_suenos_purchase:Boolean(parsed.has_suenos_purchase)||eligibleQty>0,
+      suenos_quantity:directQty,
+      custom_allowed_quantity:customQty,
+      eligible_quantity:eligibleQty,
       receipt_number:clean(parsed.receipt_number,120)||null,
       retailer_name:clean(parsed.retailer_name,160)||null,
       retailer_matches_expected:parsed.retailer_matches_expected===true?true:parsed.retailer_matches_expected===false?false:null,
@@ -106,6 +115,8 @@ async function analyzeReceiptWithAI(buffer,mime='image/jpeg',expectedRetailer=''
       total_amount:parseNumberMaybe(parsed.total_amount),
       confidence:Math.max(0,Math.min(1,Number(parsed.confidence)||0)),
       matched_lines:Array.isArray(parsed.matched_lines)?parsed.matched_lines.map(v=>clean(v,200)).filter(Boolean).slice(0,20):[],
+      matched_allowed_items:Array.isArray(parsed.matched_allowed_items)?parsed.matched_allowed_items.map(v=>clean(v,120)).filter(Boolean).slice(0,30):[],
+      allowed_items_applied:allowed,
       notes:clean(parsed.notes,1000)
     }
   };
@@ -135,11 +146,14 @@ async function processReceiptClaim({contest,entry,body}){
     await syncEntryBonus(entry.id).catch(()=>null);
     return {claimId:created?.[0]?.id||null,status:'duplicate',requested:0,awarded:0,pending:0,publicMessage:'Your base entry is in, but bonus entries were not added because this receipt has already been submitted.'};
   }
-  const ai=await analyzeReceiptWithAI(imageBuffer,receiptMimeForKey(assetKey),contest.retailer_name||'').catch(error=>({status:'error',error:error.message}));
+  const ai=await analyzeReceiptWithAI(imageBuffer,receiptMimeForKey(assetKey),contest.retailer_name||'',contest.receipt_bonus_allowed_items||[]).catch(error=>({status:'error',error:error.message}));
   const parsed=ai.parsed||{};
   if(parsed.retailer_matches_expected===null||parsed.retailer_matches_expected===undefined){parsed.retailer_matches_expected=merchantMatch(parsed.retailer_name,contest.retailer_name);}
-  const requested=Math.min(Math.max(0,(parsed.suenos_quantity||0)*Math.max(1,Number(contest.receipt_bonus_per_item)||1)),Math.max(1,Number(contest.receipt_bonus_max_per_receipt)||10));
-  const fingerprintInput=[scopeId,clean(parsed.retailer_name,160).toLowerCase(),clean(parsed.receipt_number,120).toLowerCase(),clean(parsed.purchase_date_iso,10),String(parsed.total_amount??''),String(parsed.suenos_quantity||0)].join('|');
+  const eligibleQuantity=Math.max(0,Number(parsed.eligible_quantity??parsed.suenos_quantity)||0);
+  parsed.eligible_quantity=eligibleQuantity;
+  parsed.has_suenos_purchase=Boolean(parsed.has_suenos_purchase)||eligibleQuantity>0;
+  const requested=Math.min(Math.max(0,eligibleQuantity*Math.max(1,Number(contest.receipt_bonus_per_item)||1)),Math.max(1,Number(contest.receipt_bonus_max_per_receipt)||10));
+  const fingerprintInput=[scopeId,clean(parsed.retailer_name,160).toLowerCase(),clean(parsed.receipt_number,120).toLowerCase(),clean(parsed.purchase_date_iso,10),String(parsed.total_amount??''),String(eligibleQuantity)].join('|');
   const receiptFingerprint=fingerprintInput.replace(/\|+/g,'|').replace(/^\||\|$/g,'')?sha256(fingerprintInput):null;
   const duplicateByImage=(await sb(`contest_receipt_claims?receipt_scope_id=eq.${scopeId}&image_hash=eq.${imageHash}&select=id,entry_id,status&limit=1`).catch(()=>[]))?.[0]||null;
   const duplicateByFingerprint=receiptFingerprint?(await sb(`contest_receipt_claims?receipt_scope_id=eq.${scopeId}&receipt_fingerprint=eq.${receiptFingerprint}&select=id,entry_id,status&limit=1`).catch(()=>[]))?.[0]||null:null;
@@ -167,9 +181,9 @@ async function processReceiptClaim({contest,entry,body}){
     status='pending';
     rejectionReason=`Retailer could not be confidently matched to ${clean(contest.retailer_name,160)||'the participating retailer'}.`;
     publicMessage=`Your base entry is in. We could not confidently verify that this receipt is from ${clean(contest.retailer_name,160)||'the participating retailer'}, so it is pending manual review.`;
-  }else if(!parsed.has_suenos_purchase||requested<1){
+  }else if(eligibleQuantity<1||requested<1){
     status='rejected';
-    rejectionReason='No eligible Sueños purchase was detected on the receipt.';
+    rejectionReason='No eligible Sueños purchase or retailer-approved Sueños item was detected on the receipt.';
     publicMessage='Your base entry is in. This receipt did not show an eligible Sueños purchase, so no bonus entries were added.';
   }else{
     const threshold=Math.max(0.5,Math.min(0.99,Number(contest.receipt_bonus_auto_approve_confidence)||0.85));
@@ -207,7 +221,7 @@ async function processReceiptClaim({contest,entry,body}){
     retailer_name:clean(parsed.retailer_name,160)||contest.retailer_name||null,
     purchase_date:parsed.purchase_date_iso||null,
     total_amount:parsed.total_amount,
-    suenos_quantity:Math.max(0,Number(parsed.suenos_quantity)||0),
+    suenos_quantity:eligibleQuantity,
     bonus_entries_requested:requested,
     bonus_entries_awarded:awarded,
     status,
