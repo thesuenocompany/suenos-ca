@@ -1,0 +1,71 @@
+name: Restore Sueños Houseboat on PR
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out restore branch
+        uses: actions/checkout@v4
+        with:
+          ref: restore-houseboat-20260817
+          fetch-depth: 0
+
+      - name: Download recovered August 12 build
+        run: |
+          curl -fL --retry 3 --retry-delay 2 'https://at.adobe.com/AnavHC8UF9xTdaRW' -o /tmp/houseboat.zip
+          rm -rf /tmp/houseboat-old
+          mkdir -p /tmp/houseboat-old
+          unzip -q /tmp/houseboat.zip -d /tmp/houseboat-old
+          test -f /tmp/houseboat-old/houseboat/index.html
+          test -f /tmp/houseboat-old/assets/css/houseboat.css
+          test -f /tmp/houseboat-old/assets/js/houseboat.js
+          test -f /tmp/houseboat-old/netlify/functions/houseboat-content.mjs
+          test -f /tmp/houseboat-old/netlify/functions/houseboat-inquiry.mjs
+
+      - name: Restore public houseboat page and APIs
+        run: |
+          mkdir -p houseboat assets/css assets/js assets/images/houseboat netlify/functions migrations
+          cp /tmp/houseboat-old/houseboat/index.html houseboat/index.html
+          cp /tmp/houseboat-old/assets/css/houseboat.css assets/css/houseboat.css
+          cp /tmp/houseboat-old/assets/js/houseboat.js assets/js/houseboat.js
+          cp -R /tmp/houseboat-old/assets/images/houseboat/. assets/images/houseboat/
+          cp /tmp/houseboat-old/netlify/functions/_houseboat-defaults.mjs netlify/functions/_houseboat-defaults.mjs
+          cp /tmp/houseboat-old/netlify/functions/houseboat-content.mjs netlify/functions/houseboat-content.mjs
+          cp /tmp/houseboat-old/netlify/functions/houseboat-inquiry.mjs netlify/functions/houseboat-inquiry.mjs
+          cp /tmp/houseboat-old/migrations/20260811_houseboat_landing.sql migrations/20260811_houseboat_landing.sql
+          cp /tmp/houseboat-old/HOUSEBOAT-LANDING-PAGE-NOTE.md HOUSEBOAT-LANDING-PAGE-NOTE.md
+
+      - name: Validate recovered page
+        run: |
+          test -s houseboat/index.html
+          test -s assets/css/houseboat.css
+          test -s assets/js/houseboat.js
+          test -s assets/images/houseboat/suenos-houseboat-hero-final.png
+          test -s assets/images/houseboat/deck-plans-transparent.png
+          test -s netlify/functions/_houseboat-defaults.mjs
+          test -s netlify/functions/houseboat-content.mjs
+          test -s netlify/functions/houseboat-inquiry.mjs
+          grep -q 'PARADISE IS A STATE OF SUEÑOS' houseboat/index.html
+          node --check assets/js/houseboat.js
+          node --check netlify/functions/houseboat-content.mjs
+          node --check netlify/functions/houseboat-inquiry.mjs
+
+      - name: Commit recovered public page
+        run: |
+          git config user.name 'Sueños Restore Bot'
+          git config user.email 'sales@suenos.ca'
+          git add houseboat assets/css/houseboat.css assets/js/houseboat.js assets/images/houseboat netlify/functions/_houseboat-defaults.mjs netlify/functions/houseboat-content.mjs netlify/functions/houseboat-inquiry.mjs migrations/20260811_houseboat_landing.sql HOUSEBOAT-LANDING-PAGE-NOTE.md
+          if git diff --cached --quiet; then
+            echo 'Houseboat files already restored.'
+          else
+            git commit -m 'Restore Sueños Houseboat public page'
+            git push origin HEAD:restore-houseboat-20260817
+          fi
