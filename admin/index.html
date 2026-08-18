@@ -2,7 +2,7 @@
 
 <html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Sueños Website Admin</title><meta content="noindex,nofollow" name="robots"/><meta content="#060707" name="theme-color"/><link href="../assets/css/styles.css" rel="stylesheet"/><link href="../assets/css/contest-admin-20260806.css?v=20260807-toggle1" rel="stylesheet"/><link href="../assets/css/contest-rules-modal-20260806.css" rel="stylesheet"/><link href="../assets/css/retail-print-poster-20260806.css" rel="stylesheet"/><link href="../assets/css/retail-social-creative-20260808.css?v=20260808-fullwidth1" rel="stylesheet"/><link href="../assets/css/admin-login-gate-20260807-fix.css" rel="stylesheet"/><link href="../assets/favicons/favicon.ico" rel="icon" sizes="any"/><link href="../assets/favicons/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/><link href="../assets/favicons/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="../assets/favicons/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><link href="../assets/favicons/site.webmanifest" rel="manifest"/><meta content="Sueños" name="apple-mobile-web-app-title"/><style>
 #contest-retail-settings[hidden]{display:none!important}.retail-copy-tools,.retail-qr-tools{margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14)}.retail-copy-tools h4,.retail-qr-tools h4{margin:0 0 14px}.retail-qr-preview{width:min(260px,100%);aspect-ratio:1;margin:14px 0;background:#fff;padding:12px;box-sizing:border-box;border-radius:4px}.retail-qr-preview svg{display:block;width:100%;height:100%}.contest-type-chip{display:inline-flex;margin-top:6px;padding:4px 7px;border-radius:999px;background:#123c40;color:#8ee3eb;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
-</style><link href="../assets/css/admin-system-20260808.css?v=20260808-v2-real" rel="stylesheet"/><link href="../assets/css/contest-workspace-clean-20260808.css?v=20260808-clean1" rel="stylesheet"/><link rel="stylesheet" href="../assets/css/contest-add-retailer-focus-20260813.css?v=1"></head><body>
+</style><link href="../assets/css/admin-system-20260808.css?v=20260808-v2-real" rel="stylesheet"/><link href="../assets/css/contest-workspace-clean-20260808.css?v=20260808-clean1" rel="stylesheet"/><link rel="stylesheet" href="../assets/css/contest-add-retailer-focus-20260813.css?v=1"><link rel="stylesheet" href="../assets/css/houseboat-admin.css" /></head><body>
 <div class="admin-shell"><div class="admin-card"><div class="admin-top"><a class="admin-brand" href="../en-ca/index.html"><img alt="Sueños Artisan Tequila" height="1454" src="../assets/images/logo.webp" width="1920"/><div><strong>Sueños Website Admin</strong><small>Contests, campaigns, content and reporting</small></div></a><small>Website operations</small></div><div class="admin-body">
 <section class="admin-gate" id="admin-gate"><h1>Website Admin</h1><p class="admin-lede">Manage contests, campaigns, cocktails, the Don Terry Hotline and reporting.</p><div class="admin-field"><label for="admin-password">Password</label><input autocomplete="current-password" id="admin-password" placeholder="Enter password" type="password"/></div><div class="admin-actions"><button class="admin-btn admin-btn-primary" id="admin-login" type="button">Unlock</button><a class="admin-btn admin-btn-secondary" href="../en-ca/don-terry-hotline/index.html">View Hotline Page</a></div><div class="admin-status" id="admin-status" role="status"></div></section>
 <section class="admin-panel" hidden="" id="admin-panel">
@@ -17,7 +17,27 @@
 <div class="admin-app-layout" id="admin-app-layout"><aside aria-label="Admin navigation" class="admin-navigation"><div class="admin-navigation-label">Admin tools</div><div aria-label="Admin content sections" class="admin-tabs" role="tablist"><button aria-controls="admin-section-dashboard" class="admin-tab" data-admin-tab="dashboard" id="admin-tab-dashboard" role="tab" type="button">Dashboard</button>
 <button aria-controls="admin-section-hotline" aria-selected="true" class="admin-tab is-active" data-admin-tab="hotline" id="admin-tab-hotline" role="tab" type="button">Don Terry Hotline</button>
 <button aria-controls="admin-section-recipes" aria-selected="false" class="admin-tab" data-admin-tab="recipes" id="admin-tab-recipes" role="tab" type="button">Cocktails</button>
-<button aria-controls="admin-section-sunfest" aria-selected="false" class="admin-tab" data-admin-tab="sunfest" id="admin-tab-sunfest" role="tab" type="button">Campaigns &amp; Overlays</button><button aria-controls="admin-section-contests" aria-selected="false" class="admin-tab" data-admin-tab="contests" id="admin-tab-contests" role="tab" type="button">Contests</button><button aria-controls="admin-section-archived-contests" aria-selected="false" class="admin-tab" data-admin-tab="archived-contests" id="admin-tab-archived-contests" role="tab" type="button">Contest Archive</button><button aria-controls="admin-section-analytics" aria-selected="false" class="admin-tab" data-admin-tab="analytics" id="admin-tab-analytics" role="tab" type="button">Analytics</button></div><div class="admin-navigation-actions admin-global-actions"><button class="admin-btn admin-btn-secondary" id="admin-logout" type="button">Log Out</button></div></aside><main class="admin-workspace" id="admin-workspace"><section class="admin-content-section" data-admin-section="dashboard" id="admin-section-dashboard" role="tabpanel">
+<button aria-controls="admin-section-sunfest" aria-selected="false" class="admin-tab" data-admin-tab="sunfest" id="admin-tab-sunfest" role="tab" type="button">Campaigns &amp; Overlays</button><button aria-controls="admin-section-contests" aria-selected="false" class="admin-tab" data-admin-tab="contests" id="admin-tab-contests" role="tab" type="button">Contests</button><button aria-controls="admin-section-archived-contests" aria-selected="false" class="admin-tab" data-admin-tab="archived-contests" id="admin-tab-archived-contests" role="tab" type="button">Contest Archive</button><button
+                    aria-controls="admin-section-houseboat"
+                    aria-selected="false"
+                    class="admin-tab"
+                    data-admin-tab="houseboat"
+                    id="admin-tab-houseboat"
+                    role="tab"
+                    type="button"
+                  >
+                    Houseboat</button
+                  ><button
+                    aria-controls="admin-section-analytics"
+                    aria-selected="false"
+                    class="admin-tab"
+                    data-admin-tab="analytics"
+                    id="admin-tab-analytics"
+                    role="tab"
+                    type="button"
+                  >
+                    Analytics
+                  </button><button aria-controls="admin-section-analytics" aria-selected="false" class="admin-tab" data-admin-tab="analytics" id="admin-tab-analytics" role="tab" type="button">Analytics</button></div><div class="admin-navigation-actions admin-global-actions"><button class="admin-btn admin-btn-secondary" id="admin-logout" type="button">Log Out</button></div></aside><main class="admin-workspace" id="admin-workspace"><section class="admin-content-section" data-admin-section="dashboard" id="admin-section-dashboard" role="tabpanel">
 <div class="admin-dashboard-hero">
 <div class="admin-dashboard-welcome"><div class="kicker">WEBSITE OPERATIONS</div><h2>Website operations</h2><p>Choose a tool and work inside it. Each workspace stays separate and easy to get back out of.</p></div>
 <div class="admin-dashboard-status"><small>Contest status</small><strong id="admin-dashboard-contest-summary">Loading…</strong><p id="admin-dashboard-contest-detail">Checking current campaigns.</p></div>
@@ -173,7 +193,414 @@
 <div class="admin-section-heading"><div><h2>Archived Contests</h2><p class="admin-lede">Inactive contests are kept here so the main contest workspace only shows campaigns you may still need to manage.</p></div></div>
 <div class="admin-note"><strong>Archive behaviour:</strong> Archived pages are not active. Restore a contest to Draft before republishing it.</div>
 <div class="contest-archived-list" id="contest-archived-list"></div>
-</section><section aria-labelledby="admin-tab-analytics" class="admin-content-section" data-admin-section="analytics" hidden="" id="admin-section-analytics" role="tabpanel">
+</section><section
+                  aria-labelledby="admin-tab-houseboat"
+                  class="admin-content-section"
+                  data-admin-section="houseboat"
+                  hidden
+                  id="admin-section-houseboat"
+                  role="tabpanel"
+                >
+                  <div class="admin-section-heading">
+                    <div>
+                      <h2>Houseboat</h2>
+                      <p class="admin-lede">
+                        Manage the Sueños Houseboat landing page, pricing,
+                        imagery and rental inquiries.
+                      </p>
+                    </div>
+                    <div class="admin-actions">
+                      <a
+                        class="admin-btn admin-btn-secondary"
+                        href="/houseboat/"
+                        target="_blank"
+                        rel="noopener"
+                        >View page</a
+                      ><button
+                        class="admin-btn admin-btn-primary"
+                        id="houseboat-admin-save"
+                        type="button"
+                      >
+                        Save changes
+                      </button>
+                    </div>
+                  </div>
+                  <div class="houseboat-admin-tabs">
+                    <button
+                      class="admin-btn admin-btn-secondary is-active"
+                      data-houseboat-tab="content"
+                      type="button"
+                    >
+                      Page content</button
+                    ><button
+                      class="admin-btn admin-btn-secondary"
+                      data-houseboat-tab="pricing"
+                      type="button"
+                    >
+                      Pricing & details</button
+                    ><button
+                      class="admin-btn admin-btn-secondary"
+                      data-houseboat-tab="calendar"
+                      type="button"
+                    >
+                      Availability calendar</button
+                    ><button
+                      class="admin-btn admin-btn-secondary"
+                      data-houseboat-tab="inquiries"
+                      type="button"
+                    >
+                      Inquiries
+                    </button>
+                  </div>
+                  <div
+                    id="houseboat-admin-status"
+                    class="houseboat-admin-status"
+                    role="status"
+                  ></div>
+                  <div data-houseboat-pane="content">
+                    <div class="houseboat-admin-grid">
+                      <section class="houseboat-admin-card">
+                        <h3>Hero & page copy</h3>
+                        <div class="admin-field">
+                          <label>Boat name</label><input id="hb-admin-name" />
+                        </div>
+                        <div class="admin-field">
+                          <label>Eyebrow</label><input id="hb-admin-eyebrow" />
+                        </div>
+                        <div class="admin-field">
+                          <label>Headline</label
+                          ><textarea id="hb-admin-headline"></textarea>
+                        </div>
+                        <div class="admin-field">
+                          <label>Supporting copy</label
+                          ><textarea id="hb-admin-intro"></textarea>
+                        </div>
+                        <div class="admin-field-grid">
+                          <div class="admin-field">
+                            <label>Primary CTA</label
+                            ><input id="hb-admin-primary" />
+                          </div>
+                          <div class="admin-field">
+                            <label>Secondary CTA</label
+                            ><input id="hb-admin-secondary" />
+                          </div>
+                        </div>
+                      </section>
+                      <section class="houseboat-admin-card">
+                        <h3>Section copy</h3>
+                        <div class="admin-field">
+                          <label>Experience heading</label
+                          ><input id="hb-admin-copy-experienceHeading" />
+                        </div>
+                        <div class="admin-field">
+                          <label>Experience intro</label
+                          ><textarea
+                            id="hb-admin-copy-experienceIntro"
+                          ></textarea>
+                        </div>
+                        <div class="admin-field">
+                          <label>Sleeping heading</label
+                          ><input id="hb-admin-copy-sleepingHeading" />
+                        </div>
+                        <div class="admin-field">
+                          <label>Sleeping intro</label
+                          ><textarea
+                            id="hb-admin-copy-sleepingIntro"
+                          ></textarea>
+                        </div>
+                        <div class="admin-field">
+                          <label>Amenities heading</label
+                          ><input id="hb-admin-copy-amenitiesHeading" />
+                        </div>
+                        <div class="admin-field">
+                          <label>Pricing heading</label
+                          ><input id="hb-admin-copy-pricingHeading" />
+                        </div>
+                        <div class="admin-field">
+                          <label>Pricing intro</label
+                          ><textarea id="hb-admin-copy-pricingIntro"></textarea>
+                        </div>
+                        <div class="admin-field">
+                          <label>Form heading</label
+                          ><input id="hb-admin-copy-formHeading" />
+                        </div>
+                        <div class="admin-field">
+                          <label>Form intro</label
+                          ><textarea id="hb-admin-copy-formIntro"></textarea>
+                        </div>
+                        <div class="admin-field">
+                          <label>Final heading</label
+                          ><input id="hb-admin-copy-finalHeading" />
+                        </div>
+                        <div class="admin-field">
+                          <label>Final intro</label
+                          ><textarea id="hb-admin-copy-finalIntro"></textarea>
+                        </div>
+                      </section>
+                      <section class="houseboat-admin-card">
+                        <h3>Hero images</h3>
+                        <div
+                          id="hb-admin-hero-preview"
+                          class="houseboat-admin-image-preview"
+                        ></div>
+                        <div class="admin-upload-row">
+                          <input
+                            id="hb-admin-hero-file"
+                            type="file"
+                            accept="image/jpeg,image/png,image/webp"
+                          /><button
+                            class="admin-btn admin-btn-secondary"
+                            data-houseboat-upload="hero"
+                            type="button"
+                          >
+                            Upload
+                          </button>
+                        </div>
+                        <input id="hb-admin-hero" type="hidden" />
+                        <h4>Mobile hero</h4>
+                        <div
+                          id="hb-admin-mobile-preview"
+                          class="houseboat-admin-image-preview"
+                        ></div>
+                        <div class="admin-upload-row">
+                          <input
+                            id="hb-admin-mobile-file"
+                            type="file"
+                            accept="image/jpeg,image/png,image/webp"
+                          /><button
+                            class="admin-btn admin-btn-secondary"
+                            data-houseboat-upload="mobile"
+                            type="button"
+                          >
+                            Upload
+                          </button>
+                        </div>
+                        <input id="hb-admin-mobile" type="hidden" />
+                      </section>
+                      <section
+                        class="houseboat-admin-card"
+                        style="grid-column: 1/-1"
+                      >
+                        <h3>Gallery</h3>
+                        <p>
+                          Manage the Sueños Houseboat interior and exterior
+                          photography shown on the public page.
+                        </p>
+                        <div
+                          id="hb-admin-gallery"
+                          class="houseboat-admin-gallery"
+                        ></div>
+                      </section>
+                      <section class="houseboat-admin-card">
+                        <h3>SEO & sharing</h3>
+                        <div class="admin-field">
+                          <label>SEO title</label
+                          ><input id="hb-admin-seo-title" />
+                        </div>
+                        <div class="admin-field">
+                          <label>Meta description</label
+                          ><textarea id="hb-admin-seo-description"></textarea>
+                        </div>
+                        <div
+                          id="hb-admin-og-preview"
+                          class="houseboat-admin-image-preview"
+                        ></div>
+                        <div class="admin-upload-row">
+                          <input
+                            id="hb-admin-og-file"
+                            type="file"
+                            accept="image/jpeg,image/png,image/webp"
+                          /><button
+                            class="admin-btn admin-btn-secondary"
+                            data-houseboat-upload="og"
+                            type="button"
+                          >
+                            Upload OG image
+                          </button>
+                        </div>
+                        <input id="hb-admin-og" type="hidden" />
+                      </section>
+                      <section class="houseboat-admin-card">
+                        <h3>Inquiry delivery</h3>
+                        <div class="admin-field">
+                          <label>Inquiry notification email</label
+                          ><input id="hb-admin-destination" type="email" />
+                        </div>
+                        <p class="houseboat-json-help">
+                          Rental inquiries are saved in this admin area and sent
+                          to this email address.
+                        </p>
+                      </section>
+                    </div>
+                  </div>
+                  <div data-houseboat-pane="calendar" hidden>
+                    <div class="houseboat-admin-grid">
+                      <section class="houseboat-admin-card">
+                        <h3>Add unavailable dates</h3>
+                        <p>
+                          Use this for confirmed bookings, temporary holds,
+                          owner blocks or maintenance. Available dates do not
+                          need to be entered.
+                        </p>
+                        <div class="admin-field-grid">
+                          <div class="admin-field">
+                            <label>Start date</label
+                            ><input id="hb-admin-cal-start" type="date" />
+                          </div>
+                          <div class="admin-field">
+                            <label>End date</label
+                            ><input id="hb-admin-cal-end" type="date" />
+                          </div>
+                          <div class="admin-field">
+                            <label>Status</label
+                            ><select id="hb-admin-cal-status">
+                              <option value="booked">Booked</option>
+                              <option value="hold">On hold</option>
+                              <option value="blocked">Unavailable</option>
+                              <option value="maintenance">Maintenance</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="admin-field">
+                          <label>Internal note</label
+                          ><input
+                            id="hb-admin-cal-note"
+                            placeholder="Guest name, reason or reference"
+                          />
+                        </div>
+                        <button
+                          class="admin-btn admin-btn-primary"
+                          id="hb-admin-cal-add"
+                          type="button"
+                        >
+                          Add date range
+                        </button>
+                      </section>
+                      <section class="houseboat-admin-card">
+                        <h3>Calendar rules</h3>
+                        <p>
+                          Ranges are inclusive. A three-night rental starting
+                          June 10 occupies June 10, 11 and 12. Changes go live
+                          when you click <strong>Save changes</strong>.
+                        </p>
+                        <div class="houseboat-json-help">
+                          Public visitors can click an available day to place it
+                          into the inquiry form. Held, booked, blocked and
+                          maintenance days cannot be selected.
+                        </div>
+                      </section>
+                    </div>
+                    <section
+                      class="houseboat-admin-card"
+                      style="margin-top: 18px"
+                    >
+                      <h3>Unavailable date ranges</h3>
+                      <div id="hb-admin-calendar-ranges"></div>
+                    </section>
+                  </div>
+                  <div data-houseboat-pane="pricing" hidden>
+                    <div class="houseboat-admin-card">
+                      <h3>Seasonal pricing</h3>
+                      <div
+                        id="hb-admin-pricing"
+                        class="houseboat-admin-pricing"
+                      ></div>
+                    </div>
+                    <div class="houseboat-admin-grid" style="margin-top: 18px">
+                      <section class="houseboat-admin-card">
+                        <h3>Boat facts</h3>
+                        <div class="admin-field-grid">
+                          <div class="admin-field">
+                            <label>Max guests</label
+                            ><input id="hb-admin-max" type="number" max="22" />
+                          </div>
+                          <div class="admin-field">
+                            <label>Fixed-bed sleepers</label
+                            ><input id="hb-admin-fixed" type="number" />
+                          </div>
+                          <div class="admin-field">
+                            <label>Private staterooms</label
+                            ><input
+                              id="hb-admin-staterooms"
+                              type="number"
+                              max="5"
+                            />
+                          </div>
+                          <div class="admin-field">
+                            <label>Full bathrooms</label
+                            ><input id="hb-admin-bathrooms" type="number" />
+                          </div>
+                          <div class="admin-field">
+                            <label>Square feet</label
+                            ><input id="hb-admin-sqft" type="number" />
+                          </div>
+                          <div class="admin-field">
+                            <label>Length (ft)</label
+                            ><input id="hb-admin-length" type="number" />
+                          </div>
+                          <div class="admin-field">
+                            <label>Width (ft)</label
+                            ><input id="hb-admin-width" type="number" />
+                          </div>
+                        </div>
+                      </section>
+                      <section class="houseboat-admin-card">
+                        <h3>Sleeping arrangements</h3>
+                        <textarea id="hb-admin-sleep"></textarea>
+                        <p class="houseboat-json-help">
+                          One line each: Title | Description
+                        </p>
+                      </section>
+                      <section class="houseboat-admin-card">
+                        <h3>Amenities</h3>
+                        <textarea id="hb-admin-amenities"></textarea>
+                        <p class="houseboat-json-help">
+                          One group per line: Group name: Item one; Item two;
+                          Item three
+                        </p>
+                      </section>
+                      <section class="houseboat-admin-card">
+                        <h3>Additional costs</h3>
+                        <textarea id="hb-admin-costs"></textarea>
+                        <p class="houseboat-json-help">
+                          One line each: Cost name | Explanation
+                        </p>
+                      </section>
+                      <section class="houseboat-admin-card">
+                        <h3>FAQs</h3>
+                        <textarea
+                          id="hb-admin-faqs"
+                          style="min-height: 280px"
+                        ></textarea>
+                        <p class="houseboat-json-help">
+                          One line each: Question | Answer
+                        </p>
+                      </section>
+                      <section class="houseboat-admin-card">
+                        <h3>Lead workflow</h3>
+                        <label>Booking-status options</label
+                        ><textarea id="hb-admin-statuses"></textarea
+                        ><label>Promotional packages</label
+                        ><textarea id="hb-admin-packages"></textarea>
+                        <p class="houseboat-json-help">
+                          Packages are stored for future use but are not
+                          published unless separately implemented and approved.
+                        </p>
+                      </section>
+                    </div>
+                  </div>
+                  <div data-houseboat-pane="inquiries" hidden>
+                    <div class="admin-note">
+                      <strong>Rental inquiries</strong>
+                      <p>
+                        Trip requests from /houseboat. Update status and add
+                        internal notes here.
+                      </p>
+                    </div>
+                    <div id="houseboat-inquiry-list"></div>
+                  </div>
+                </section>
+                <section aria-labelledby="admin-tab-analytics" class="admin-content-section" data-admin-section="analytics" hidden="" id="admin-section-analytics" role="tabpanel">
 <div class="admin-section-heading"><div><h2>Traffic Diagnostics</h2><p class="admin-lede">Compare actual first-party page loads with Meta-tagged landings and GA4 initialization. This panel helps identify the gap between ad clicks and visits that reached the website.</p></div><div class="admin-field analytics-range"><label for="analytics-days">Date range</label><select id="analytics-days"><option value="1">Today</option><option selected="" value="7">Last 7 days</option><option value="14">Last 14 days</option><option value="30">Last 30 days</option><option value="90">Last 90 days</option></select></div></div>
 <div class="analytics-metrics"><div class="analytics-metric"><small>Actual landings</small><strong id="metric-landings">0</strong></div><div class="analytics-metric"><small>Meta-tagged landings</small><strong id="metric-meta">0</strong></div><div class="analytics-metric"><small>GA4 events queued</small><strong id="metric-ga">0</strong></div><div class="analytics-metric"><small>Analytics consent granted</small><strong id="metric-consent">0</strong></div></div>
 <div class="admin-actions"><button class="admin-btn admin-btn-primary" id="analytics-refresh" type="button">Refresh Diagnostics</button></div><div class="admin-status" id="analytics-status" role="status"></div>
@@ -181,4 +608,4 @@
 <h3>Most recent landings</h3><div class="analytics-table-wrap"><table class="analytics-table"><thead><tr><th>Time</th><th>Source</th><th>Campaign</th><th>Page</th><th>Location</th><th>Consent</th><th>GA status</th></tr></thead><tbody id="analytics-recent"><tr><td colspan="7">Open this tab to load data.</td></tr></tbody></table></div>
 <div class="admin-note">Privacy: this diagnostic stores page, campaign, consent status and coarse Netlify location. It does not store names, email addresses, full IP addresses or full postal codes.</div>
 </section></main></div></section></div></div></div>
-<script src="../assets/js/hotline-content.js"></script><script src="../assets/js/admin.js?v=20260807-freezefix1"></script><script src="../assets/js/cocktail-admin.js"></script><script src="../assets/js/sunfest-admin-20260805-previewfix2.js"></script><script src="../assets/js/analytics-admin.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script><script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script><script src="../assets/js/contest-rules-modal-20260806.js"></script><script src="../assets/js/contest-admin-20260806-rules.js?v=20260808-adminsystem1"></script><script src="../assets/js/contest-photo-moderation-20260729-1315.js"></script><script src="../assets/js/retail-print-poster-20260806.js?v=20260807-cardposter1" type="module"></script><script src="../assets/js/retail-social-creative-20260808.js?v=20260808-uploadfix1" type="module"></script><script src="../assets/js/admin-router-stable-20260807.js?v=20260807-contestloadfix1"></script><script src="../assets/js/admin-receipt-review-20260807.js?v=20260807-retailer-match1" type="module"></script><script src="../assets/js/admin-system-20260808.js?v=20260808-v2-real"></script><script src="../assets/js/contest-workspace-clean-20260808.js?v=20260808-clean1"></script><script src="../assets/js/contest-add-retailer-focus-20260813.js?v=1"></script></body></html>
+<script src="../assets/js/hotline-content.js"></script><script src="../assets/js/admin.js?v=20260807-freezefix1"></script><script src="../assets/js/cocktail-admin.js"></script><script src="../assets/js/sunfest-admin-20260805-previewfix2.js"></script><script src="../assets/js/analytics-admin.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script><script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script><script src="../assets/js/contest-rules-modal-20260806.js"></script><script src="../assets/js/contest-admin-20260806-rules.js?v=20260808-adminsystem1"></script><script src="../assets/js/contest-photo-moderation-20260729-1315.js"></script><script src="../assets/js/retail-print-poster-20260806.js?v=20260807-cardposter1" type="module"></script><script src="../assets/js/retail-social-creative-20260808.js?v=20260808-uploadfix1" type="module"></script><script src="../assets/js/admin-router-stable-20260807.js?v=20260807-contestloadfix1"></script><script src="../assets/js/admin-receipt-review-20260807.js?v=20260807-retailer-match1" type="module"></script><script src="../assets/js/admin-system-20260808.js?v=20260808-v2-real"></script><script src="../assets/js/contest-workspace-clean-20260808.js?v=20260808-clean1"></script><script src="../assets/js/contest-add-retailer-focus-20260813.js?v=1"></script><script defer src="../assets/js/houseboat-admin.js"></script></body></html>

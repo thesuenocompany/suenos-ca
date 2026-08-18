@@ -1,0 +1,146 @@
+.houseboat-admin-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.houseboat-admin-card {
+  border: 1px solid rgba(56, 220, 232, 0.2);
+  background: #0b1718;
+  border-radius: 12px;
+  padding: 20px;
+}
+.houseboat-admin-card h3 {
+  margin-top: 0;
+}
+.houseboat-admin-card .admin-field {
+  margin-bottom: 14px;
+}
+.houseboat-admin-card textarea {
+  min-height: 110px;
+}
+.houseboat-admin-image-preview {
+  min-height: 140px;
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #061112;
+  color: #758486;
+}
+.houseboat-admin-image-preview img {
+  width: 100%;
+  max-height: 260px;
+  object-fit: cover;
+}
+.houseboat-admin-pricing {
+  display: grid;
+  gap: 10px;
+}
+.houseboat-admin-season {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr 0.9fr 0.9fr 0.9fr 0.9fr;
+  gap: 8px;
+  align-items: end;
+}
+.houseboat-inquiry-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 0.8fr 0.8fr 1fr auto;
+  gap: 10px;
+  align-items: start;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.houseboat-inquiry-row strong {
+  display: block;
+}
+.houseboat-inquiry-row small {
+  display: block;
+  color: #89999a;
+  margin-top: 3px;
+}
+.houseboat-admin-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.houseboat-admin-tabs button.is-active {
+  background: #1e6c72;
+  color: #fff;
+}
+.houseboat-admin-pane[hidden] {
+  display: none;
+}
+.houseboat-admin-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.houseboat-admin-gallery .houseboat-admin-image-preview {
+  min-height: 100px;
+}
+.houseboat-json-help {
+  font-size: 0.78rem;
+  color: #829293;
+  line-height: 1.5;
+}
+.houseboat-admin-status {
+  min-height: 24px;
+  font-weight: 700;
+}
+.houseboat-admin-status.success {
+  color: #47e78a;
+}
+.houseboat-admin-status.error {
+  color: #ff756d;
+}
+.houseboat-calendar-range {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+.houseboat-calendar-range strong,
+.houseboat-calendar-range small {
+  display: block;
+}
+.houseboat-calendar-range small {
+  color: #89999a;
+  margin-top: 5px;
+}
+.houseboat-calendar-chip {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  background: #d6dde0;
+  color: #102226;
+}
+.houseboat-calendar-chip.booked {
+  background: #ff8b7f;
+}
+.houseboat-calendar-chip.hold {
+  background: #ffd66b;
+}
+.houseboat-calendar-chip.maintenance {
+  background: #91dbe0;
+}
+@media (max-width: 1000px) {
+  .houseboat-admin-grid {
+    grid-template-columns: 1fr;
+  }
+  .houseboat-admin-season {
+    grid-template-columns: 1fr 1fr;
+  }
+  .houseboat-inquiry-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .houseboat-admin-gallery {
+    grid-template-columns: 1fr;
+  }
+}

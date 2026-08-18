@@ -1,0 +1,7 @@
+import { randomUUID } from 'node:crypto';
+import { getStore } from '@netlify/blobs';
+import { getBearerToken, verifyAdminToken } from './_hotline-auth.mjs';
+import { jsonResponse, originAllowed } from './_hotline-http.mjs';
+const TYPES=new Map([['image/jpeg','jpg'],['image/png','png'],['image/webp','webp']]);
+export default async request=>{if(request.method!=='POST')return jsonResponse(405,{ok:false,message:'Method not allowed.'});if(!originAllowed(request))return jsonResponse(403,{ok:false,message:'Origin not allowed.'});if(!verifyAdminToken(getBearerToken(request),process.env.HOTLINE_ADMIN_SECRET))return jsonResponse(401,{ok:false,message:'Admin session expired.'});const form=await request.formData().catch(()=>null);const file=form?.get('file');const kind=String(form?.get('kind')||'image').replace(/[^a-z0-9-]/gi,'-').toLowerCase();if(!file||typeof file.arrayBuffer!=='function')return jsonResponse(400,{ok:false,message:'Choose an image.'});const ext=TYPES.get(file.type);if(!ext)return jsonResponse(400,{ok:false,message:'Use JPG, PNG or WebP.'});if(file.size>15*1024*1024)return jsonResponse(400,{ok:false,message:'Image must be under 15 MB.'});const key=`${kind}-${randomUUID()}.${ext}`;await getStore('suenos-houseboat-assets').set(key,file,{metadata:{contentType:file.type,originalName:String(file.name||'image').slice(0,180),uploadedAt:new Date().toISOString()}});return jsonResponse(201,{ok:true,key,url:`/api/houseboat-assets/${key}`});};
+export const config={path:'/api/houseboat-assets',method:'POST'};
