@@ -1,0 +1,117 @@
+name: Restore Sueños Houseboat
+
+on:
+  push:
+    branches: [restore-houseboat-20260817]
+    paths:
+      - .github/workflows/restore-houseboat.yml
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out current branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download August 12 houseboat build
+        run: |
+          curl -fL --retry 3 --retry-delay 2 'https://at.adobe.com/AnavHC8UF9xTdaRW' -o /tmp/houseboat.zip
+          rm -rf /tmp/houseboat-old
+          mkdir -p /tmp/houseboat-old
+          unzip -q /tmp/houseboat.zip -d /tmp/houseboat-old
+          test -f /tmp/houseboat-old/houseboat/index.html
+          test -f /tmp/houseboat-old/assets/js/houseboat.js
+          test -f /tmp/houseboat-old/netlify/functions/houseboat-content.mjs
+
+      - name: Restore houseboat-specific files
+        run: |
+          mkdir -p houseboat assets/css assets/js assets/images/houseboat netlify/functions migrations
+          cp /tmp/houseboat-old/houseboat/index.html houseboat/index.html
+          cp /tmp/houseboat-old/assets/css/houseboat.css assets/css/houseboat.css
+          cp /tmp/houseboat-old/assets/css/houseboat-admin.css assets/css/houseboat-admin.css
+          cp /tmp/houseboat-old/assets/js/houseboat.js assets/js/houseboat.js
+          cp /tmp/houseboat-old/assets/js/houseboat-admin.js assets/js/houseboat-admin.js
+          cp -R /tmp/houseboat-old/assets/images/houseboat/. assets/images/houseboat/
+          cp /tmp/houseboat-old/netlify/functions/_houseboat-defaults.mjs netlify/functions/_houseboat-defaults.mjs
+          cp /tmp/houseboat-old/netlify/functions/houseboat-admin.mjs netlify/functions/houseboat-admin.mjs
+          cp /tmp/houseboat-old/netlify/functions/houseboat-asset-upload.mjs netlify/functions/houseboat-asset-upload.mjs
+          cp /tmp/houseboat-old/netlify/functions/houseboat-asset.mjs netlify/functions/houseboat-asset.mjs
+          cp /tmp/houseboat-old/netlify/functions/houseboat-content.mjs netlify/functions/houseboat-content.mjs
+          cp /tmp/houseboat-old/netlify/functions/houseboat-inquiry.mjs netlify/functions/houseboat-inquiry.mjs
+          cp /tmp/houseboat-old/migrations/20260811_houseboat_landing.sql migrations/20260811_houseboat_landing.sql
+          cp /tmp/houseboat-old/HOUSEBOAT-LANDING-PAGE-NOTE.md HOUSEBOAT-LANDING-PAGE-NOTE.md
+
+      - name: Merge Houseboat into current Admin without reverting newer work
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          current_path = Path('admin/index.html')
+          old_path = Path('/tmp/houseboat-old/admin/index.html')
+          current = current_path.read_text(encoding='utf-8')
+          old = old_path.read_text(encoding='utf-8')
+
+          # CSS
+          css = '<link rel="stylesheet" href="../assets/css/houseboat-admin.css" />'
+          if 'houseboat-admin.css' not in current:
+              current = current.replace('</head>', css + '</head>', 1)
+
+          # Navigation button, extracted from the original build.
+          if 'data-admin-tab="houseboat"' not in current:
+              marker = 'data-admin-tab="houseboat"'
+              pos = old.index(marker)
+              start = old.rfind('<button', 0, pos)
+              end = old.index('</button>', pos) + len('</button>')
+              nav = old[start:end]
+              analytics_pos = current.index('data-admin-tab="analytics"')
+              insert_at = current.rfind('<button', 0, analytics_pos)
+              current = current[:insert_at] + nav + current[insert_at:]
+
+          # Full Houseboat workspace, extracted from the original build.
+          if 'id="admin-section-houseboat"' not in current:
+              hb_pos = old.index('aria-labelledby="admin-tab-houseboat"')
+              hb_start = old.rfind('<section', 0, hb_pos)
+              analytics_pos_old = old.index('aria-labelledby="admin-tab-analytics"')
+              hb_end = old.rfind('<section', hb_start, analytics_pos_old)
+              houseboat_section = old[hb_start:hb_end]
+
+              analytics_pos = current.index('aria-labelledby="admin-tab-analytics"')
+              insert_at = current.rfind('<section', 0, analytics_pos)
+              current = current[:insert_at] + houseboat_section + current[insert_at:]
+
+          # Houseboat Admin controller.
+          if 'houseboat-admin.js' not in current:
+              current = current.replace('</body>', '<script defer src="../assets/js/houseboat-admin.js"></script></body>', 1)
+
+          current_path.write_text(current, encoding='utf-8')
+          PY
+
+      - name: Validate restored page
+        run: |
+          test -s houseboat/index.html
+          test -s assets/css/houseboat.css
+          test -s assets/js/houseboat.js
+          test -s assets/images/houseboat/suenos-houseboat-hero-final.png
+          test -s assets/images/houseboat/deck-plans-transparent.png
+          test -s netlify/functions/houseboat-content.mjs
+          test -s netlify/functions/houseboat-inquiry.mjs
+          grep -q 'PARADISE IS A STATE OF SUEÑOS' houseboat/index.html
+          grep -q 'admin-section-houseboat' admin/index.html
+          grep -q 'houseboat-admin.js' admin/index.html
+
+      - name: Commit restored houseboat files
+        run: |
+          git config user.name 'Sueños Restore Bot'
+          git config user.email 'sales@suenos.ca'
+          git add houseboat assets/css/houseboat.css assets/css/houseboat-admin.css assets/js/houseboat.js assets/js/houseboat-admin.js assets/images/houseboat netlify/functions/_houseboat-defaults.mjs netlify/functions/houseboat-*.mjs migrations/20260811_houseboat_landing.sql HOUSEBOAT-LANDING-PAGE-NOTE.md admin/index.html
+          if git diff --cached --quiet; then
+            echo 'No changes to commit.'
+          else
+            git commit -m 'Restore Sueños Houseboat landing page and admin'
+            git push origin HEAD:restore-houseboat-20260817
+          fi
