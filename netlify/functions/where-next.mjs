@@ -194,7 +194,7 @@ export default async (request, context = {}) => {
   const safeSource = escapeHtml(source);
   const safePageUrl = escapeHtml(pageUrl || "Not provided");
   const text = [
-    "New Sueños Cerveza location request",
+    "New Sueños location request",
     "",
     `Location: ${locationName}`,
     `City: ${city}`,
@@ -204,7 +204,7 @@ export default async (request, context = {}) => {
   const html = `
     <div style="font-family:Arial,sans-serif;line-height:1.55;color:#171717;max-width:680px;margin:auto">
       <div style="background:#111313;padding:22px 26px;border-bottom:6px solid #00cbd6">
-        <h1 style="margin:0;color:#fff7e5;font-size:24px">New Sueños Cerveza location request</h1>
+        <h1 style="margin:0;color:#fff7e5;font-size:24px">New Sueños location request</h1>
       </div>
       <div style="padding:24px 26px;background:#fff7e5">
         <p><strong>Location:</strong> ${safeLocationName}</p>
@@ -224,7 +224,7 @@ export default async (request, context = {}) => {
       body: JSON.stringify({
         from: fromEmail,
         to: [toEmail],
-        subject: `Sueños Cerveza request: ${locationName} — ${city}`,
+        subject: `Sueños request: ${locationName} — ${city}`,
         text,
         html,
         tags: [{ name: "source", value: "where-next" }],
