@@ -498,4 +498,20 @@
     if(submitButton){submitButton.disabled=true;submitButton.setAttribute('aria-busy','true');}
     setTimeout(renderSocietyThanks,420);
   });
+
+  const mountBlancoBottleViewer=()=>{
+    if(!window.location.pathname.includes('/en-ca/our-tequila'))return;
+    const bottleImage=document.querySelector('.product-image > img[alt="Sueños Blanco bottle"]');
+    if(!bottleImage)return;
+    const frame=document.createElement('iframe');
+    frame.src='/assets/bottle-viewer/index.html';
+    frame.title='Explore the Sueños Blanco bottle in 3D';
+    frame.loading='eager';
+    frame.allow='fullscreen';
+    frame.referrerPolicy='same-origin';
+    frame.setAttribute('aria-label','Interactive 3D view of the Sueños Blanco bottle');
+    bottleImage.parentElement.classList.add('product-image-interactive');
+    bottleImage.replaceWith(frame);
+  };
+  mountBlancoBottleViewer();
 })();

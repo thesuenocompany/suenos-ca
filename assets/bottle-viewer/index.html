@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#082e31">
+  <title>Interactive Sueños Blanco bottle</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script>
+</head>
+<body>
+  <main class="bottle-studio" id="studio">
+    <div id="viewer" tabindex="0" role="region" aria-label="Interactive Sueños Blanco bottle. Drag or use arrow keys to rotate. Pinch, scroll, or use plus and minus to zoom. Press Home for the front view."></div>
+    <div class="loading" id="loading" role="status"><span class="loader"></span><span>Preparing the bottle…</span></div>
+    <div class="fallback" id="fallback" hidden><img src="./bottle-front.webp" alt="Sueños Blanco bottle"><p>The interactive view could not start.</p><button id="retry" type="button">Try again</button></div>
+    <div class="view-badge" id="view-badge" aria-live="polite">FRONT VIEW</div>
+    <div class="toolbar" role="group" aria-label="Bottle controls">
+      <button id="spin" aria-pressed="false" title="Start automatic rotation" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg><span>Auto spin</span></button>
+      <button id="front" title="Return to front view" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></svg><span>Front</span></button>
+      <button class="icon-button" id="zoom-out" aria-label="Zoom out" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+      <button class="icon-button" id="zoom-in" aria-label="Zoom in" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg></button>
+    </div>
+    <div class="angle-picker" role="group" aria-label="Choose bottle view">
+      <button data-view="front" aria-pressed="true" type="button">Front</button><button data-view="side1" aria-pressed="false" type="button">Side</button><button data-view="back" aria-pressed="false" type="button">Back</button><button data-view="side2" aria-pressed="false" type="button">Other side</button><button data-view="top" aria-pressed="false" type="button">Top</button><button data-view="bottom" aria-pressed="false" type="button">Base</button>
+    </div>
+    <p class="interaction-hint">Drag to rotate <span>·</span> Scroll or pinch to zoom</p>
+  </main>
+  <noscript><div class="noscript"><img src="./bottle-front.webp" alt="Sueños Blanco bottle"></div></noscript>
+  <script type="module">import('./viewer.js').catch(error => { console.error(error); document.getElementById('loading').hidden=true; document.getElementById('fallback').hidden=false; document.querySelector('.toolbar').hidden=true; document.querySelector('.angle-picker').hidden=true; });</script>
+</body>
+</html>
