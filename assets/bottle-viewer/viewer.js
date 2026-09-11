@@ -180,7 +180,9 @@ async function start() {
 
 async function loadSources(paths) {
   const entries = await Promise.all(Object.entries(paths).map(async ([name, path]) => {
-    const image = new Image(); image.src = path; await image.decode(); return [name, removeConnectedWhite(image)];
+    const image = new Image(); image.src = path; await image.decode();
+    const photo = removeConnectedWhite(image);
+    return [name, { photo, decal: name === 'top' || name === 'bottom' ? photo : makeDecal(photo) }];
   }));
   return Object.fromEntries(entries);
 }
@@ -210,6 +212,28 @@ function removeConnectedWhite(image) {
     if (low > 190 && spread < 22) pixels[offset + 3] = Math.round(pixels[offset + 3] * THREE.MathUtils.clamp((255 - low) / 45, .06, 1));
   }
   context.putImageData(frame, 0, 0); return trimTransparent(canvas);
+}
+
+function makeDecal(source) {
+  const canvas = document.createElement('canvas'); canvas.width = source.width; canvas.height = source.height;
+  const context = canvas.getContext('2d', { willReadFrequently: true }); context.drawImage(source, 0, 0);
+  const frame = context.getImageData(0, 0, canvas.width, canvas.height), pixels = frame.data;
+  for (let y = 0; y < canvas.height; y++) for (let x = 0; x < canvas.width; x++) {
+    const offset = (y * canvas.width + x) * 4;
+    if (!pixels[offset + 3]) continue;
+    const r = pixels[offset], g = pixels[offset + 1], b = pixels[offset + 2];
+    const high = Math.max(r, g, b), low = Math.min(r, g, b), chroma = high - low;
+    const luminance = r * .2126 + g * .7152 + b * .0722;
+    const nx = x / canvas.width, ny = y / canvas.height;
+    const labelZone = nx > .09 && nx < .91 && ny > .19 && ny < .84;
+    const colouredPrint = chroma > 13 && luminance < 238;
+    const darkPrint = labelZone && luminance < 128;
+    let strength = 0;
+    if (colouredPrint) strength = THREE.MathUtils.clamp((chroma - 9) / 32, .24, 1);
+    else if (darkPrint) strength = THREE.MathUtils.clamp((145 - luminance) / 62, .18, 1);
+    pixels[offset + 3] = Math.round(pixels[offset + 3] * strength);
+  }
+  context.putImageData(frame, 0, 0); return canvas;
 }
 
 function trimTransparent(source) {
@@ -250,14 +274,14 @@ function silhouette(source) {
 }
 
 function makeBottle(sources, height) {
-  const profile = silhouette(sources.front), scale = height / (profile.bottom - profile.top);
+  const profile = silhouette(sources.front.photo), scale = height / (profile.bottom - profile.top);
   const points = profile.samples.map(row => new THREE.Vector2(Math.max(.003, (row.right - row.left) * .5 * scale), (profile.bottom - row.pixelY) * scale));
   points.unshift(new THREE.Vector2(0, 0)); points.push(new THREE.Vector2(0, height));
   const geometry = new THREE.LatheGeometry(points, 128); geometry.scale(1, 1, .78);
-  const glass = new THREE.MeshPhysicalMaterial({ color: 0xe1f2ed, metalness: 0, roughness: .12, transmission: .76, thickness: .38, ior: 1.48, clearcoat: 1, clearcoatRoughness: .08, envMapIntensity: 1.25, attenuationColor: 0xc2e0d6, attenuationDistance: 5, side: THREE.DoubleSide });
+  const glass = new THREE.MeshPhysicalMaterial({ color: 0xffffff, metalness: 0, roughness: .018, transmission: 1, thickness: .14, ior: 1.5, clearcoat: 1, clearcoatRoughness: .025, envMapIntensity: 1.55, attenuationColor: 0xffffff, attenuationDistance: 100, side: THREE.FrontSide });
   const group = new THREE.Group(); group.name = 'Suenos_Blanco_six_photo_model'; group.add(new THREE.Mesh(geometry, glass));
   const projections = [['front', 0], ['side1', Math.PI / 2], ['back', Math.PI], ['side2', -Math.PI / 2]].map(([name, angle]) => {
-    const projection = makeProjection(sources[name], height, angle); group.add(projection.mesh); return { ...projection, angle };
+    const projection = makeProjection(sources[name].photo, sources[name].decal, profile, height, angle); group.add(projection.mesh); return { ...projection, angle };
   });
   function update(cameraAngle) {
     const raw = projections.map(item => Math.max(0, 1 - angularDistance(cameraAngle, item.angle) / (Math.PI / 2)));
@@ -267,24 +291,26 @@ function makeBottle(sources, height) {
   update(0); return { group, update };
 }
 
-function makeProjection(source, height, orientation) {
-  const profile = silhouette(source), scale = height / (profile.bottom - profile.top), positions = [], uvs = [], edgeAlpha = [], indices = [];
+function makeProjection(source, decal, shellProfile, height, orientation) {
+  const sourceProfile = silhouette(source), shellScale = height / (shellProfile.bottom - shellProfile.top), positions = [], uvs = [], edgeAlpha = [], indices = [];
   const segments = 100, halfArc = Math.PI / 2;
-  profile.samples.forEach((row, rowIndex) => {
-    const radius = Math.max(.003, (row.right - row.left) * .5 * scale), centre = (row.right + row.left) * .5;
+  shellProfile.samples.forEach((shellRow, rowIndex) => {
+    const sourceIndex = Math.round(rowIndex / Math.max(1, shellProfile.samples.length - 1) * (sourceProfile.samples.length - 1));
+    const sourceRow = sourceProfile.samples[sourceIndex];
+    const radius = Math.max(.003, (shellRow.right - shellRow.left) * .5 * shellScale), sourceCentre = (sourceRow.right + sourceRow.left) * .5, sourceHalfWidth = (sourceRow.right - sourceRow.left) * .5;
     for (let segment = 0; segment <= segments; segment++) {
       const angle = -halfArc + segment / segments * halfArc * 2, localX = Math.sin(angle) * radius, localZ = Math.cos(angle) * radius * .78;
       const worldX = localX * Math.cos(orientation) + localZ * Math.sin(orientation), worldZ = -localX * Math.sin(orientation) + localZ * Math.cos(orientation);
-      positions.push(worldX * 1.003, (profile.bottom - row.pixelY) * scale, worldZ * 1.003);
-      uvs.push((centre + localX / scale) / profile.width, 1 - row.pixelY / profile.height);
+      positions.push(worldX * 1.003, (shellProfile.bottom - shellRow.pixelY) * shellScale, worldZ * 1.003);
+      uvs.push((sourceCentre + Math.sin(angle) * sourceHalfWidth) / sourceProfile.width, 1 - sourceRow.pixelY / sourceProfile.height);
       edgeAlpha.push(THREE.MathUtils.smoothstep(Math.cos(angle), .015, .38));
-      if (rowIndex < profile.samples.length - 1 && segment < segments) { const a = rowIndex * (segments + 1) + segment, b = a + segments + 1; indices.push(a, a + 1, b, a + 1, b + 1, b); }
+      if (rowIndex < shellProfile.samples.length - 1 && segment < segments) { const a = rowIndex * (segments + 1) + segment, b = a + segments + 1; indices.push(a, a + 1, b, a + 1, b + 1, b); }
     }
   });
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3)); geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2)); geometry.setAttribute('edgeAlpha', new THREE.Float32BufferAttribute(edgeAlpha, 1)); geometry.setIndex(indices); geometry.computeVertexNormals();
-  const texture = new THREE.CanvasTexture(source); texture.colorSpace = THREE.SRGBColorSpace; texture.anisotropy = 4;
-  const material = new THREE.MeshPhysicalMaterial({ map: texture, roughness: .31, metalness: .025, clearcoat: .28, clearcoatRoughness: .2, transparent: true, opacity: 1, depthWrite: false, envMapIntensity: .24, side: THREE.FrontSide });
+  const texture = new THREE.CanvasTexture(decal); texture.colorSpace = THREE.SRGBColorSpace; texture.anisotropy = 4;
+  const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, opacity: 1, depthWrite: false, toneMapped: false, side: THREE.FrontSide });
   material.onBeforeCompile = shader => {
     shader.vertexShader = 'attribute float edgeAlpha; varying float vEdgeAlpha;\n' + shader.vertexShader;
     shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvEdgeAlpha = edgeAlpha;');
@@ -297,9 +323,9 @@ function makeProjection(source, height, orientation) {
 
 function makeInspectionPlane(sources) {
   const textures = {};
-  for (const name of ['top', 'bottom']) { textures[name] = new THREE.CanvasTexture(sources[name]); textures[name].colorSpace = THREE.SRGBColorSpace; textures[name].anisotropy = 4; }
+  for (const name of ['top', 'bottom']) { textures[name] = new THREE.CanvasTexture(sources[name].photo); textures[name].colorSpace = THREE.SRGBColorSpace; textures[name].anisotropy = 4; }
   const material = new THREE.MeshBasicMaterial({ map: textures.top, transparent: true, depthTest: false, toneMapped: false });
-  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(6.2 * sources.top.width / sources.top.height, 6.2), material);
+  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(6.2 * sources.top.photo.width / sources.top.photo.height, 6.2), material);
   mesh.visible = false; mesh.renderOrder = 99; return { mesh, material, textures };
 }
 
