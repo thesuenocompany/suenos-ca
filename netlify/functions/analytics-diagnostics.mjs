@@ -12,7 +12,7 @@ export default async (request,context)=>{
     let body;try{body=JSON.parse(raw);}catch{return jsonResponse(400,{ok:false,message:'Invalid JSON.'});}
     const batch=Array.isArray(body?.events)?body.events:[body];if(batch.length<1||batch.length>20)return jsonResponse(400,{ok:false,message:'Send 1–20 events.'});
     const now=new Date();let events;try{events=batch.map(r=>normaliseEvent(r,context?.geo,now)).filter(Boolean);}catch(e){return jsonResponse(400,{ok:false,message:e.message});}
-    if(events.length){const batchId=/^[a-zA-Z0-9-]{16,64}$/.test(body.batchId||'')?body.batchId:randomUUID();await analyticsStore().setJSON(`events/${now.toISOString().slice(0,10)}/${batchId}.json`,{version:2,events});}
+    if(events.length){const batchId=/^[a-zA-Z0-9-]{16,64}$/.test(body.batchId||'')?body.batchId:randomUUID();await analyticsStore(context).setJSON(`events/${now.toISOString().slice(0,10)}/${batchId}.json`,{version:2,events});}
     return jsonResponse(202,{ok:true});
   }catch(error){console.error('Analytics collection failed',error.name);return jsonResponse(503,{ok:false,message:'Analytics is temporarily unavailable.'});}
 };
