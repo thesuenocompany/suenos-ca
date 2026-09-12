@@ -123,7 +123,7 @@ window.renderPhotoStoryContest=async function(page,c,track){
       const r=await fetch('/api/contests',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});
       const d=await r.json().catch(()=>({}));
       if(!r.ok)throw Object.assign(new Error(d.message||'Entry could not be submitted.'),{code:d.code||'',turnstileError:d.turnstileError||''});
-      if(typeof track==='function')track('contest_entry_success',c);
+      if(typeof track==='function')window.SuenosAnalytics?.track('contest_entry_success');track('contest_entry_success',c);
       form.outerHTML=`<div class="ps-success"><h2>${esc(d.confirmation?.heading||'You’re in.')}</h2><p>${esc(d.confirmation?.message||'Your memory has been received and is awaiting moderation.')}</p><p class="ps-success-note">Your photo is pending approval before it appears in the public album.</p></div>`;
     }catch(err){
       button.disabled=false;

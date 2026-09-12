@@ -47,6 +47,7 @@
   let submitting = false;
 
   const track = (name, params = {}) => {
+    window.SuenosAnalytics?.track(name, params);
     if (typeof window.gtag === 'function') window.gtag('event', name, params);
   };
 

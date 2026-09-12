@@ -97,7 +97,7 @@ window.renderRetailContest=async function(page,c,track){
       status.textContent='Saving your entry…';
       const r=await fetch('/api/contests',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)}),d=await r.json().catch(()=>({}));
       if(!r.ok)throw Object.assign(new Error(d.message||'Entry could not be submitted.'),{code:d.code||'',turnstileError:d.turnstileError||''});
-      if(typeof track==='function')track('contest_entry_success',c);
+      if(typeof track==='function')window.SuenosAnalytics?.track('contest_entry_success');track('contest_entry_success',c);
       const subscribed=submitSocietySignup(payload);
       if(subscribed&&typeof track==='function')track('newsletter_signup_submit',{source:'retail_contest',contest_slug:c.slug,retailer:c.retailer_code||''});
       const receiptCopy=d.receipt?.publicMessage?`<p>${esc(d.receipt.publicMessage)}</p>`:'';

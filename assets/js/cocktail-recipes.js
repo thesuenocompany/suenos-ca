@@ -145,13 +145,13 @@ ${[[copy.glassware,data.glassware],[copy.difficulty,data.difficulty],[copy.time,
 </div>${data.tip?`<div class="recipe-tip-banner"><strong>${escapeHTML(copy.tip)}</strong><p>${escapeHTML(data.tip)}</p><span aria-hidden="true">→</span></div>`:''}</div></section>`;
     updateMetadata(recipe);
     detailMain.querySelector('[data-print-recipe]')?.addEventListener('click',()=>{
-      if(typeof window.gtag==='function')window.gtag('event','print_recipe',{recipe_name:data.name,language:document.documentElement.lang||'unknown'});
+      window.SuenosAnalytics?.track('print_recipe');if(typeof window.gtag==='function')window.gtag('event','print_recipe',{recipe_name:data.name,language:document.documentElement.lang||'unknown'});
       window.print();
     });
     detailMain.querySelector('[data-find-bottle]')?.addEventListener('click',event=>{
-      if(typeof window.gtag==='function')window.gtag('event','find_bottle_click',{link_url:event.currentTarget.href,link_text:event.currentTarget.textContent.trim()});
+      window.SuenosAnalytics?.track('find_bottle_click');if(typeof window.gtag==='function')window.gtag('event','find_bottle_click',{link_url:event.currentTarget.href,link_text:event.currentTarget.textContent.trim()});
     });
-    if(typeof window.gtag==='function')window.gtag('event','recipe_view',{recipe_name:data.name,recipe_slug:recipe.slug,language:document.documentElement.lang||'unknown'});
+    window.SuenosAnalytics?.track('recipe_view');if(typeof window.gtag==='function')window.gtag('event','recipe_view',{recipe_name:data.name,recipe_slug:recipe.slug,language:document.documentElement.lang||'unknown'});
   };
 
   const init=async()=>{

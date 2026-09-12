@@ -249,7 +249,7 @@ window.renderScrapbookContest=async function(page,c,track){
      const r=await fetch('/api/contests',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});
      const d=await r.json().catch(()=>({}));
      if(!r.ok) throw new Error(d.message||'Entry could not be submitted.');
-     if(typeof track==='function') track('contest_entry_success',c);
+     if(typeof track==='function') window.SuenosAnalytics?.track('contest_entry_success');track('contest_entry_success',c);
      form.outerHTML=`<div class="contest-success"><h2>${esc(d.confirmation?.heading||'You’re in. Paradise may be calling.')}</h2><p>${esc(d.confirmation?.message||'Your memory has been received and is awaiting moderation.')}</p></div>`;
    }catch(err){
      status.textContent=err.message;

@@ -51,7 +51,7 @@
   }
   function enter(){
     if(panel.hidden)return;
-    const remembered=sessionStorage.getItem('suenos-admin-last-section');
+    const remembered=location.hash==='#analytics'?'analytics':sessionStorage.getItem('suenos-admin-last-section');
     setSection(remembered&&valid(remembered)?remembered:'dashboard');
   }
   document.addEventListener('suenos:admin-authenticated',enter);

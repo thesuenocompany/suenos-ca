@@ -18,7 +18,7 @@
       essential:'Esenciales',
       essentialDesc:'Necesarias para funciones como la verificación de edad y para recordar tus preferencias. Siempre activas.',
       analytics:'Analítica',
-      analyticsDesc:'Ayuda a medir visitas y uso del sitio mediante Google Analytics.',
+      analyticsDesc:'Ayuda a medir visitas y uso del sitio mediante Google Analytics y los informes del sitio Sueños.',
       marketing:'Publicidad',
       marketingDesc:'Permite medir campañas y actividad publicitaria mediante Meta Pixel.',
       always:'Siempre activas',
@@ -38,7 +38,7 @@
       essential:'Essential',
       essentialDesc:'Required for features such as age verification and remembering your preferences. Always active.',
       analytics:'Analytics',
-      analyticsDesc:'Helps measure visits and site use through Google Analytics.',
+      analyticsDesc:'Helps measure visits and site use through Google Analytics and Sueños website reporting.',
       marketing:'Advertising',
       marketingDesc:'Allows campaign and advertising measurement through Meta Pixel.',
       always:'Always active',
@@ -230,6 +230,7 @@
       hideBanner();
       closePreferences();
       apply(current);
+      document.dispatchEvent(new CustomEvent('suenos:consent-changed'));
     };
 
     const bind=()=>{
@@ -276,7 +277,7 @@
   const gate=document.getElementById('age-gate');
   const toast=document.getElementById('toast');
   const show=m=>{if(!toast)return;toast.textContent=m;toast.style.display='block';setTimeout(()=>toast.style.display='none',2300)};
-  const track=(name,params={})=>{if(typeof window.gtag==='function')window.gtag('event',name,params)};
+  const track=(name,params={})=>{window.SuenosAnalytics?.track(name,params);if(typeof window.gtag==='function')window.gtag('event',name,params)};
   const ageAlreadyConfirmed=!!localStorage.getItem(key);
 
   Consent.init({showBannerOnInit:!gate||ageAlreadyConfirmed});

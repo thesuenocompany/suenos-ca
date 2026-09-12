@@ -545,7 +545,7 @@
     </div>
   </div>
 
-  <script defer src="/assets/js/app.js"></script>
+  <script defer src="/assets/js/analytics-diagnostics.js?v=20260912-1"></script><script defer src="/assets/js/app.js"></script>
   <script async defer src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>
   <script>
     (() => {
@@ -587,6 +587,7 @@
             throw new Error(result.message || 'Your suggestion could not be sent. Please try again.');
           }
 
+          window.SuenosAnalytics?.track('where_next_submit');
           if (typeof window.gtag === 'function') {
             window.gtag('event', 'where_next_submit', { event_category: 'engagement' });
           }
@@ -597,6 +598,7 @@
           setStatus(error.message || 'Your suggestion could not be sent. Please try again.', 'error');
           submit.disabled = false;
 
+          window.SuenosAnalytics?.track('where_next_error');
           if (typeof window.gtag === 'function') {
             window.gtag('event', 'where_next_error', { event_category: 'engagement' });
           }

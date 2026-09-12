@@ -26,6 +26,7 @@
         })[m],
     );
   function track(name, extra = {}) {
+    window.SuenosAnalytics?.track(name, extra);
     window.gtag?.("event", name, { ...extra, page_location: location.href });
     fetch("/api/analytics-diagnostics", {
       method: "POST",
