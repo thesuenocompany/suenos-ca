@@ -6,3 +6,10 @@
 #invite-form{display:grid;gap:10px;max-width:520px}#invite-form input{box-sizing:border-box;width:100%;min-height:46px;padding:10px;font:inherit;border:1px solid #617a76;border-radius:6px;background:#fff;color:#123f3b}#invite-form button{margin-top:8px;min-height:46px}.portal-dashboard article p{overflow-wrap:anywhere}.portal-dashboard button{min-height:44px}.portal-dashboard main{box-sizing:border-box;max-width:100%;overflow-wrap:anywhere}#team{margin-block:30px}
 
 #invite-form select{box-sizing:border-box;width:100%;min-height:46px;padding:10px;font:inherit;color:#123f3b;background:#fff;border:1px solid #617a76;border-radius:6px}#custom-deadline label{display:block;margin-bottom:10px}#deadline-help{font-size:14px;margin:0}
+/* Investor navigation only: presentation headings and public-site menus are untouched. */
+body>header nav a,body>header>button[data-open],.portal-bar>a,.portal-bar>button,.portal-dashboard main>a[href="/investors/"],.portal-dashboard main>p>a[href="/investors/invitations"]{text-transform:uppercase;letter-spacing:.055em}
+body>header nav a,.portal-bar>a,.portal-bar>button{white-space:nowrap}
+@media(max-width:1100px){body>header nav{gap:16px}body>header nav a{font-size:12px;letter-spacing:.04em}}
+@media(max-width:600px){.portal-bar{gap:12px}.portal-bar>a,.portal-bar>button,body>header>button[data-open]{letter-spacing:.04em}}
+body>header>button[data-open]{white-space:nowrap}
+@media(min-width:601px) and (max-width:1000px){body>header{height:auto;min-height:78px;flex-wrap:wrap;padding-block:12px;gap:8px 16px}body>header nav{order:3;flex-basis:100%;justify-content:space-between;gap:8px}body>header nav a{font-size:11.5px;letter-spacing:.035em}}
