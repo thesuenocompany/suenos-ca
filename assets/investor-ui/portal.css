@@ -4,3 +4,5 @@
 .auth-panel a{color:#173c40}.auth-panel button{background:#173c40;color:#fff9e9;border:1px solid #173c40;padding:10px 16px;font:inherit;cursor:pointer}.auth-panel :focus-visible{outline:3px solid #b18c28;outline-offset:3px}.auth-panel button:disabled{opacity:.6;cursor:wait}
 /* Invitation management uses the same private portal typography and palette. */
 #invite-form{display:grid;gap:10px;max-width:520px}#invite-form input{box-sizing:border-box;width:100%;min-height:46px;padding:10px;font:inherit;border:1px solid #617a76;border-radius:6px;background:#fff;color:#123f3b}#invite-form button{margin-top:8px;min-height:46px}.portal-dashboard article p{overflow-wrap:anywhere}.portal-dashboard button{min-height:44px}.portal-dashboard main{box-sizing:border-box;max-width:100%;overflow-wrap:anywhere}#team{margin-block:30px}
+
+#invite-form select{box-sizing:border-box;width:100%;min-height:46px;padding:10px;font:inherit;color:#123f3b;background:#fff;border:1px solid #617a76;border-radius:6px}#custom-deadline label{display:block;margin-bottom:10px}#deadline-help{font-size:14px;margin:0}
