@@ -14,7 +14,7 @@ await rm(output,{recursive:true,force:true});await mkdir(output,{recursive:true}
 for(const {path} of manifest.files){await mkdir(dirname(`${output}/${path}`),{recursive:true});await copyFile(path,`${output}/${path}`);}
 await mkdir('generated/investor-ui',{recursive:true});
 await build({entryPoints:{'auth-bundle':'src/investor/auth-browser.mjs','session-bundle':'src/investor/session-browser.mjs'},outdir:'generated/investor-ui',bundle:true,platform:'browser',format:'iife',target:['es2022'],minify:true,sourcemap:false,legalComments:'none'});
-const publicUI=['portal.css','portal.js','dashboard.js'];
+const publicUI=['portal.css','portal.js','dashboard.js','invitations.js'];
 const callbackTag='<script src="/investors/ui/callback-bridge.js" data-investor-callback-bridge></script>';
 const callbackPages=['index.html','en-ca/index.html'];
 for(const page of callbackPages){

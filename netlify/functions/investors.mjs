@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { createRuntime,enabledProduction,productionSite } from '../../lib/investor/runtime.mjs';
 import { securityHeaders } from '../../lib/investor/handler.mjs';
-const generic=new Set(['portal.js','portal.css','dashboard.js','dashboard.html','auth.html','callback-bridge.js']);
+const generic=new Set(['portal.js','portal.css','dashboard.js','dashboard.html','invitations.html','invitations.js','auth.html','callback-bridge.js']);
 const bundles=new Set(['auth-bundle.js','session-bundle.js']);
 async function ui(name){
  if(!generic.has(name)&&!bundles.has(name))return new Response('Not found',{status:404});
@@ -11,7 +11,7 @@ async function ui(name){
 }
 let pool;
 export default async (request,context)=>{
- const runtimeEnv={CONTEXT:context?.deploy?.context,SITE_ID:context?.site?.id,INVESTOR_PORTAL_ENABLED:process.env.INVESTOR_PORTAL_ENABLED,INVESTOR_OWNER_EMAIL:process.env.INVESTOR_OWNER_EMAIL,INVESTOR_PIN_ENABLED:process.env.INVESTOR_PIN_ENABLED,INVESTOR_PIN_PEPPER:process.env.INVESTOR_PIN_PEPPER};
+ const runtimeEnv={CONTEXT:context?.deploy?.context,SITE_ID:context?.site?.id,INVESTOR_PORTAL_ENABLED:process.env.INVESTOR_PORTAL_ENABLED,INVESTOR_OWNER_EMAIL:process.env.INVESTOR_OWNER_EMAIL,INVESTOR_APPROVED_INVITERS:process.env.INVESTOR_APPROVED_INVITERS,INVESTOR_PIN_ENABLED:process.env.INVESTOR_PIN_ENABLED,INVESTOR_PIN_PEPPER:process.env.INVESTOR_PIN_PEPPER};
  // Generic callback/UI responses require no storage and contain no private content.
  if(productionSite(runtimeEnv,request)&&['GET','HEAD'].includes(request.method)){
   const path=new URL(request.url).pathname;

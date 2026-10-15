@@ -1,14 +1,19 @@
 // Provider-backed email verification for first PIN enrollment. A recovery token
-// creates a session through the SDK; this flow never updates an account password.
+// creates a session through the SDK. New invites use a disposable random provider
+// password solely to accept the email token; users choose only their portal PIN.
 export function createPinSetupController(sdk,{authorize,showEnrollment,showEmail,showStatus,cleanLocation}){
  async function ready(){const enrollment=await authorize();showEnrollment(enrollment);}
  return {
   async initialize(){
    try{
     const callback=await sdk.handleAuthCallback();cleanLocation();
-    if(callback&&callback.type!=='invite'){await ready();return;}
-    // An invite token alone is not a verified session. Send the user through
-    // mailbox verification instead of asking them to create an Identity password.
+    if(callback?.type==='invite'){
+     const password=Array.from(crypto.getRandomValues(new Uint8Array(32)),b=>b.toString(16).padStart(2,'0')).join('');
+     const user=await sdk.acceptInvite(callback.token,password);
+     // acceptInvite alone does not write the server cookies in SDK 2.0.0.
+     await sdk.login(user.email,password);await ready();return;
+    }
+    if(callback){await ready();return;}
     if(!callback){try{await ready();return;}catch{/* email proof required */}}
     const settings=await sdk.getSettings();if(!settings.providers.email)throw Error('Email verification unavailable');
     showEmail();showStatus('Enter your invited email address. We will email a link so you can choose your PIN. No existing password is needed.');
