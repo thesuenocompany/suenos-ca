@@ -29,4 +29,4 @@ export default async (request,context)=>{
   return createRuntime({env:runtimeEnv,identity,pool,assetsStore,ui})(request);
  }catch{return new Response('Investor portal unavailable.',{status:503,headers:securityHeaders});}
 };
-export const config={path:['/investors','/investors/*'],includedFiles:['src/investor/callback-bridge.js','assets/investor-ui/portal.js','assets/investor-ui/portal.css','assets/investor-ui/dashboard.js','assets/investor-ui/dashboard.html','assets/investor-ui/auth.html','generated/investor-ui/auth-bundle.js','generated/investor-ui/session-bundle.js']};
+export const config={path:['/investors','/investors/*']};

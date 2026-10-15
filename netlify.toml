@@ -9,6 +9,9 @@
 [functions]
   node_bundler = "esbuild"
 
+[functions.investors]
+  included_files = ["src/investor/callback-bridge.js", "assets/investor-ui/*", "generated/investor-ui/*.js"]
+
 # Admin is an operational surface. Always revalidate it so fixes and auth/session
 # handling are not stranded behind a stale browser copy.
 [[headers]]
