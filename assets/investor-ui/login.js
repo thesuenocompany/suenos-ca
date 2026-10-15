@@ -1,0 +1,2 @@
+// Synthetic local login only. Never included in a production public allowlist.
+document.querySelector('form').addEventListener('submit',async event=>{event.preventDefault();const response=await fetch('/local-login',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({account:event.submitter.value})});if(response.ok)location.assign('/investors/');else alert('Local test sign-in failed.');});

@@ -1,6 +1,6 @@
 [build]
-  command = "find . -maxdepth 2 -type f \\( -name 'NETLIFY-HOTLINE-SETUP*.md' -o -name 'NETLIFY-HOTLINE-SETUP*.txt' \\) -delete"
-  publish = "."
+  command = "node tools/investor/build-public.mjs"
+  publish = "dist-public"
   functions = "netlify/functions"
 
 [build.environment]
