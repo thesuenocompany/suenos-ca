@@ -1,0 +1,16 @@
+Verify your email for Sueños
+
+Confirm your email to continue to the private Sueños investor presentation.
+
+Once your access is approved, you can choose your personal four-digit PIN. If you already have a PIN, sign in with it.
+
+Verify email & continue:
+{{ .ConfirmationURL }}
+
+This message is intended for you. Please don’t forward your verification link.
+
+If the security link expires, request a fresh setup link at https://suenos.ca/investors/setup. Your invitation’s acceptance deadline and access approval still apply.
+
+The Sueños team
+
+If you weren’t expecting this message, you can ignore it.

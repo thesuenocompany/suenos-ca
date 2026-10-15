@@ -1,0 +1,16 @@
+Your invitation to the Sueños investor presentation
+
+You’re invited to explore the private Sueños investor presentation.
+
+Verify your email, then choose a personal four-digit PIN for future visits. No existing password is needed.
+
+Verify email & choose PIN:
+{{ .ConfirmationURL }}
+
+This message is intended for you. Please don’t forward your verification link.
+
+If the security link expires, request a fresh setup link at https://suenos.ca/investors/setup. Your invitation’s acceptance deadline and access approval still apply.
+
+The Sueños team
+
+If you weren’t expecting this message, you can ignore it.

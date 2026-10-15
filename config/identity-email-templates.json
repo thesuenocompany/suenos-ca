@@ -1,0 +1,23 @@
+{
+  "templates": [
+    {
+      "type": "invitation",
+      "subject": "Your invitation to the Sue\u00f1os investor presentation",
+      "path": "/identity-emails/invitation.html",
+      "plainTextSource": "/identity-emails/invitation.txt"
+    },
+    {
+      "type": "recovery",
+      "subject": "Your Sue\u00f1os verification link",
+      "path": "/identity-emails/recovery.html",
+      "plainTextSource": "/identity-emails/recovery.txt"
+    },
+    {
+      "type": "confirmation",
+      "subject": "Verify your email for Sue\u00f1os",
+      "path": "/identity-emails/confirmation.html",
+      "plainTextSource": "/identity-emails/confirmation.txt"
+    }
+  ],
+  "note": "Desired dashboard settings only; deploying this file does not configure Identity. Plain-text sources are supplied for review/fallback; a separate MIME text-part setting is not documented."
+}
