@@ -11,11 +11,11 @@ async function ui(name){
 }
 let pool;
 export default async (request,context)=>{
- const runtimeEnv={CONTEXT:context?.deploy?.context,SITE_ID:context?.site?.id,INVESTOR_PORTAL_ENABLED:process.env.INVESTOR_PORTAL_ENABLED,INVESTOR_OWNER_EMAIL:process.env.INVESTOR_OWNER_EMAIL};
+ const runtimeEnv={CONTEXT:context?.deploy?.context,SITE_ID:context?.site?.id,INVESTOR_PORTAL_ENABLED:process.env.INVESTOR_PORTAL_ENABLED,INVESTOR_OWNER_EMAIL:process.env.INVESTOR_OWNER_EMAIL,INVESTOR_PIN_ENABLED:process.env.INVESTOR_PIN_ENABLED,INVESTOR_PIN_PEPPER:process.env.INVESTOR_PIN_PEPPER};
  // Generic callback/UI responses require no storage and contain no private content.
  if(productionSite(runtimeEnv,request)&&['GET','HEAD'].includes(request.method)){
   const path=new URL(request.url).pathname;
-  const name=(path==='/investors/login'||path==='/investors/login/')?'auth.html':path.startsWith('/investors/ui/')?path.slice(14):null;
+  const name=(path==='/investors/login'||path==='/investors/login/'||path==='/investors/setup'||path==='/investors/setup/')?'auth.html':path.startsWith('/investors/ui/')?path.slice(14):null;
   if(name&&(generic.has(name)||bundles.has(name))){try{const response=await ui(name);const headers=new Headers(response.headers);for(const [key,value]of Object.entries(securityHeaders))headers.set(key,value);return new Response(request.method==='HEAD'?null:response.body,{status:response.status,headers});}catch{return new Response('Sign-in temporarily unavailable.',{status:503,headers:securityHeaders});}}
  }
  // Fail before loading provider clients in all previews and unconfigured deployments.
@@ -26,7 +26,7 @@ export default async (request,context)=>{
   // Platform-managed connection only: never read, copy, log or return its URL.
   pool??=getDatabase().pool;
   const assetsStore=getStore({name:'investor-private-assets',region:'us-east-2',consistency:'strong'});
-  return createRuntime({env:runtimeEnv,identity,pool,assetsStore,ui})(request);
+  return createRuntime({env:runtimeEnv,identity,pool,assetsStore,ui,clientNetwork:context?.ip})(request);
  }catch{return new Response('Investor portal unavailable.',{status:503,headers:securityHeaders});}
 };
 export const config={path:['/investors','/investors/*']};

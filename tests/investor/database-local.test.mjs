@@ -4,7 +4,7 @@ test('real local migration, transaction rollback and consent lifecycle',{timeout
  const db=new NetlifyDB({logger:()=>{}});let pool;
  try{
   const localConnection=await db.start();pool=new pg.Pool({connectionString:localConnection,max:1});
-  const applied=await db.applyMigrations('netlify/database/migrations');assert.equal(applied.length,1);
+  const applied=await db.applyMigrations('netlify/database/migrations');assert.equal(applied.length,2);
   const store=new PostgresStore(pool);
   await store.transaction(s=>{s.members.owner={name:'Synthetic owner',email:'synthetic@example.invalid',active:true,owner:true};});
   await assert.rejects(store.transaction(s=>{s.members.owner.active=false;throw Error('rollback');}));

@@ -1,5 +1,3 @@
-import { getUser,onAuthChange,logout } from '@netlify/identity';
-// Keep the official SDK refresh lifecycle active on the protected presentation.
-getUser().then(user=>{if(!user)location.replace('/investors/login');}).catch(()=>location.replace('/investors/login'));
-onAuthChange(event=>{if(event==='logout')location.replace('/investors/login');});
-document.addEventListener('click',event=>{if(event.target.closest('[data-investor-signout]')){event.preventDefault();logout().then(()=>location.replace('/investors/login')).catch(()=>{event.target.textContent='Sign-out failed; retry';});}});
+// App-managed HttpOnly session: no PIN or session token is readable by this script.
+fetch('/investors/api/me',{cache:'no-store'}).then(r=>{if(!r.ok)location.replace('/investors/login');}).catch(()=>location.replace('/investors/login'));
+document.addEventListener('click',event=>{if(event.target.closest('[data-investor-signout]')){event.preventDefault();fetch('/investors/api/pin/logout',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'}).then(r=>{if(!r.ok)throw Error();location.replace('/investors/login');}).catch(()=>{event.target.textContent='Sign-out failed; retry';});}});
