@@ -11,8 +11,8 @@ const files=[];
 for(const name of [...privateManifest].sort()){
  const path=await realpath(resolve(source,name));if(!path.startsWith(source+sep))throw Error('Private asset escaped source');
  const bytes=await readFile(path);
- files.push({path:name,key:`partner-october-2026-v1/${name}`,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')});
+ files.push({path:name,key:`partner-october-2026-v2/${name}`,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')});
 }
 await mkdir(dirname(output),{recursive:true});
-await writeFile(output,JSON.stringify({siteId:'0c7a4a0c-375e-4b11-9d6f-571c7ac18953',store:'investor-private-assets',region:'us-east-2',edition:'partner-october-2026-v1',source,files,totalBytes:files.reduce((n,f)=>n+f.bytes,0)},null,2),{mode:0o600});
+await writeFile(output,JSON.stringify({siteId:'0c7a4a0c-375e-4b11-9d6f-571c7ac18953',store:'investor-private-assets',region:'us-east-2',edition:'partner-october-2026-v2',source,files,totalBytes:files.reduce((n,f)=>n+f.bytes,0)},null,2),{mode:0o600});
 console.log(`Prepared ${files.length} private asset checksums (${files.reduce((n,f)=>n+f.bytes,0)} bytes); no files uploaded.`);
