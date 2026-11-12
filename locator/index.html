@@ -192,6 +192,7 @@
   <div id="map"></div>
 </div>
 
+<script src="/assets/js/locator-actions.js"></script>
 <script>
 // ── CONFIG ────────────────────────────────────────────────────────────────────
 const SUPABASE_URL = 'https://dowfjjthshbbgnvwxzjv.supabase.co';
@@ -339,10 +340,14 @@ function makePopup(s) {
   h += `<span class="store-type ${cat}">${cat === 'retail' ? '🛒 Retail Store' : '🍹 Bar / Restaurant'}</span></div>`;
   h += `</div>`;
   if (s.address) h += `<div class="popup-row">${ico('pin')} <span>${esc(s.address)}</span></div>`;
-  if (s.phone)   h += `<div class="popup-row">${ico('phone')} <a href="tel:${esc(s.phone)}" class="popup-link">${esc(s.phone)}</a></div>`;
+  if (s.phone)   h += `<div class="popup-row">${ico('phone')} <a href="tel:${esc(s.phone)}" class="popup-link" data-retailer-action="call" data-retailer-id="${esc(s.id)}" data-venue-type="${cat}">${esc(s.phone)}</a></div>`;
   if (s.website) {
     const url = /^https?:\/\//i.test(s.website) ? s.website : 'https://' + s.website;
-    h += `<div class="popup-row">${ico('globe')} <a href="${url}" target="_blank" rel="noopener" class="popup-link">Visit website</a></div>`;
+    h += `<div class="popup-row">${ico('globe')} <a href="${esc(url)}" target="_blank" rel="noopener" class="popup-link" data-retailer-action="website" data-retailer-id="${esc(s.id)}" data-venue-type="${cat}">Visit website</a></div>`;
+  }
+  if (Number.isFinite(Number(s.lat)) && Number.isFinite(Number(s.lng))) {
+    const destination = encodeURIComponent(`${s.lat},${s.lng}`);
+    h += `<div class="popup-row">${ico('pin')} <a href="https://www.google.com/maps/dir/?api=1&amp;destination=${destination}" target="_blank" rel="noopener" class="popup-link" data-retailer-action="directions" data-retailer-id="${esc(s.id)}" data-venue-type="${cat}">Get directions</a></div>`;
   }
   h += `</div>`;
   return h;
