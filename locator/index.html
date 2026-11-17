@@ -262,19 +262,29 @@ let markers   = {};
 let activeId  = null;
 
 // ── Load ──────────────────────────────────────────────────────────────────────
+let loading = false;
 async function load() {
-  const { data, error } = await sb
-    .from('accounts')
-    .select('id, name, type, address, lat, lng, phone, website, logo_url')
-    .eq('status', 'Listed')
-    .not('lat', 'is', null)
-    .not('lng', 'is', null)
-    .order('name');
-
-  if (error) { console.error('[StoreLocator]', error); return; }
-  allStores = data || [];
-  renderAll(allStores);
+  if (loading) return;
+  loading = true;
+  try {
+    const response = await fetch('/api/public-stockists', { cache: 'no-store', signal: AbortSignal.timeout(10000) });
+    if (!response.ok) throw new Error('Retailer source unavailable');
+    const data = await response.json();
+    if (!Array.isArray(data.stores)) throw new Error('Invalid retailer response');
+    allStores = data.stores.filter(s => Number.isFinite(s.lat) && Number.isFinite(s.lng));
+    document.getElementById('empty').textContent = 'No locations match your search.';
+    applyFilters();
+  } catch {
+    allStores = [];
+    renderAll([]);
+    document.getElementById('count-label').textContent = 'Retailer information unavailable';
+    document.getElementById('empty').textContent = 'Unable to load current locations. Please try again shortly.';
+  } finally { loading = false; }
 }
+// Refresh current status on return and once per minute while visible.
+window.addEventListener('pageshow', event => { if (event.persisted) load(); });
+document.addEventListener('visibilitychange', () => { if (!document.hidden) load(); });
+setInterval(() => { if (!document.hidden) load(); }, 60000);
 
 // ── Render markers + list ─────────────────────────────────────────────────────
 function renderAll(list, highlightId) {

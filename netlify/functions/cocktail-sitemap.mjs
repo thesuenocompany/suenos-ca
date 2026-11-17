@@ -4,7 +4,7 @@ import { validateCocktailRecipes } from "./_cocktail-http.mjs";
 
 const STORE_NAME = "suenos-content";
 const KEY = "cocktail-recipes-v1";
-const SITE = "https://www.suenos.ca";
+const SITE = "https://suenos.ca";
 const xml = value => String(value ?? "").replace(/[<>&'\"]/g, char => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", "'": "&apos;", '"': "&quot;" }[char]));
 const absolute = value => /^https:\/\//i.test(value) ? value : `${SITE}${value.startsWith("/") ? "" : "/"}${value}`;
 

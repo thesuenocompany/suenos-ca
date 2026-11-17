@@ -1,12 +1,12 @@
 import { readFile,writeFile,rm,mkdir,copyFile,lstat } from 'node:fs/promises';
-import { dirname,resolve } from 'node:path';
+import { dirname,resolve,sep } from 'node:path';
 import { createHash } from 'node:crypto';
 import { build } from 'esbuild';
 const root=resolve('.'),output=resolve('dist-public'),manifest=JSON.parse(await readFile('config/public-manifest.json','utf8'));
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 // Explicit baseline manifest, never a recursive copy of the working directory.
 for(const {path,sha256} of manifest.files){
- if(path.startsWith('/')||path.includes('..')||!resolve(path).startsWith(root+'/'))throw Error('Invalid public path');
+ if(path.startsWith('/')||path.includes('..')||!resolve(path).startsWith(root+sep))throw Error('Invalid public path');
  if((await lstat(path)).isSymbolicLink())throw Error('Public symlink refused');
  if(hash(await readFile(path))!==sha256)throw Error(`Public baseline changed; review manifest before building: ${path}`);
 }
