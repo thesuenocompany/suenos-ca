@@ -13,6 +13,6 @@ Allow: /
 User-agent: Perplexity-User
 Allow: /
 
-Sitemap: https://www.suenos.ca/sitemap.xml
-Sitemap: https://www.suenos.ca/image-sitemap.xml
-Sitemap: https://www.suenos.ca/cocktail-sitemap.xml
+Sitemap: https://suenos.ca/sitemap.xml
+Sitemap: https://suenos.ca/image-sitemap.xml
+Sitemap: https://suenos.ca/cocktail-sitemap.xml

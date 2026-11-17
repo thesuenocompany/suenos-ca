@@ -74,14 +74,14 @@
         script.remove();
       }catch{}
     });
-    const organizationId='https://www.suenos.ca/#organization';
-    const brandId='https://www.suenos.ca/#brand';
-    const websiteId='https://www.suenos.ca/#website';
+    const organizationId='https://suenos.ca/#organization';
+    const brandId='https://suenos.ca/#brand';
+    const websiteId='https://suenos.ca/#website';
     const foundation=retained.length?retained:[
-      {'@type':'Organization','@id':organizationId,name:'Sueños Tequila',alternateName:['Suenos Tequila','Sueños Artisan Tequila'],url:'https://www.suenos.ca/en-ca/',logo:{'@type':'ImageObject',url:'https://www.suenos.ca/assets/images/logo.webp'},email:'sales@suenos.ca',founder:{'@id':'https://www.suenos.ca/#gord-erickson'},foundingLocation:{'@type':'Place',name:'British Columbia, Canada',address:{'@type':'PostalAddress',addressRegion:'British Columbia',addressCountry:'CA'}},sameAs:['https://www.instagram.com/suenostequila','https://www.facebook.com/suenostequila/'],owns:{'@id':brandId}},
-      {'@type':'Person','@id':'https://www.suenos.ca/#gord-erickson',name:'Gord Erickson',url:'https://www.gorderickson.com/',founderOf:{'@id':organizationId}},
-      {'@type':'Brand','@id':brandId,name:'Sueños Tequila',alternateName:['Suenos Tequila','Sueños Artisan Tequila'],slogan:'Paradise Is a State of Sueños',logo:'https://www.suenos.ca/assets/images/logo.webp',url:'https://www.suenos.ca/en-ca/'},
-      {'@type':'WebSite','@id':websiteId,url:'https://www.suenos.ca/',name:'Sueños Tequila',alternateName:'Suenos Tequila',publisher:{'@id':organizationId},inLanguage:['en-CA','es-MX']}
+      {'@type':'Organization','@id':organizationId,name:'Sueños Tequila',alternateName:['Suenos Tequila','Sueños Artisan Tequila'],url:'https://suenos.ca/en-ca/',logo:{'@type':'ImageObject',url:'https://suenos.ca/assets/images/logo.webp'},email:'sales@suenos.ca',founder:{'@id':'https://suenos.ca/#gord-erickson'},foundingLocation:{'@type':'Place',name:'British Columbia, Canada',address:{'@type':'PostalAddress',addressRegion:'British Columbia',addressCountry:'CA'}},sameAs:['https://www.instagram.com/suenostequila','https://www.facebook.com/suenostequila/'],owns:{'@id':brandId}},
+      {'@type':'Person','@id':'https://suenos.ca/#gord-erickson',name:'Gord Erickson',url:'https://www.gorderickson.com/',founderOf:{'@id':organizationId}},
+      {'@type':'Brand','@id':brandId,name:'Sueños Tequila',alternateName:['Suenos Tequila','Sueños Artisan Tequila'],slogan:'Paradise Is a State of Sueños',logo:'https://suenos.ca/assets/images/logo.webp',url:'https://suenos.ca/en-ca/'},
+      {'@type':'WebSite','@id':websiteId,url:'https://suenos.ca/',name:'Sueños Tequila',alternateName:'Suenos Tequila',publisher:{'@id':organizationId},inLanguage:['en-CA','es-MX']}
     ];
     const minutes=Number.parseInt(String(data.time||'').match(/\d+/)?.[0]||'',10);
     const webPage={'@type':'WebPage','@id':`${url}#webpage`,url,name:data.pageTitle||data.name,description:data.metaDescription||data.intro,isPartOf:{'@id':websiteId},about:{'@id':brandId},publisher:{'@id':organizationId},inLanguage:isSpanish?'es-MX':'en-CA',dateModified:data.lastReviewed,breadcrumb:{'@id':`${url}#breadcrumb`},mainEntity:{'@id':`${url}#recipe`}};
