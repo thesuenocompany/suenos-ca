@@ -28,8 +28,12 @@ export function category(store) {
   if (/^(?:(?:on (?:premise|premises|trade))|hospitality|(?:sports |cocktail |hotel )?bar|restaurants?|pub|lounge|hotel|nightclub|night club|resort|tavern|bar restaurant|restaurant bar|club|cantina)$/.test(type)) return 'hospitality';
   return null;
 }
+// Coordinates stored alongside a mailing address may point to the post office.
+function isMailingAddress(address) {
+  return /^(?:(?:p o|po|post office) )?box (?:no )?#?\d+[a-z]?\b/.test(normalizeSearch(address));
+}
 export function hasPin(store) {
-  return Number.isFinite(store.lat) && Number.isFinite(store.lng) &&
+  return !isMailingAddress(store.address) && Number.isFinite(store.lat) && Number.isFinite(store.lng) &&
     Math.abs(store.lat) <= 90 && Math.abs(store.lng) <= 180 && (store.lat !== 0 || store.lng !== 0);
 }
 export function safeWebsite(value) {
@@ -45,7 +49,7 @@ export function actionsFor(store) {
   const phone = /^\+?[\d\s().-]+$/.test(rawPhone) ? rawPhone.replace(/[^+\d]/g,'') : '';
   const pin = hasPin(store);
   // Ignore name-only records, including those with coordinates of unknown precision.
-  const destination = address ? (pin ? `${store.lat},${store.lng}` : `${store.name}, ${address}`) : '';
+  const destination = address && !isMailingAddress(address) ? (pin ? `${store.lat},${store.lng}` : `${store.name}, ${address}`) : '';
   return {
     directions: destination ? 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(destination) : '',
     call: /^\+?\d{7,15}$/.test(phone) ? 'tel:' + phone : '',

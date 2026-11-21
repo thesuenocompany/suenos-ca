@@ -1019,7 +1019,7 @@
     },
     {
       "path": "locator/index.html",
-      "sha256": "b5f7ac56be99d6abba03aa2449c94019c3b3e5e0645dd0321662d3d2dd41f715"
+      "sha256": "48ae47eb10de8b00f257f664dc8f017954ed2ff0957bc05ecd36ed626569fc56"
     },
     {
       "path": "reposado-test.png",
@@ -1047,7 +1047,7 @@
     },
     {
       "path": "assets/js/locator-rules.js",
-      "sha256": "4af3fc92081a85ef594ef436794826225ec203151bf02c4f7fbeec93b6f5a831"
+      "sha256": "eca519ee58b99485d8c14e117ca79718514f269445f0d24a5dabbd4eca2a8e2e"
     }
   ]
 }
