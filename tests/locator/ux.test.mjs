@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { actionsFor, category, countryFor, matchesSearch, visibleStores } from '../../assets/js/locator-rules.js';
+import { actionsFor, category, countryFor, hasPin, matchesSearch, visibleStores } from '../../assets/js/locator-rules.js';
 import { renderDirectory } from '../../lib/stockists.mjs';
 const store = {id:'brothers',name:'Brothers Liquor Store',type:'Private Liquor Store',city:'Salmon Arm',province:'BC',address:'1191 10 Avenue SW, Salmon Arm, BC V1E 1E4',phone:'250-555-1234',lat:50.7,lng:-119.3};
 const par = {...store,id:'par',name:'Par-Tee Putt',city:'Vancouver',address:'670 Smithe St, Vancouver, BC'};
@@ -107,4 +107,23 @@ test('locator runtime switches modes, normalizes searches, shows useful empty st
   await new Promise(setImmediate);
   assert.equal(text(),'');
   assert.match(get('count-label').textContent,/^0 locations in Canada$/);
+});
+
+
+test('mailing-only Box addresses never imply Directions or map pins',()=>{
+  const sea={...store,id:'sea',name:'Sea Store',address:'Box 921 Sicamous, BC, V0E 2V0'};
+  for(const address of [sea.address,'P.O. Box 921, Sicamous, BC','PO Box #921A, Sicamous','Post Office Box 921']) {
+    assert.equal(actionsFor({...sea,address,lat:null,lng:null}).directions,'');
+    assert.equal(actionsFor({...sea,address}).directions,'');
+    assert.equal(hasPin({...sea,address}),false);
+  }
+  assert.equal(actionsFor(sea).call,'tel:2505551234');
+  assert.equal(visibleStores([{...sea,phone:'',website:''}]).length,0);
+  const directory=renderDirectory([sea],'2026-11-21T00:00:00Z');
+  assert.match(directory,/>Call</);
+  assert.doesNotMatch(directory,/>Directions</);
+  const street={...sea,address:'Unit 4, 921 Box Street, Sicamous, BC'};
+  assert.equal(hasPin(street),true);
+  assert.equal(new URL(actionsFor(street).directions).searchParams.get('destination'),`${street.lat},${street.lng}`);
+  assert.match(actionsFor({...street,lat:null,lng:null}).directions,/Unit%204/);
 });
