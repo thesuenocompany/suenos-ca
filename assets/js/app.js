@@ -386,7 +386,7 @@
     track('recipe_view',{recipe_name:title,language:document.documentElement.lang||'unknown'});
   }
 
-  if(document.querySelector('iframe[src*="suenos-locator.netlify.app"]')){
+  if(document.querySelector('iframe[src^="/locator/"]')){
     track('retailer_locator_view',{page_location:window.location.href,language:document.documentElement.lang||'unknown'});
   }
 

@@ -43,6 +43,7 @@ test('delegated trusted clicks track hospitality distinctly',()=>{
 test('no initialization view event and correct HTML action wiring',()=>{
  const x=setup();assert.equal(x.events.length,0);
  const html=fs.readFileSync('locator/index.html','utf8');
- for(const action of ['website','call','directions'])assert.ok(html.includes(`data-retailer-action="${action}"`));
+ assert.match(html,/\['directions','call','website'\]\.filter/);
+ assert.ok(html.includes('data-retailer-action="${key}"'));
  assert.ok(html.includes('/assets/js/locator-actions.js'));
 });

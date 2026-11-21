@@ -607,11 +607,11 @@
     },
     {
       "path": "assets/js/analytics-diagnostics.js",
-      "sha256": "e088110da97f7e77f38f8ba54bc59eb45b9dfc6ea51f5114d66b9c7ff86e79d4"
+      "sha256": "6bfbadd01630af2149225a7a4002962d95d097fa48dbfd82b9535bd970cf49a7"
     },
     {
       "path": "assets/js/app.js",
-      "sha256": "78fec081890da52f2401170b651bc189778b251ff926c16032852de144976d25"
+      "sha256": "05558f66bf2590d5d85e06d35e5d06aed4d372aeaed1fe6cf827c41013f8040a"
     },
     {
       "path": "assets/js/cocktail-admin.js",
@@ -875,7 +875,7 @@
     },
     {
       "path": "en-ca/find-a-bottle/index.html",
-      "sha256": "a428bb5013c29371642bdc0b7b92fcad5039f2568e79a9a800882efdb09f301b"
+      "sha256": "d572a1abe5511dfac180d2aab357b5ec7eba6ff417a737bbc8b4f6b9d7b5102e"
     },
     {
       "path": "en-ca/how-its-made/index.html",
@@ -883,7 +883,7 @@
     },
     {
       "path": "en-ca/index.html",
-      "sha256": "3e3a10a7fc0f2cce62729dc8200d0353f516832aa1b81cfe59e50fa30b678eec"
+      "sha256": "14e71cc74fb82d5d61af47132f7b67fb01e01d88e5f801bc874cc7207ab36130"
     },
     {
       "path": "en-ca/our-story/index.html",
@@ -971,11 +971,11 @@
     },
     {
       "path": "es-mx/encuentra-una-botella/index.html",
-      "sha256": "dd7ef9422bcc9d8237ce610ea8a2a185c20c3db0c5a665f354fc6214b69091db"
+      "sha256": "6e76094f0e478dc9aa2b0dc3a9dfe5ef15605a5c04a777b6941f26f62373f1f2"
     },
     {
       "path": "es-mx/index.html",
-      "sha256": "e94852043a8eadb17597e10816ba49555f4ea91c5c04d18c3f1b256613718455"
+      "sha256": "95801eefa6d05d504b2d16844b47946bc1c7d5c58ad6f898ae3660b2c601f985"
     },
     {
       "path": "es-mx/linea-don-terry/index.html",
@@ -1019,7 +1019,7 @@
     },
     {
       "path": "locator/index.html",
-      "sha256": "e0c3e2d409346ae00a9181adb3e35b615b6f7cc81047cf3efb0e0d04b5e3c13d"
+      "sha256": "b5f7ac56be99d6abba03aa2449c94019c3b3e5e0645dd0321662d3d2dd41f715"
     },
     {
       "path": "reposado-test.png",
@@ -1044,6 +1044,10 @@
     {
       "path": "assets/js/locator-actions.js",
       "sha256": "30746e914ac42e94e6c2ed7083a994f0035420053d527d1bd36d9653561f58a8"
+    },
+    {
+      "path": "assets/js/locator-rules.js",
+      "sha256": "4af3fc92081a85ef594ef436794826225ec203151bf02c4f7fbeec93b6f5a831"
     }
   ]
 }

@@ -133,36 +133,26 @@
   .popup-link { color: var(--teal); text-decoration: none; }
   .popup-link:hover { text-decoration: underline; }
 
-  /* ── Mobile ── */
+  .locator-actions { display:flex; flex-wrap:wrap; gap:4px 12px; margin-top:5px; }
+  .locator-actions a { min-height:44px; display:inline-flex; align-items:center; padding:0 5px; color:#0f766e; font-size:13px; }
+  .locator-actions a.primary { font-weight:700; }
+  #search, #nearest-btn, .chip, #map-toggle { min-height:44px; font-size:14px; }
+  #map-toggle { display:none; }
+  #map.unavailable { display:none; }
+  #empty button { min-height:44px; margin-top:8px; padding:0 10px; cursor:pointer; }
+  #store-list:empty { display:none; }
   @media (max-width: 600px) {
-    /* Lock the whole page to the viewport — no body scroll */
-    html, body { height: 100%; overflow: hidden; }
-
-    #wrap { flex-direction: column; height: 100vh; overflow: hidden; }
-
-    /* Map FIRST — takes the top 52% of the screen */
-    #map { order: -1; height: 52vh; min-height: 0; max-height: none; flex: none; }
-
-    /* Sidebar fills the remaining 48% below the map */
-    #sidebar {
-      order: 0;
-      width: 100%; border-right: none;
-      border-top: 1px solid var(--border);
-      flex: 1; min-height: 0;
-      overflow: hidden; flex-shrink: 0;
-      display: flex; flex-direction: column;
-    }
-
-    /* Hide the title/count header on mobile — saves space, map is already obvious */
-    #sidebar-head { display: none; }
-
-    /* Controls row: search + button side by side */
-    #controls { flex-direction: row; gap: 6px; padding: 8px 10px; }
-    #search { flex: 1; }
-    #nearest-btn { flex-shrink: 0; white-space: nowrap; width: auto; padding: 7px 10px; font-size: 11px; }
-
-    /* List fills remaining space and scrolls internally */
-    #store-list { flex: 1; overflow-y: auto; max-height: none; padding: 4px 8px 8px; }
+    #wrap { flex-direction:column; overflow:hidden; }
+    #sidebar { width:100%; border:0; flex:1; min-height:0; z-index:1; }
+    #sidebar-head { padding:9px 12px; }
+    #controls { gap:5px; padding:7px 10px; }
+    #mobile-options { display:flex; gap:6px; }
+    #nearest-btn, #map-toggle { flex:1; }
+    #map-toggle:not([hidden]) { display:block; }
+    #map { display:none; }
+    #wrap.mobile-map #map:not(.unavailable) { display:block; flex:none; height:38%; }
+    .store-name { font-size:15px; }
+    .store-addr { font-size:13px; }
   }
 </style>
 </head>
@@ -172,49 +162,88 @@
   <div id="sidebar">
     <div id="sidebar-head">
       <h2>Sueños Tequila</h2>
-      <p id="count-label">Loading locations…</p>
+      <p id="count-label" role="status">Loading locations…</p>
     </div>
     <div id="controls">
       <div id="type-filter">
-        <button class="chip on" data-cat="all"         onclick="setTypeFilter('all', this)">All</button>
-        <button class="chip retail" data-cat="retail"  onclick="setTypeFilter('retail', this)">🛒 Retail Stores</button>
-        <button class="chip" data-cat="hospitality"    onclick="setTypeFilter('hospitality', this)">🍹 Bars &amp; Restaurants</button>
+        <button type="button" class="chip on retail" data-cat="retail" aria-pressed="true">Buy a bottle</button>
+        <button type="button" class="chip" data-cat="hospitality" aria-pressed="false">Find a pour</button>
       </div>
-      <input id="search" type="text" placeholder="Search by name or city…" autocomplete="off"/>
-      <button id="nearest-btn" onclick="findNearest()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
-        Find my nearest location
-      </button>
+      <input id="search" type="search" aria-label="Search by name, city or postal code" placeholder="Name, city or postal code" autocomplete="off"/>
+      <div id="mobile-options">
+        <button type="button" id="nearest-btn">Use my location</button>
+        <button type="button" class="chip" id="map-toggle" aria-controls="map" aria-expanded="false">Show map</button>
+      </div>
     </div>
     <div id="store-list"></div>
-    <div id="empty">No locations match your search.</div>
+    <div id="empty"><p id="empty-message"></p><button id="clear-search" type="button" class="chip" hidden>Clear search</button></div>
   </div>
   <div id="map"></div>
 </div>
 
 <script src="/assets/js/locator-actions.js"></script>
-<script>
+<script type="module">
+import { actionsFor, category, visibleStores, hasPin, normalizeSearch } from "/assets/js/locator-rules.js?v=1";
 // ── CONFIG ────────────────────────────────────────────────────────────────────
 const SUPABASE_URL = 'https://dowfjjthshbbgnvwxzjv.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRvd2ZqanRoc2hiYmdudnd4emp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2NzMxNjMsImV4cCI6MjA5NjI0OTE2M30.KnXWIp7BXqoxTv2-os77_7FphL5ZVn1XbB1HTwbxKsU';
 // ─────────────────────────────────────────────────────────────────────────────
 
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const sb = window.supabase?.createClient(SUPABASE_URL, SUPABASE_KEY);
+const market = new URLSearchParams(location.search).get('market') === 'mx' ? 'mx' : 'ca';
+const es = market === 'mx';
+document.documentElement.lang = es ? 'es-MX' : 'en-CA';
+const copy = es ? {
+  loading:'Cargando establecimientos…', buy:'Comprar una botella', pour:'Encontrar un bar',
+  search:'Nombre, ciudad o código postal', locate:'Usar mi ubicación', locating:'Buscando ubicación…',
+  show:'Ver mapa', hide:'Ocultar mapa', clear:'Borrar búsqueda', retail:'Tienda', hospitality:'Bar o restaurante',
+  directions:'Cómo llegar', call:'Llamar', website:'Sitio web', here:'Estás aquí', distance:'km de distancia',
+  noSearch:'Sin resultados. Prueba con el nombre, una ciudad cercana o un código postal.',
+  noResults:'Por ahora no hay establecimientos en esta categoría. Prueba la otra opción o vuelve más tarde.',
+  badLoad:'No pudimos cargar los establecimientos. Vuelve a intentarlo en un momento.',
+  unavailable:'Directorio no disponible', geoError:'No pudimos acceder a tu ubicación. Busca por ciudad o código postal.',
+  count:n=>n===1?'1 establecimiento en México':`${n} establecimientos en México`
+} : {
+  loading:'Loading locations…', buy:'Buy a bottle', pour:'Find a pour',
+  search:'Name, city or postal code', locate:'Use my location', locating:'Locating…',
+  show:'Show map', hide:'Hide map', clear:'Clear search', retail:'Retail store', hospitality:'Bar or restaurant',
+  directions:'Directions', call:'Call', website:'Website', here:'You are here', distance:'km away',
+  noSearch:'No matches. Try a nearby city, a store name, or a different postal code.',
+  noResults:'No listed locations in this category right now. Try the other option or check back later.',
+  badLoad:'Could not load current locations. Please try again shortly.',
+  unavailable:'Locator unavailable', geoError:'Couldn’t get your location. You can still search by city or postal code.',
+  count:n=>n===1?'1 location in Canada':`${n} locations in Canada`
+};
+const $ = id => document.getElementById(id);
+const setCopy=(id,value)=> { $(id).textContent=value; };
+setCopy('count-label',copy.loading);
+setCopy('nearest-btn',copy.locate); setCopy('map-toggle',copy.show); setCopy('clear-search',copy.clear);
+$('search').placeholder=copy.search; $('search').setAttribute('aria-label',copy.search);
+document.querySelector('[data-cat="retail"]').textContent=copy.buy;
+document.querySelector('[data-cat="hospitality"]').textContent=copy.pour;
+if(es) document.title='Dónde encontrar tequila Sueños en México';
 
-// OpenStreetMap tile layer (no API key required)
-const map = L.map('map', { zoomControl: true, attributionControl: true })
-              .setView([56, -96], 4);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',
-  maxZoom: 19,
-}).addTo(map);
-
-// Category: retail (liquor/grocery stores) vs hospitality (bars, restaurants, hotels, clubs)
-function category(s) {
-  const t = (s.type || '').toLowerCase();
-  return (t.includes('liquor') || t.includes('store') || t.includes('retail') || t.includes('grocery')) ? 'retail' : 'hospitality';
-}
-const CAT_LABEL = { retail: 'Retail Store', hospitality: 'Bar / Restaurant' };
+let map = null;
+try {
+  if (window.L) {
+    map = L.map('map', { zoomControl: true, attributionControl: true })
+      .setView(es ? [23.5,-102] : [56,-96], 4);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',
+      maxZoom: 19
+    }).addTo(map);
+  }
+} catch { map = null; }
+if (!map) { $('map').classList.add('unavailable'); $('map-toggle').hidden=true; }
+$('map-toggle').addEventListener('click',()=>{
+  const showing=$('wrap').classList.toggle('mobile-map');
+  $('map-toggle').setAttribute('aria-expanded',String(showing));
+  setCopy('map-toggle',showing?copy.hide:copy.show);
+  if (showing) { map?.invalidateSize(); drawBounds(latestBounds); }
+});
+$('nearest-btn').addEventListener('click',findNearest);
+$('clear-search').addEventListener('click',()=>{ $('search').value=''; $('search').focus(); applyFilters(); });
+document.querySelectorAll('#type-filter .chip').forEach(btn=>btn.addEventListener('click',()=>setTypeFilter(btn.dataset.cat,btn)));
 
 // Pin icon — drop-pin colored by category (teal = hospitality, amber = retail)
 function pinIcon(active, cat) {
@@ -258,11 +287,14 @@ function logoPin(logoUrl, active, cat) {
 let userMarker = null;
 
 let allStores = [];
-let markers   = {};
+let markers = Object.create(null);
+let latestBounds = [];
+let userLocation = null;
 let activeId  = null;
 
 // ── Load ──────────────────────────────────────────────────────────────────────
 let loading = false;
+let loadFailed = false;
 async function load() {
   if (loading) return;
   loading = true;
@@ -271,14 +303,13 @@ async function load() {
     if (!response.ok) throw new Error('Retailer source unavailable');
     const data = await response.json();
     if (!Array.isArray(data.stores)) throw new Error('Invalid retailer response');
-    allStores = data.stores.filter(s => Number.isFinite(s.lat) && Number.isFinite(s.lng));
-    document.getElementById('empty').textContent = 'No locations match your search.';
+    allStores = data.stores;
+    loadFailed = false;
     applyFilters();
   } catch {
     allStores = [];
+    loadFailed = true;
     renderAll([]);
-    document.getElementById('count-label').textContent = 'Retailer information unavailable';
-    document.getElementById('empty').textContent = 'Unable to load current locations. Please try again shortly.';
   } finally { loading = false; }
 }
 // Refresh current status on return and once per minute while visible.
@@ -287,102 +318,86 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden) load
 setInterval(() => { if (!document.hidden) load(); }, 60000);
 
 // ── Render markers + list ─────────────────────────────────────────────────────
-function renderAll(list, highlightId) {
-  Object.values(markers).forEach(m => map.removeLayer(m));
-  markers = {};
-  document.getElementById('store-list').innerHTML = '';
-  document.getElementById('empty').style.display = 'none';
+function renderActions(store) {
+  const links = actionsFor(store), cat=category(store);
+  return '<div class="locator-actions">' +
+    ['directions','call','website'].filter(key=>links[key]).map(key=>
+      `<a ${key==='directions'?'class="primary" ':''}href="${esc(links[key])}" ${key==='call'?'':'target="_blank" rel="noopener noreferrer" '}` +
+      `aria-label="${esc(copy[key] + ' – ' + store.name)}" data-retailer-action="${key}" data-retailer-id="${esc(store.id)}" data-venue-type="${cat}">${copy[key]}</a>`
+    ).join('') + '</div>';
+}
+function drawBounds(bounds) {
+  if (!map || !bounds.length) return;
+  if (bounds.length === 1) map.setView(bounds[0], 13);
+  else map.fitBounds(bounds, { padding: [35, 35], maxZoom: 13 });
+}
+function renderAll(list) {
+  Object.values(markers).forEach(m => map?.removeLayer(m));
+  markers = Object.create(null);
+  $('store-list').innerHTML = '';
+  $('empty').style.display = 'none';
   activeId = null;
-
-  document.getElementById('count-label').textContent =
-    list.length ? `${list.length} location${list.length !== 1 ? 's' : ''} carrying Sueños` : 'No locations found';
-
+  latestBounds = [];
+  setCopy('count-label',loadFailed ? copy.unavailable : copy.count(list.length));
   if (!list.length) {
-    document.getElementById('empty').style.display = 'block';
+    $('empty').style.display = 'block';
+    const searched = !!normalizeSearch($('search').value);
+    setCopy('empty-message', loadFailed ? copy.badLoad : searched ? copy.noSearch : copy.noResults);
+    $('clear-search').hidden=loadFailed || !searched;
     return;
   }
-
-  const bounds = [];
-
   list.forEach(s => {
-    const isHighlight = s.id === highlightId;
     const cat = category(s);
-    const icon = s.logo_url ? logoPin(s.logo_url, isHighlight, cat) : pinIcon(isHighlight, cat);
-    const m = L.marker([s.lat, s.lng], { icon });
-    m.bindPopup(makePopup(s), { maxWidth: 260, minWidth: 200 });
-    m.addTo(map);
-    m.on('click', () => setActive(s.id, false));
-    markers[s.id] = m;
-    bounds.push([s.lat, s.lng]);
-
-    const el = document.createElement('div');
-    el.className = 'store-item' + (isHighlight ? ' active' : '');
+    const address = s.address || [s.city,s.province].filter(Boolean).join(', ');
+    if (map && hasPin(s) && s.address) {
+      const marker = L.marker([s.lat, s.lng], { icon: iconFor(s, false) });
+      marker.bindPopup(`<div class="popup-inner"><div class="popup-name">${esc(s.name)}</div><p class="store-addr">${esc(address)}</p>${renderActions(s)}</div>`, { maxWidth: 270, minWidth: 200 });
+      marker.addTo(map).on('click', () => setActive(s.id, true));
+      markers[s.id] = marker;
+      latestBounds.push([s.lat, s.lng]);
+    }
+    const el = document.createElement('article');
+    el.className = 'store-item';
     el.id = `item-${s.id}`;
-    el.innerHTML = `<div class="store-name">${esc(s.name)}</div>`
-      + (s.address ? `<div class="store-addr">${esc(s.address)}</div>` : '')
-      + `<span class="store-type ${cat}">${cat === 'retail' ? '🛒 Retail Store' : '🍹 Bar / Restaurant'}</span>`
-      + (s._dist   ? `<div class="store-dist">📍 ${s._dist} km away</div>` : '');
-    el.addEventListener('click', () => {
-      setActive(s.id, true);
-      map.setView([s.lat, s.lng], 14, { animate: true });
-      markers[s.id]?.openPopup();
+    el.innerHTML = `<h3 class="store-name">${esc(s.name)}</h3>`
+      + (address ? `<div class="store-addr">${esc(address)}</div>` : '')
+      + `<span class="store-type ${cat}">${copy[cat]}</span>`
+      + (s._dist ? `<div class="store-dist">${s._dist} ${copy.distance}</div>` : '')
+      + renderActions(s);
+    if (markers[s.id]) el.addEventListener('click', event => {
+      if (event.target.closest('a')) return;
+      setActive(s.id, false);
+      if (getComputedStyle($('map')).display !== 'none') {
+        map.setView([s.lat, s.lng], 14);
+        markers[s.id]?.openPopup();
+      }
     });
-    document.getElementById('store-list').appendChild(el);
+    $('store-list').appendChild(el);
   });
-
-  if (highlightId) {
-    setActive(highlightId, true);
-    const hit = list.find(s => s.id === highlightId);
-    if (hit) { map.setView([hit.lat, hit.lng], 13, { animate: true }); markers[hit.id]?.openPopup(); }
-  } else if (bounds.length === 1) {
-    map.setView(bounds[0], 13);
-  } else if (bounds.length > 1) {
-    map.fitBounds(bounds, { padding: [40, 40], maxZoom: 13 });
-  }
-}
-
-function makePopup(s) {
-  let h = `<div class="popup-inner">`;
-  h += `<div class="popup-header">`;
-  if (s.logo_url) h += `<img class="popup-logo" src="${esc(s.logo_url)}" alt="${esc(s.name)} logo" onerror="this.style.display='none'">`;
-  h += `<div><div class="popup-name">${esc(s.name)}</div>`;
-  const cat = category(s);
-  h += `<span class="store-type ${cat}">${cat === 'retail' ? '🛒 Retail Store' : '🍹 Bar / Restaurant'}</span></div>`;
-  h += `</div>`;
-  if (s.address) h += `<div class="popup-row">${ico('pin')} <span>${esc(s.address)}</span></div>`;
-  if (s.phone)   h += `<div class="popup-row">${ico('phone')} <a href="tel:${esc(s.phone)}" class="popup-link" data-retailer-action="call" data-retailer-id="${esc(s.id)}" data-venue-type="${cat}">${esc(s.phone)}</a></div>`;
-  if (s.website) {
-    const url = /^https?:\/\//i.test(s.website) ? s.website : 'https://' + s.website;
-    h += `<div class="popup-row">${ico('globe')} <a href="${esc(url)}" target="_blank" rel="noopener" class="popup-link" data-retailer-action="website" data-retailer-id="${esc(s.id)}" data-venue-type="${cat}">Visit website</a></div>`;
-  }
-  if (Number.isFinite(Number(s.lat)) && Number.isFinite(Number(s.lng))) {
-    const destination = encodeURIComponent(`${s.lat},${s.lng}`);
-    h += `<div class="popup-row">${ico('pin')} <a href="https://www.google.com/maps/dir/?api=1&amp;destination=${destination}" target="_blank" rel="noopener" class="popup-link" data-retailer-action="directions" data-retailer-id="${esc(s.id)}" data-venue-type="${cat}">Get directions</a></div>`;
-  }
-  h += `</div>`;
-  return h;
+  if (map && getComputedStyle($('map')).display !== 'none') drawBounds(latestBounds);
 }
 
 function storeById(id) { return allStores.find(s => s.id === id); }
-function iconFor(s, active) { const c = category(s||{}); return s?.logo_url ? logoPin(s.logo_url, active, c) : pinIcon(active, c); }
+function iconFor(s, active) { const c = category(s||{}); return s?.logo_url ? logoPin(esc(s.logo_url), active, c) : pinIcon(active, c); }
 
 // ── Type filter ───────────────────────────────────────────────────────────────
-let typeFilter = 'all';
+let typeFilter = 'retail';
 function setTypeFilter(cat, btn) {
   typeFilter = cat;
-  document.querySelectorAll('#type-filter .chip').forEach(c => c.classList.remove('on'));
-  btn.classList.add('on');
+  document.querySelectorAll('#type-filter .chip').forEach(chip=>{
+    chip.classList.toggle('on',chip===btn);
+    chip.setAttribute('aria-pressed',String(chip===btn));
+  });
   applyFilters();
   trackEvent({ event_type: 'search', query: `[filter] ${cat}` });
 }
 function applyFilters() {
-  const q = document.getElementById('search').value.toLowerCase().trim();
-  let list = allStores;
-  if (typeFilter !== 'all') list = list.filter(s => category(s) === typeFilter);
-  if (q) list = list.filter(s =>
-    (s.name || '').toLowerCase().includes(q) ||
-    (s.address || '').toLowerCase().includes(q)
-  );
+  let list = visibleStores(allStores, {country:market,type:typeFilter,query:$('search').value});
+  if (userLocation) {
+    const {latitude,longitude}=userLocation;
+    list = list.map(s => ({...s, km: hasPin(s) && s.address ? haversine(latitude,longitude,s.lat,s.lng) : Infinity}))
+      .sort((a,b)=>a.km-b.km).map(s=>({...s, _dist:Number.isFinite(s.km)?s.km.toFixed(1):''}));
+  }
   renderAll(list);
 }
 
@@ -401,46 +416,24 @@ function setActive(id, scrollList) {
 
 // ── Find nearest ──────────────────────────────────────────────────────────────
 function findNearest() {
-  if (!navigator.geolocation) {
-    alert('Your browser does not support location access.');
-    return;
-  }
-  const btn = document.getElementById('nearest-btn');
-  btn.disabled = true;
-  btn.textContent = 'Locating…';
-
-  navigator.geolocation.getCurrentPosition(
-    pos => {
-      const { latitude: uy, longitude: ux } = pos.coords;
-
-      // Drop a user pin
+  if (!navigator.geolocation) { alert(copy.geoError); return; }
+  const btn=$('nearest-btn');
+  btn.disabled=true;
+  setCopy('nearest-btn',copy.locating);
+  navigator.geolocation.getCurrentPosition(pos=>{
+    userLocation=pos.coords;
+    if (map) {
       if (userMarker) map.removeLayer(userMarker);
-      userMarker = L.circleMarker([uy, ux], {
-        radius: 7, fillColor: '#3b82f6', color: '#fff', weight: 2, fillOpacity: 1,
-      }).addTo(map).bindPopup('You are here').openPopup();
-
-      // Sort stores by distance (respecting the active type filter)
-      const pool = typeFilter === 'all' ? allStores : allStores.filter(s => category(s) === typeFilter);
-      const withDist = pool.map(s => {
-        const d = haversine(uy, ux, s.lat, s.lng);
-        return { ...s, _dist: d.toFixed(1) };
-      }).sort((a, b) => parseFloat(a._dist) - parseFloat(b._dist));
-
-      renderAll(withDist, withDist[0]?.id);
-
-      btn.disabled = false;
-      btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg> Find my nearest location`;
-    },
-    err => {
-      btn.disabled = false;
-      btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg> Find my nearest location`;
-      if (err.code === 1) alert('Location access was denied. Please allow location in your browser settings.');
-      else alert('Could not determine your location. Please try again.');
-    },
-    { timeout: 10000, maximumAge: 60000 }
-  );
+      userMarker=L.circleMarker([pos.coords.latitude,pos.coords.longitude],{
+        radius:7,fillColor:'#3b82f6',color:'#fff',weight:2,fillOpacity:1
+      }).addTo(map).bindPopup(copy.here);
+    }
+    applyFilters();
+    btn.disabled=false; setCopy('nearest-btn',copy.locate);
+  },()=>{
+    btn.disabled=false; setCopy('nearest-btn',copy.locate); alert(copy.geoError);
+  },{ timeout:10000,maximumAge:60000 });
 }
-
 // Haversine distance in km
 function haversine(lat1, lon1, lat2, lon2) {
   const R = 6371;
@@ -452,7 +445,7 @@ function rad(d) { return d * Math.PI / 180; }
 
 // ── Analytics ─────────────────────────────────────────────────────────────────
 async function trackEvent(payload) {
-  try { await sb.from('map_analytics').insert(payload); } catch(e) { /* silent */ }
+  try { await sb?.from('map_analytics').insert(payload); } catch(e) { /* silent */ }
 }
 
 // ── Search ────────────────────────────────────────────────────────────────────
@@ -473,15 +466,6 @@ document.getElementById('search').addEventListener('input', e => {
 function esc(str) {
   return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
-function ico(type) {
-  const i = {
-    pin:   `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
-    phone: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012 .88h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.9a16 16 0 006.29 6.29l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>`,
-    globe: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>`,
-  };
-  return i[type] || '';
-}
-
 load();
 </script>
 </body>

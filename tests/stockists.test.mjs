@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {loadStockists,createStockistHandler,publicAccounts,renderDirectory,PUBLIC_ACCOUNT_COLUMNS} from '../lib/stockists.mjs';
 const template=readFileSync('en-ca/find-a-bottle/index.html','utf8');
-const record=(overrides={})=>({id:'test-retailer',name:'Synthetic Test Retailer',type:'Liquor Store',address:'1 Test Street',lat:48,lng:-123,city:'Test City',province:'BC',phone:'555-0100',website:'https://example.invalid',logo_url:null,status:'Listed',deleted_at:null,notes:'PRIVATE_SENTINEL',contact:'PRIVATE_SENTINEL',budget_total:777,...overrides});
+const record=(overrides={})=>({id:'test-retailer',name:'Synthetic Test Retailer',type:'Liquor Store',address:'1 Test Street',lat:48,lng:-123,city:'Test City',province:'BC',phone:'250-555-0100',website:'https://example.invalid',logo_url:null,status:'Listed',deleted_at:null,notes:'PRIVATE_SENTINEL',contact:'PRIVATE_SENTINEL',budget_total:777,...overrides});
 const response=(rows,total=rows.length)=>new Response(JSON.stringify(rows),{headers:{'Content-Range':`${rows.length?'0-'+(rows.length-1):'*'}/${total}`}});
 const req=(path='/en-ca/find-a-bottle/',method='GET')=>new Request(`https://suenos.ca${path}`,{method});
 test('current status and deletions remove accounts from both uncached HTML and API',async()=>{
@@ -28,7 +28,7 @@ test('source failure never reuses successful retailer data and differs from an e
 });
 test('crawler receives escaped retailer HTML without executing JavaScript; missing coordinates still appear in directory',async()=>{
   const handler=createStockistHandler({template,now:()=>new Date('2026-11-17T12:00:00Z'),load:async()=>publicAccounts([record({name:'<script>bad()</script>',lat:null,lng:null,website:'javascript:alert(1)'}),record({id:'bar',name:'Test Bar',type:'Restaurant'})])});
-  const r=await handler(req());const html=await r.text();assert.equal(r.status,200);assert.match(html,/&lt;script&gt;bad\(\)&lt;\/script&gt;/);assert.ok(!html.includes('javascript:alert'));assert.match(html,/<h3>Test City, BC<\/h3>/);assert.match(html,/This is not live inventory/);assert.match(html,/2026-11-17T12:00:00.000Z/);assert.match(html,/href="https:\/\/suenos.ca\/en-ca\/find-a-bottle\/" rel="canonical"/);assert.match(html,/iframe[^>]*src="\/locator\/"/);assert.ok(!html.includes('<h4>Test Bar</h4>'));
+  const r=await handler(req());const html=await r.text();assert.equal(r.status,200);assert.match(html,/&lt;script&gt;bad\(\)&lt;\/script&gt;/);assert.ok(!html.includes('javascript:alert'));assert.match(html,/<h3>Test City, BC<\/h3>/);assert.equal((html.match(/Confirm stock or menu availability/g)||[]).length,1);assert.match(html,/2026-11-17T12:00:00.000Z/);assert.match(html,/href="https:\/\/suenos.ca\/en-ca\/find-a-bottle\/" rel="canonical"/);assert.match(html,/iframe[^>]*src="\/locator\/"/);assert.ok(!html.includes('<h4>Test Bar</h4>'));
   assert.deepEqual((await (await handler(req('/api/public-stockists'))).json()).stores.map(s=>s.id).sort(),['bar','test-retailer']);
 });
 test('public projection strips private fields and unsafe URLs, rejects unknown identity/status',()=>{

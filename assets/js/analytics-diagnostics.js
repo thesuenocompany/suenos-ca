@@ -45,7 +45,7 @@
   pageview();
   const consentChanged=()=>{
     const now=allowed();if(now===consented)return;consented=now;
-    if(now){record('session_start');if(document.querySelector('iframe[src*="suenos-locator.netlify.app"]'))record('retailer_locator_view');if(/\/(cocktails|cocteles)\/[^/]+\/?$/.test(location.pathname))record('recipe_view');}
+    if(now){record('session_start');if(document.querySelector('iframe[src^="/locator/"]'))record('retailer_locator_view');if(/\/(cocktails|cocteles)\/[^/]+\/?$/.test(location.pathname))record('recipe_view');}
     else{queue=queue.filter(r=>r.event==='page_view'&&!r.session);remove(VISITOR);remove(SESSION);visitor=null;session=null;active=0;}
   };
   document.addEventListener('suenos:consent-changed',consentChanged);
