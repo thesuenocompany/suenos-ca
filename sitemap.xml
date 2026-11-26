@@ -160,4 +160,46 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://suenos.ca/en-ca/tequila-guide/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://suenos.ca/en-ca/tequila-guide/" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://suenos.ca/es-mx/guia-del-tequila/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://suenos.ca/en-ca/tequila-guide/" />
+  </url>
+  <url>
+    <loc>https://suenos.ca/en-ca/tequila-guide/blanco-vs-reposado-vs-anejo/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://suenos.ca/en-ca/tequila-guide/blanco-vs-reposado-vs-anejo/" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://suenos.ca/es-mx/guia-del-tequila/blanco-reposado-y-anejo/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://suenos.ca/en-ca/tequila-guide/blanco-vs-reposado-vs-anejo/" />
+  </url>
+  <url>
+    <loc>https://suenos.ca/en-ca/tequila-guide/what-does-100-percent-agave-mean/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://suenos.ca/en-ca/tequila-guide/what-does-100-percent-agave-mean/" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://suenos.ca/es-mx/guia-del-tequila/que-significa-100-por-ciento-de-agave/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://suenos.ca/en-ca/tequila-guide/what-does-100-percent-agave-mean/" />
+  </url>
+  <url>
+    <loc>https://suenos.ca/es-mx/guia-del-tequila/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://suenos.ca/en-ca/tequila-guide/" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://suenos.ca/es-mx/guia-del-tequila/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://suenos.ca/en-ca/tequila-guide/" />
+  </url>
+  <url>
+    <loc>https://suenos.ca/es-mx/guia-del-tequila/blanco-reposado-y-anejo/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://suenos.ca/en-ca/tequila-guide/blanco-vs-reposado-vs-anejo/" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://suenos.ca/es-mx/guia-del-tequila/blanco-reposado-y-anejo/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://suenos.ca/en-ca/tequila-guide/blanco-vs-reposado-vs-anejo/" />
+  </url>
+  <url>
+    <loc>https://suenos.ca/es-mx/guia-del-tequila/que-significa-100-por-ciento-de-agave/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://suenos.ca/en-ca/tequila-guide/what-does-100-percent-agave-mean/" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://suenos.ca/es-mx/guia-del-tequila/que-significa-100-por-ciento-de-agave/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://suenos.ca/en-ca/tequila-guide/what-does-100-percent-agave-mean/" />
+  </url>
 </urlset>
