@@ -19,6 +19,8 @@
   };
 
   const storedPreferences=readStoredPreferences();
+  const entryUrl=window.location.href;
+  let pageViewQueued=false;
   const consentDefaults={
     analytics_storage:storedPreferences?.analytics?'granted':'denied',
     ad_storage:storedPreferences?.marketing?'granted':'denied',
@@ -26,8 +28,7 @@
     ad_personalization:storedPreferences?.marketing?'granted':'denied'
   };
 
-  // Only pause the first measurement ping when the visitor has not made a choice.
-  // Returning visitors should begin with their saved consent state before GA4 config runs.
+  // Returning visitors start with their saved consent state before GA4 config runs.
   if(!storedPreferences)consentDefaults.wait_for_update=500;
 
   window.dataLayer=window.dataLayer||[];
@@ -36,7 +37,18 @@
   window.gtag('consent','default',consentDefaults);
   window.gtag('js',new Date());
   window.gtag('config',GA_ID,{anonymize_ip:true,send_page_view:false});
-  window.gtag('event','page_view',{page_location:window.location.href,page_title:document.title,transport_type:'beacon'});
+  const queuePageView=preferences=>{
+    if(pageViewQueued||preferences?.analytics!==true)return;
+    pageViewQueued=true;
+    window.gtag('event','page_view',{page_location:entryUrl,page_title:document.title,transport_type:'beacon'});
+  };
+
+  // app.js dispatches this after updating Google's consent state. A new
+  // visitor who opts in gets one attributed landing view on the same page.
+  document.addEventListener('suenos:consent-changed',()=>{
+    queuePageView(window.SuenosConsent?.preferences);
+  });
+  queuePageView(storedPreferences);
 
   if(!document.querySelector('script[data-suenos-google-tag]')){
     const script=document.createElement('script');

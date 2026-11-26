@@ -611,7 +611,7 @@
     },
     {
       "path": "assets/js/app.js",
-      "sha256": "05558f66bf2590d5d85e06d35e5d06aed4d372aeaed1fe6cf827c41013f8040a"
+      "sha256": "8a6724f062475cc905555d2edb0a442ba2ee21d9b66d6e7025cb3b915e334de9"
     },
     {
       "path": "assets/js/cocktail-admin.js",
@@ -623,7 +623,7 @@
     },
     {
       "path": "assets/js/consent-bootstrap.js",
-      "sha256": "23d5529fab91281c433dc26187ff71110270004483f3b1cb9ed100988697b550"
+      "sha256": "5f807aaf50d4b5720efb4c87c7b9be898c69da9713d1109d710820ffdc03ce71"
     },
     {
       "path": "assets/js/contest-add-retailer-focus-20260813.js",
