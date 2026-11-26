@@ -63,3 +63,10 @@
 .tg-nom img{width:min(100%,18.5rem);margin-inline:auto}
 .tg-nom a{color:#155d56}
 @media(max-width:650px){.tg-nom-grid{grid-template-columns:1fr}.tg-nom img{width:min(100%,13rem);margin-inline:0}}
+
+/* Real label crop, set apart from the decorative Sueños stamp above it. */
+.tg-nom-proof{display:grid;justify-items:center;align-content:center}
+.tg-nom-label{width:min(100%,15.5rem);margin:.25rem 0 0;text-align:center}
+.tg-nom .tg-nom-label img{width:100%;height:auto;border-radius:3px}
+.tg-nom-label figcaption{margin:.45rem 0 0;font-size:.77rem;color:#40504c}
+@media(max-width:650px){.tg-nom-proof{justify-items:start}.tg-nom-label{width:min(100%,13rem)}}

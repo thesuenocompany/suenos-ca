@@ -879,7 +879,7 @@
     },
     {
       "path": "en-ca/how-its-made/index.html",
-      "sha256": "0fb8304b2015c6bfc07d559eb78f2764e023c157c050a2f9945c7b02709e92b4"
+      "sha256": "0fa454499c0a1aab62914c9030ed1dbbe8e23167b3f674c4ae003bdfc8790b9d"
     },
     {
       "path": "en-ca/index.html",
@@ -959,7 +959,7 @@
     },
     {
       "path": "es-mx/como-se-hace/index.html",
-      "sha256": "448851d01fab563bbcb7dfddd84aa32a66403d76f3596520742bccdb970f5887"
+      "sha256": "82a875a9d07064c70cee2fe0e21d14a4f598d344a4fad1b6c5561da2f5e216dc"
     },
     {
       "path": "es-mx/consumo-responsable/index.html",
@@ -1011,7 +1011,7 @@
     },
     {
       "path": "image-sitemap.xml",
-      "sha256": "3ba7612fa58abe98ee135583bccc1530e7b1fb4a9a3861562e05aa9637e394c0"
+      "sha256": "ac78adc7217a0a49704da280d086be894fdbcee69a4f3d60d861cdaf6ed8e49e"
     },
     {
       "path": "index.html",
@@ -1075,7 +1075,7 @@
     },
     {
       "path": "assets/css/tequila-guide.css",
-      "sha256": "03aeee40e3313d4dcd4124d6954a5cbdb49238bb4718ffacdec71177e7eeda4a"
+      "sha256": "04f35751ccd4769ee18f6560525b4998f20c29a1bb76e75bca146d64d9af8053"
     },
     {
       "path": "assets/images/tequila-guide/blue-weber-agave-640.webp",
@@ -1112,6 +1112,18 @@
     {
       "path": "assets/images/tequila-guide/nom-1632-stamp.webp",
       "sha256": "87b3aceb6ef0e6e02a24d9f278d9d5b2c6d4efc1d50b0228fd1ed41cd9dd32c9"
+    },
+    {
+      "path": "assets/images/tequila-guide/jalisco-agave-field.webp",
+      "sha256": "c7c72860357b83b2fee006a21dc9ef6dc912caa13ffee56f91bfc5656827c854"
+    },
+    {
+      "path": "assets/images/tequila-guide/jalisco-agave-field-800.webp",
+      "sha256": "eae5470804753254821af794c701c5b7631a1a3570c9835df0b4043d1dccf670"
+    },
+    {
+      "path": "assets/images/tequila-guide/blanco-label-nom-1632.webp",
+      "sha256": "19a2e27b1d4a0c3f45f6c2aa045c1fe962e4e7afdbc173457914309516845a98"
     }
   ]
 }
