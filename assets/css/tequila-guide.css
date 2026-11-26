@@ -70,3 +70,9 @@
 .tg-nom .tg-nom-label img{width:100%;height:auto;border-radius:3px}
 .tg-nom-label figcaption{margin:.45rem 0 0;font-size:.77rem;color:#40504c}
 @media(max-width:650px){.tg-nom-proof{justify-items:start}.tg-nom-label{width:min(100%,13rem)}}
+
+/* Keep native video controls unobscured by the process timeline decoration. */
+.process-milestone-visual.tg-bottling-visual{min-height:0;align-self:center;aspect-ratio:4/3}
+.tg-bottling-visual::after{display:none}
+.tg-bottling-video{display:block;width:100%;height:auto;aspect-ratio:4/3;background:#0c171b;object-fit:contain}
+.tg-bottling-caption{font-size:.9rem;color:#46504a}

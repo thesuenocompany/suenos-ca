@@ -879,7 +879,7 @@
     },
     {
       "path": "en-ca/how-its-made/index.html",
-      "sha256": "0fa454499c0a1aab62914c9030ed1dbbe8e23167b3f674c4ae003bdfc8790b9d"
+      "sha256": "b336a1da7f3cad260108195aad8b9af6de23af655edb7fc49ba45823ef4db4c5"
     },
     {
       "path": "en-ca/index.html",
@@ -959,7 +959,7 @@
     },
     {
       "path": "es-mx/como-se-hace/index.html",
-      "sha256": "82a875a9d07064c70cee2fe0e21d14a4f598d344a4fad1b6c5561da2f5e216dc"
+      "sha256": "f3ce801d46c5ed57c796c2e77fcbe84fabc2a0e3fecb0d5c10d7e544ef0656df"
     },
     {
       "path": "es-mx/consumo-responsable/index.html",
@@ -1011,7 +1011,7 @@
     },
     {
       "path": "image-sitemap.xml",
-      "sha256": "ac78adc7217a0a49704da280d086be894fdbcee69a4f3d60d861cdaf6ed8e49e"
+      "sha256": "55910f4e05a7d23190c32b7f80b3c8b0ed858cc2c79cfbf79ec0f3e0b3fe1aea"
     },
     {
       "path": "index.html",
@@ -1075,7 +1075,7 @@
     },
     {
       "path": "assets/css/tequila-guide.css",
-      "sha256": "04f35751ccd4769ee18f6560525b4998f20c29a1bb76e75bca146d64d9af8053"
+      "sha256": "26904b2efea8588c539fe5bff1b33a6dd1cc9ce55514ffcebecaa5d88d5e33b6"
     },
     {
       "path": "assets/images/tequila-guide/blue-weber-agave-640.webp",
@@ -1124,6 +1124,14 @@
     {
       "path": "assets/images/tequila-guide/blanco-label-nom-1632.webp",
       "sha256": "19a2e27b1d4a0c3f45f6c2aa045c1fe962e4e7afdbc173457914309516845a98"
+    },
+    {
+      "path": "assets/images/tequila-guide/suenos-bottling-poster.webp",
+      "sha256": "63c221cd2e580167d3b010be69a413e22ea70dee0ad0e1aaa65979333cd8d17a"
+    },
+    {
+      "path": "assets/video/production/suenos-blanco-bottling.mp4",
+      "sha256": "236614ec7693a691a91f6e0c1c9f0141921d8b9d62096ad23eeb84ca9e8c7cf5"
     }
   ]
 }
