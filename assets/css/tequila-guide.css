@@ -53,3 +53,13 @@
  .tg-table th:first-child{width:20%}
 }
 @media print{.tg-callout,.tg-hero figcaption{display:none!important}}
+
+/* The NOM mark is brand artwork; the explanation remains readable HTML. */
+.tg-nom{background:#efe5d1;color:#172526;padding:clamp(1.75rem,3.9vw,3.2rem) 0}
+.tg-nom-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,19rem);align-items:center;gap:clamp(1rem,5vw,4rem);max-width:980px}
+.tg-nom .tg-kicker{color:#28665e;margin-bottom:.6rem}
+.tg-nom h2{font:600 clamp(1.8rem,4vw,2.75rem)/1.12 Georgia,serif;letter-spacing:-.03em;margin:0}
+.tg-nom p:not(.tg-kicker){max-width:58ch;margin:.72rem 0 0}
+.tg-nom img{width:min(100%,18.5rem);margin-inline:auto}
+.tg-nom a{color:#155d56}
+@media(max-width:650px){.tg-nom-grid{grid-template-columns:1fr}.tg-nom img{width:min(100%,13rem);margin-inline:0}}

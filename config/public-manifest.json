@@ -879,7 +879,7 @@
     },
     {
       "path": "en-ca/how-its-made/index.html",
-      "sha256": "a7a584faa7363d180b1158a20da20d9e9bb03a6bfa1db0e0b66d84b2830c75e1"
+      "sha256": "0fb8304b2015c6bfc07d559eb78f2764e023c157c050a2f9945c7b02709e92b4"
     },
     {
       "path": "en-ca/index.html",
@@ -959,7 +959,7 @@
     },
     {
       "path": "es-mx/como-se-hace/index.html",
-      "sha256": "9095b9975e7c0298677cb556ecc4fc75e2114e81e43badce6ae9cf1f62273906"
+      "sha256": "448851d01fab563bbcb7dfddd84aa32a66403d76f3596520742bccdb970f5887"
     },
     {
       "path": "es-mx/consumo-responsable/index.html",
@@ -1075,7 +1075,7 @@
     },
     {
       "path": "assets/css/tequila-guide.css",
-      "sha256": "9a3a2d7f9d55781e7a071313eb4c8d2f4a64f025f7eb8391bdefc1fc364a8468"
+      "sha256": "03aeee40e3313d4dcd4124d6954a5cbdb49238bb4718ffacdec71177e7eeda4a"
     },
     {
       "path": "assets/images/tequila-guide/blue-weber-agave-640.webp",
@@ -1108,6 +1108,10 @@
     {
       "path": "assets/images/tequila-guide/tequila-styles.webp",
       "sha256": "817f45ba2a25a6613a34b0b55f7746d2749f7dd4e3b455eab71db179cd5763b9"
+    },
+    {
+      "path": "assets/images/tequila-guide/nom-1632-stamp.webp",
+      "sha256": "87b3aceb6ef0e6e02a24d9f278d9d5b2c6d4efc1d50b0228fd1ed41cd9dd32c9"
     }
   ]
 }
