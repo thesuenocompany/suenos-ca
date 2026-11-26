@@ -277,7 +277,12 @@
   const gate=document.getElementById('age-gate');
   const toast=document.getElementById('toast');
   const show=m=>{if(!toast)return;toast.textContent=m;toast.style.display='block';setTimeout(()=>toast.style.display='none',2300)};
-  const track=(name,params={})=>{window.SuenosAnalytics?.track(name,params);if(typeof window.gtag==='function')window.gtag('event',name,params)};
+  const track=(name,params={})=>{
+    window.SuenosAnalytics?.track(name,params);
+    // Do not let a cookieless age-gate or automatic locator event start a
+    // GA session before the visitor can opt in and send their landing view.
+    if(Consent.preferences?.analytics===true&&typeof window.gtag==='function')window.gtag('event',name,params);
+  };
   const ageAlreadyConfirmed=!!localStorage.getItem(key);
 
   Consent.init({showBannerOnInit:!gate||ageAlreadyConfirmed});
