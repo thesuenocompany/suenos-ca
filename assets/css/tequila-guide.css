@@ -1,0 +1,55 @@
+/* Tequila Guide. Deliberately scoped so public-site style and recipe styling remain unchanged. */
+.tg-hero{background:#0b2325;color:#f3eadd;padding:clamp(2.15rem,6.3vw,5.5rem) 0}
+.tg-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(1.6rem,5.2vw,5rem);align-items:center}
+.tg-hero-copy{max-width:39rem}
+.tg-kicker{color:#77d1ce;font-size:.76rem;line-height:1.4;letter-spacing:.19em;font-weight:800;text-transform:uppercase;margin:0 0 1rem}
+.tg-hero h1{font-family:Georgia,serif;font-weight:600;font-size:clamp(2.45rem,6.05vw,5.7rem);line-height:1;letter-spacing:-.058em;margin:0;max-width:18ch;text-wrap:balance}
+.tg-deck{font-size:clamp(1.02rem,1.65vw,1.28rem);max-width:48ch;color:#ebe3d6;margin:1.3rem 0 0;line-height:1.6}
+.tg-byline{color:#b9cccc;font-size:.86rem;margin:1.3rem 0 0}
+.tg-crumb{display:inline-block;color:#f4c184;text-decoration:underline;text-underline-offset:.23em;margin:0 0 1.6rem}
+.tg-hero figure,.tg-margarita figure{margin:0}
+.tg-image{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;background:#183b3a}
+.tg-hero figcaption,.tg-margarita figcaption{font-size:.72rem;color:#c9d4ca;margin-top:.5rem}
+.tg-paper,.tg-hub{background:#efe5d1;color:#172526;padding:clamp(2.5rem,6vw,5rem) 0}
+.tg-hub h2,.tg-paper h2,.tg-callout h2{font-family:Georgia,serif;font-weight:600;line-height:1.13;letter-spacing:-.026em;text-wrap:balance}
+.tg-hub>.container>h2{font-size:clamp(2.05rem,4.3vw,3rem);margin:0 0 1.3rem}
+.tg-card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1rem,2.1vw,2rem)}
+.tg-card{background:#fbf4e6;border:1px solid #d6c6ab;display:flex;flex-direction:column}
+.tg-card>div{padding:1.2rem 1.2rem 1.35rem;flex:1;display:flex;flex-direction:column;align-items:flex-start}
+.tg-card h2{font-size:clamp(1.35rem,2.45vw,2rem);margin:0;max-width:18ch}
+.tg-card p{font-size:.97rem;margin:.7rem 0 1.15rem;max-width:35ch}
+.tg-card .tg-arrow{margin-top:auto}
+.tg-arrow{font-size:.91rem;font-weight:800;text-decoration:underline;text-underline-offset:.23em}
+.tg-hub a:hover,.tg-reading a:hover{color:#176966}
+.tg-reading{max-width:880px;font-size:clamp(1rem,1.5vw,1.13rem);line-height:1.64}
+.tg-reading h2{font-size:clamp(1.7rem,3.5vw,2.35rem);margin:2.05rem 0 .55rem}
+.tg-reading h2:first-child{margin-top:0}
+.tg-reading p{max-width:70ch}
+.tg-reading p a,.tg-related a{color:#165c58;text-decoration:underline;text-underline-offset:.20em;font-weight:700}
+.tg-table table{border-collapse:collapse;width:100%;line-height:1.43}
+.tg-table th,.tg-table td{padding:1rem;text-align:left;vertical-align:top;border-bottom:1px solid #b7aa92}
+.tg-table thead{background:#143534;color:#f9edda;font-size:.84rem;letter-spacing:.025em}
+.tg-table tbody th{color:#154c48}
+.tg-table tbody tr:nth-child(2n+1){background:#f8efdf}
+.tg-reading .tg-source{font-size:.9rem;color:#404946;margin-top:.85rem}
+.tg-related{padding:1.3rem 1.4rem;border-top:3px solid #267d78;background:#faf0df;margin-top:2.3rem}
+.tg-related h2,.tg-related ul{margin:.15rem 0}
+.tg-related ul{padding-left:1.25rem}
+.tg-related li+li{margin-top:.35rem}
+.tg-callout{background:#102c2d;color:#f3eadd;padding:clamp(1.65rem,4vw,3.4rem) 0;border-top:1px solid #385554}
+.tg-callout-grid h2{font-size:clamp(1.65rem,4.2vw,3.35rem);margin:0;max-width:26ch}
+.tg-callout-grid p:not(.tg-kicker){margin:.8rem 0 0;max-width:58ch;line-height:1.6}
+.tg-callout .tg-arrow{color:#f3c17d}
+.tg-callout a:hover{color:#fff4d9}
+.tg-margarita{scroll-margin-top:8rem}
+.tg-margarita .tg-callout-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.25rem,4vw,3.5rem);align-items:center}
+@media(max-width:760px){
+ .tg-hero-grid,.tg-card-grid,.tg-margarita .tg-callout-grid{grid-template-columns:1fr}
+ .tg-hero h1{max-width:21ch}
+ .tg-card h2{max-width:none}
+ .tg-card-grid{max-width:570px;margin:auto}
+ .tg-table th,.tg-table td{padding:.65rem .38rem;font-size:.85rem;overflow-wrap:anywhere}
+ .tg-table table{table-layout:fixed}
+ .tg-table th:first-child{width:20%}
+}
+@media print{.tg-callout,.tg-hero figcaption{display:none!important}}

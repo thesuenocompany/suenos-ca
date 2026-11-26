@@ -843,7 +843,7 @@
     },
     {
       "path": "en-ca/cocktails/suenos-margarita/index.html",
-      "sha256": "cd7df9b940fc6bb27f9139fa8fe75aafb913cfc4e8dba85fb07a8846f9088f82"
+      "sha256": "ef1adc5f911b6dfa407c120a725d831945af97cfdcda57947258e6f9b12127f0"
     },
     {
       "path": "en-ca/cocktails/tequila-old-fashioned/index.html",
@@ -871,7 +871,7 @@
     },
     {
       "path": "en-ca/faq/index.html",
-      "sha256": "474ed9d0245cb14a5e160d9ff548964f7dfcd55547d60bcd8c3dadaf6ea65711"
+      "sha256": "a5e4504de84d1f583e06c48075a29b476cf30f3b997251414daab19c37101d49"
     },
     {
       "path": "en-ca/find-a-bottle/index.html",
@@ -879,11 +879,11 @@
     },
     {
       "path": "en-ca/how-its-made/index.html",
-      "sha256": "31d1f02fea9a97523f8859b8e61ac347016de79fa327a79e617b29564c22f183"
+      "sha256": "a7a584faa7363d180b1158a20da20d9e9bb03a6bfa1db0e0b66d84b2830c75e1"
     },
     {
       "path": "en-ca/index.html",
-      "sha256": "14e71cc74fb82d5d61af47132f7b67fb01e01d88e5f801bc874cc7207ab36130"
+      "sha256": "a4fab37e4ab7b730d5bb48253a0562e282c254aa8fa863068904dba0dd4c075c"
     },
     {
       "path": "en-ca/our-story/index.html",
@@ -891,7 +891,7 @@
     },
     {
       "path": "en-ca/our-tequila/index.html",
-      "sha256": "39fe745a551c0e627759eb0675d22403fe8fb88deedb7db8612fc06fafbe4f6d"
+      "sha256": "49b270ea5694a1120240ff96e1dc333ebd82eefc75d2e41157cb0b47bc6097a6"
     },
     {
       "path": "en-ca/privacy-policy/index.html",
@@ -947,7 +947,7 @@
     },
     {
       "path": "es-mx/cocteles/suenos-margarita/index.html",
-      "sha256": "fad8dc4ae4a8643d3b5e178f3ae9a15f477312c668d930cd2d5b36e0d24bb2fd"
+      "sha256": "951c7b7647ac76996b4db41841a68d65221860a7632eccb032f31b2aa355bf36"
     },
     {
       "path": "es-mx/cocteles/tequila-old-fashioned/index.html",
@@ -959,7 +959,7 @@
     },
     {
       "path": "es-mx/como-se-hace/index.html",
-      "sha256": "2d2fd11307c1fbad61112393ea88021e9aec5472b4c6650e1c9b463c27ea9172"
+      "sha256": "9095b9975e7c0298677cb556ecc4fc75e2114e81e43badce6ae9cf1f62273906"
     },
     {
       "path": "es-mx/consumo-responsable/index.html",
@@ -975,7 +975,7 @@
     },
     {
       "path": "es-mx/index.html",
-      "sha256": "95801eefa6d05d504b2d16844b47946bc1c7d5c58ad6f898ae3660b2c601f985"
+      "sha256": "7417ac2cd931dd09ba7313fda298012cb870f8aab1b6e5957f307ffdcf35c304"
     },
     {
       "path": "es-mx/linea-don-terry/index.html",
@@ -987,7 +987,7 @@
     },
     {
       "path": "es-mx/nuestro-tequila/index.html",
-      "sha256": "5620165aea83b079b255044ded40495a5a8de774e3ac60b162801439eecb1267"
+      "sha256": "8e421e8bc230d22ecff8fc71680c7cb4af9f9569c9f6551c32364f9d0a1ed079"
     },
     {
       "path": "es-mx/politica-de-privacidad/index.html",
@@ -995,7 +995,7 @@
     },
     {
       "path": "es-mx/preguntas-frecuentes/index.html",
-      "sha256": "fe6a23993aff0d0f4bb230263588c37eb8bed8e6689c2e0b962b2ccb4bad982c"
+      "sha256": "cf3f14215a187d1e31d3866ff4bbd8f4b9da23c34edc82d14a608de475a506c2"
     },
     {
       "path": "favicon.ico",
@@ -1035,7 +1035,7 @@
     },
     {
       "path": "sitemap.xml",
-      "sha256": "b5bfa813883df8270dcde8896bdbcc765b0c40402f37adcd772af7b3236c3fca"
+      "sha256": "b1b1f3651411734db66065f9afe408ca4a96a1a2ed6aa1a5bbeae437c6879220"
     },
     {
       "path": "where-next/index.html",
@@ -1048,6 +1048,66 @@
     {
       "path": "assets/js/locator-rules.js",
       "sha256": "eca519ee58b99485d8c14e117ca79718514f269445f0d24a5dabbd4eca2a8e2e"
+    },
+    {
+      "path": "en-ca/tequila-guide/index.html",
+      "sha256": "c356f5b097eb2f3195283dcfaaba4757a1b895fb0599c1e0015520608b0554c2"
+    },
+    {
+      "path": "en-ca/tequila-guide/blanco-vs-reposado-vs-anejo/index.html",
+      "sha256": "245ea20bf4f768b347b2d2a0cd8c446bb36839456787145707edca804bb1dee3"
+    },
+    {
+      "path": "en-ca/tequila-guide/what-does-100-percent-agave-mean/index.html",
+      "sha256": "e70afb60cb3c08f62098f4dfeb76ddf293138c79bbe80f419927b713d764fff3"
+    },
+    {
+      "path": "es-mx/guia-del-tequila/index.html",
+      "sha256": "ecd22e672d70552b2197aea62170522059890e19a7b9cf849a2a5ac07edb72d1"
+    },
+    {
+      "path": "es-mx/guia-del-tequila/blanco-reposado-y-anejo/index.html",
+      "sha256": "d29f0d034d62d19941b86846d1a7e16bb675682e2204fb71783d38356ddfb603"
+    },
+    {
+      "path": "es-mx/guia-del-tequila/que-significa-100-por-ciento-de-agave/index.html",
+      "sha256": "ccaa66135eef1d13b3955e3c45e864b660bc693a9452461fe753d7117eae9cd5"
+    },
+    {
+      "path": "assets/css/tequila-guide.css",
+      "sha256": "9a3a2d7f9d55781e7a071313eb4c8d2f4a64f025f7eb8391bdefc1fc364a8468"
+    },
+    {
+      "path": "assets/images/tequila-guide/blue-weber-agave-640.webp",
+      "sha256": "7dc9f1d930e3addf4dd06a3e6049d8f21f150f70b9e3cae3f224539f36c2270c"
+    },
+    {
+      "path": "assets/images/tequila-guide/blue-weber-agave.webp",
+      "sha256": "6f9e5d8dd15487b4e654f791bcb36301abd67ad89893d9948cae2e44f6afb538"
+    },
+    {
+      "path": "assets/images/tequila-guide/field-guide-cover-640.webp",
+      "sha256": "dc2478b898a61a46adb2749c728b3d03cb48673a5a1bc73210cc46b658b99299"
+    },
+    {
+      "path": "assets/images/tequila-guide/field-guide-cover.webp",
+      "sha256": "33576c8d175f2fe11295db1c168e47079cbe473bb0dc05f6dc4ccc306d84ded5"
+    },
+    {
+      "path": "assets/images/tequila-guide/margarita-comparison-640.webp",
+      "sha256": "366f84df6cf3733b9a455b2cfcfb7a1692d21e5e0350f9605a664e2089de1d44"
+    },
+    {
+      "path": "assets/images/tequila-guide/margarita-comparison.webp",
+      "sha256": "5e8ff26e64cea8d8069207a7c01e423ed366cb7babfe2eb75f9146fbe6db9606"
+    },
+    {
+      "path": "assets/images/tequila-guide/tequila-styles-640.webp",
+      "sha256": "e157e57da2faed3e9d3ec55246aa6c17f61b1c51f5fbb5e458becaffca1f8b6c"
+    },
+    {
+      "path": "assets/images/tequila-guide/tequila-styles.webp",
+      "sha256": "817f45ba2a25a6613a34b0b55f7746d2749f7dd4e3b455eab71db179cd5763b9"
     }
   ]
 }
