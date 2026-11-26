@@ -412,7 +412,35 @@
   });
 
   const societyModal=document.querySelector('[data-society-modal]');
-  const societyForm=document.querySelector('[data-society-form]');
+  const societySignup=document.querySelector('[data-society-emailoctopus]');
+  const societyAge=societySignup?.querySelector('#society-legal-age');
+  const societyProvider=societySignup?.querySelector('[data-society-provider]');
+  const societyStatus=societySignup?.querySelector('[data-society-form-status]');
+  let societyProviderLoading=false;
+  const loadSocietyProvider=()=>{
+    if(!societyAge||!societyProvider||!societySignup)return;
+    societyProvider.hidden=!societyAge.checked;
+    if(!societyAge.checked && societyStatus)societyStatus.textContent='';
+    if(!societyAge.checked||societyProviderLoading||societyProvider.querySelector('form'))return;
+    const id=societySignup.dataset.societyEmailoctopus;
+    if(!['27136690-e9f1-11f1-9481-c979c46caff8','96261d3e-e9f1-11f1-810e-3f7d4931e5b4'].includes(id))return;
+    societyProviderLoading=true;
+    if(societyStatus)societyStatus.textContent=societyIsSpanish?'Cargando formulario…':'Loading signup form…';
+    const embed=document.createElement('script');
+    embed.async=true;
+    embed.dataset.form=id;
+    embed.src=`https://eocampaign1.com/form/${id}.js`;
+    embed.addEventListener('load',()=>{
+      societyProviderLoading=false;
+      if(societyStatus)societyStatus.textContent=societyProvider.querySelector('form')?'':societyStatus.dataset.loadError;
+    },{once:true});
+    embed.addEventListener('error',()=>{
+      societyProviderLoading=false;
+      embed.remove();
+      if(societyStatus)societyStatus.textContent=societyStatus.dataset.loadError;
+    },{once:true});
+    societyProvider.appendChild(embed);
+  };
   const societyFormWrap=societyModal?.querySelector('.society-form-wrap');
   const societyIsSpanish=(document.documentElement.lang||'').toLowerCase().startsWith('es');
   const societyThanksCopy=societyIsSpanish?{
@@ -438,17 +466,6 @@
   const findBottleHref=()=>{
     const selector=societyIsSpanish?'a[href*="encuentra-una-botella"]':'a[href*="find-a-bottle"]';
     return document.querySelector(selector)?.getAttribute('href')||(societyIsSpanish?'/es-mx/encuentra-una-botella/':'/en-ca/find-a-bottle/');
-  };
-
-  const ensureMailchimpFrame=()=>{
-    if(document.querySelector('iframe[name="suenos-mailchimp-submit"]'))return;
-    const frame=document.createElement('iframe');
-    frame.name='suenos-mailchimp-submit';
-    frame.title='Mailchimp signup response';
-    frame.hidden=true;
-    frame.tabIndex=-1;
-    frame.setAttribute('aria-hidden','true');
-    document.body.appendChild(frame);
   };
 
   const renderSocietyThanks=()=>{
@@ -478,7 +495,7 @@
     track('newsletter_signup_open',{language:document.documentElement.lang||'unknown',page_location:window.location.href});
     setTimeout(()=>{
       if(societySubmitted)societyModal.querySelector('.society-thanks-cta')?.focus();
-      else societyModal.querySelector('input[type="email"]')?.focus();
+      else (societyAge?.checked ? societyProvider?.querySelector('input[type="email"]')||societyAge : societyAge)?.focus();
     },60);
   };
   const closeSociety=()=>{
@@ -489,19 +506,26 @@
     societyLastFocus?.focus?.();
   };
 
-  ensureMailchimpFrame();
-  if(societyForm)societyForm.target='suenos-mailchimp-submit';
+  societyAge?.addEventListener('change',loadSocietyProvider);
+  for(const eventName of ['click','submit']){
+    societyProvider?.addEventListener(eventName,event=>{
+      if(societyAge?.checked)return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      societyAge?.focus();
+    },true);
+  }
 
   document.querySelectorAll('[data-society-open]').forEach(button=>button.addEventListener('click',openSociety));
   document.querySelectorAll('[data-society-close]').forEach(button=>button.addEventListener('click',closeSociety));
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&societyModal&&!societyModal.hidden)closeSociety()});
 
-  societyForm?.addEventListener('submit',()=>{
+  document.addEventListener('emailoctopus:form.success',event=>{
+    if(!societySignup||!societyAge?.checked||societySubmitted||
+      event.detail?.form_id!==societySignup.dataset.societyEmailoctopus)return;
     const language=document.documentElement.lang||'unknown';
     track('newsletter_signup_submit',{language,page_location:window.location.href,form_name:'Suenos Society'});
     Consent.trackMeta('Lead',{content_name:'Suenos Society'});
-    const submitButton=societyForm.querySelector('button[type="submit"]');
-    if(submitButton){submitButton.disabled=true;submitButton.setAttribute('aria-busy','true');}
-    setTimeout(renderSocietyThanks,420);
+    renderSocietyThanks();
   });
 })();

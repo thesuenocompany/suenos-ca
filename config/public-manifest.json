@@ -611,7 +611,7 @@
     },
     {
       "path": "assets/js/app.js",
-      "sha256": "8a6724f062475cc905555d2edb0a442ba2ee21d9b66d6e7025cb3b915e334de9"
+      "sha256": "9959982d4843c034d849e402a2276a0d38cf43cbced0fd2ebbca86e285c319da"
     },
     {
       "path": "assets/js/cocktail-admin.js",
@@ -803,59 +803,59 @@
     },
     {
       "path": "en-ca/cocktails/cantarito/index.html",
-      "sha256": "3bfb4fd2d00d0098798a30814ecdaae77148bbc25d56f5069e9753036cacd8b2"
+      "sha256": "dcd71b0fc42c91e99b26c5da26a6646af5c03c906c44c0ffcc48d953d1d78a0e"
     },
     {
       "path": "en-ca/cocktails/don-terry/index.html",
-      "sha256": "c473571066c291c41625b7c8bb14f4ef3dd31a55fe66040f5727d0604d67e2e9"
+      "sha256": "c161d9b372110940d7a7929943490ebe725d348565854b615c12b0a2d7429903"
     },
     {
       "path": "en-ca/cocktails/el-diablo/index.html",
-      "sha256": "e7da411e51a870e4d3e14efeaa755907cad39aa6b3ed4a2c92a11977a5300cb1"
+      "sha256": "e35fd7ee7185008e3db91e504ad45915335f923508b134572fecf93b11691e12"
     },
     {
       "path": "en-ca/cocktails/index.html",
-      "sha256": "b58d6cb5fe7816e4a215b2d24cba7ab84d71c0b55e150cf7157a363b1bd38496"
+      "sha256": "d79f3c8ae57761d5043ea416875ea8325f40567fa20e6c79d023d09aa99fcee6"
     },
     {
       "path": "en-ca/cocktails/jalisco-haze/index.html",
-      "sha256": "f3e9ee8e0da87e778ccac75865b1105fae3bf084a0c42ee979c1723dda35e073"
+      "sha256": "7a701a9daed59c3c6d7e51ddf652aed437f7156194f936ae31baafdb74c1a0b8"
     },
     {
       "path": "en-ca/cocktails/matador/index.html",
-      "sha256": "81b8e6419bcd0aae394a8b19f631e7bb94bc86f464ea6442f01179fef24b86bd"
+      "sha256": "9e05092e54e588494982e7b39974b3521fd423cf221f492dffb5f90c15408672"
     },
     {
       "path": "en-ca/cocktails/mexican-mule/index.html",
-      "sha256": "8e80a341d0820ebe2a4885679a97eb85b2222491e096aede3d4ba66be52b8568"
+      "sha256": "2793b13b59e4036d875175556375463b2b1bae62532b90d3dd9151921c039da2"
     },
     {
       "path": "en-ca/cocktails/paloma-del-sueno/index.html",
-      "sha256": "91c0162b508b2b3c3d8b7f6ed3d4058d27d72fd0dffa36378c85f9018aa2f329"
+      "sha256": "2b492df0a7fee8332c8fea037fd3ebf59a881f9dbde8131940d05c1f8f2ca285"
     },
     {
       "path": "en-ca/cocktails/ranch-water/index.html",
-      "sha256": "bebd3c266e64828e06776d3f8604317d1edbc9f57305da408dde7bd3be08069a"
+      "sha256": "2fe7c2e69cf2d9c52c70349fd5b8b761c816f53190814233b3f81310398fdbef"
     },
     {
       "path": "en-ca/cocktails/recipe/index.html",
-      "sha256": "eeb2a9bbc03c162a4d0411c4829bd5058a1fe81c8414c91b815e1beb5243a579"
+      "sha256": "30ec33c95b9ccc946ca42ae09bd88240c392c8c37adfc5d0e902a15e56a31b8e"
     },
     {
       "path": "en-ca/cocktails/suenos-margarita/index.html",
-      "sha256": "ef1adc5f911b6dfa407c120a725d831945af97cfdcda57947258e6f9b12127f0"
+      "sha256": "aee7f47d2d2b457d0481a6b512835437ea4286484f94c5cdf3fb5e06ce14c70b"
     },
     {
       "path": "en-ca/cocktails/tequila-old-fashioned/index.html",
-      "sha256": "0f0c9b5d1226c569387cf197dca26c4ce68acf871c226768eead6fd78977da56"
+      "sha256": "e34c30a534fdbd4e0500948d98d90baceac805479d412fdc707774b9bf5b9947"
     },
     {
       "path": "en-ca/cocktails/tequila-sunrise/index.html",
-      "sha256": "170a54fdd5b02b834879fc75f7fa9552c324b403b2059c74c0c6fc945d2e49f5"
+      "sha256": "5b0a561780e661a7ac8179c4b157bd87d7ce0651b009b14d939314b4a1b57c60"
     },
     {
       "path": "en-ca/contact/index.html",
-      "sha256": "cf03cc0708fd0b177ae05c0aa75ab0061264991ddd124e8cd149a3538496d429"
+      "sha256": "bf6174c6f94fddbb499fb452baf8756aee0d8e2e0deb98e49d44b0485a3b7b8f"
     },
     {
       "path": "en-ca/contests/contest/index.html",
@@ -867,135 +867,135 @@
     },
     {
       "path": "en-ca/don-terry-hotline/index.html",
-      "sha256": "8468e52ae94e13cc762c26ee656ace066c9fff95f8f649bf197a2c526d61a8f5"
+      "sha256": "93032671dc673cbb274071267d76b88a871ae1e422f7c7b6f40aae24d6edc1a9"
     },
     {
       "path": "en-ca/faq/index.html",
-      "sha256": "a5e4504de84d1f583e06c48075a29b476cf30f3b997251414daab19c37101d49"
+      "sha256": "a4a6dd1c675ae8d8bff9c68001ec29814a1b120a5df74bd08b67a54122b32945"
     },
     {
       "path": "en-ca/find-a-bottle/index.html",
-      "sha256": "d572a1abe5511dfac180d2aab357b5ec7eba6ff417a737bbc8b4f6b9d7b5102e"
+      "sha256": "195a4f60ea9a541d9761ae7b31c935cc1c6dde0e6f9a8e920fb99a41f182f2d6"
     },
     {
       "path": "en-ca/how-its-made/index.html",
-      "sha256": "b336a1da7f3cad260108195aad8b9af6de23af655edb7fc49ba45823ef4db4c5"
+      "sha256": "9cb179734d0ab6c312d5303a336d41a66a32e0c6d7c01c9819f8da6debcbb29b"
     },
     {
       "path": "en-ca/index.html",
-      "sha256": "a4fab37e4ab7b730d5bb48253a0562e282c254aa8fa863068904dba0dd4c075c"
+      "sha256": "3821837c5c32e923df415313ea86ed86ff0b3401c22282d0da855f9de47b02fd"
     },
     {
       "path": "en-ca/our-story/index.html",
-      "sha256": "93352cbf3b8637745d7134a14a99b65423c76748a914a9096daefa8afe73ec22"
+      "sha256": "d996fddfa4fb5f97d774319ab520b966e0184d7447e4706dbfd6ec89f6a3a98c"
     },
     {
       "path": "en-ca/our-tequila/index.html",
-      "sha256": "49b270ea5694a1120240ff96e1dc333ebd82eefc75d2e41157cb0b47bc6097a6"
+      "sha256": "f52c3f07ccc3fdd6a5ea29b7bfc5b1eb7cc5c00e3db124e0523a1d83d225d415"
     },
     {
       "path": "en-ca/privacy-policy/index.html",
-      "sha256": "d10927d304b749cabca8c37e01f4043dae317f5f1de8686bd3c4a7811acafe7c"
+      "sha256": "9f041a5da060ab0db90eec5877dc3b3148a34823c1c16011f99773ab9b65ce86"
     },
     {
       "path": "en-ca/responsible-enjoyment/index.html",
-      "sha256": "4d82a98c9902983869c9cfca2d4e7b7a9ad1ebcab5bb8417db8562db957599f4"
+      "sha256": "2ceb816f2c5e73a382221de78fc1cc3e33307887c3b329f00dd868c5fc656b20"
     },
     {
       "path": "en-ca/trade/index.html",
-      "sha256": "ee5b81381dd5a3e660e63d67a3760deb2d28ae3f3a2d5b127f23a598c3bb7c4d"
+      "sha256": "9f58b60ab78ff273e75fc69890d2fbd0e45607c3e89d2463dabb1e22d3d38cc0"
     },
     {
       "path": "es-mx/cocteles/cantarito/index.html",
-      "sha256": "0a8b1d8da6a1891a51043ed636ee3dba9e3a34f9f99dcef5021fe3797168181a"
+      "sha256": "6660f420280e51f794eb539a8465edb213ffac5895bb50edd8bfb90c6d44ceda"
     },
     {
       "path": "es-mx/cocteles/don-terry/index.html",
-      "sha256": "b94be69b442e8ed654b6ed02027d0c2b481c030240621d9f0303ef1e18da93c5"
+      "sha256": "9cd3e77b6cfe242019e4ae5a4c50a91706cc5e2f6e214dd3bedf6df5e38b66d1"
     },
     {
       "path": "es-mx/cocteles/el-diablo/index.html",
-      "sha256": "fae97839cf398f528c6f3dea760a3b7e8aa121cdba6d8c7ce2a88be65e12613c"
+      "sha256": "8c15191be2e42bb9a4e5f067536aa8ff39ecb688255737684619eb0700df256c"
     },
     {
       "path": "es-mx/cocteles/index.html",
-      "sha256": "124ff28db104be9900b6c54b8318f3420c09d75b18bd25f735c933c8cd579159"
+      "sha256": "12daf31f89c3ff9223d21215bfddac320c9b60f41e217aa26e04d7da28096fe4"
     },
     {
       "path": "es-mx/cocteles/jalisco-haze/index.html",
-      "sha256": "2861f9b65ba2be18da233f4b8b2c974cd71e6c6e74a4424b7491b1cc3801a49a"
+      "sha256": "ea203c7f2b1e3b58b2e6d99db689bd62a40ae312a1b935c07d51ab419d3ecd84"
     },
     {
       "path": "es-mx/cocteles/matador/index.html",
-      "sha256": "b8ce6add99851dd882c84078a2f72c0a7f4327a4bc04818031c3c5dc77bddb3d"
+      "sha256": "7a0b646f4555112059bc97ca257d2aa10f685414d1543a0881617c59b0ef5353"
     },
     {
       "path": "es-mx/cocteles/mexican-mule/index.html",
-      "sha256": "b2bacae11ee95f6475abeeeea0306ba76b208474b3f004f46bb769e697fdae75"
+      "sha256": "1576976d931cb55ee8cba709f409604016c7c4a7343c254bb83aee8cafe35168"
     },
     {
       "path": "es-mx/cocteles/paloma-del-sueno/index.html",
-      "sha256": "44062b239c924fadcb31e714c93ed884a00e81a5592dbb7911c7e1153ca5c310"
+      "sha256": "56eb361109a04d2d25fc4d15fdb7a88fccbf96d76a746a644c292d522ff155cf"
     },
     {
       "path": "es-mx/cocteles/ranch-water/index.html",
-      "sha256": "952456c1894032ef3dfe8167579c09604ebce221063c0aa234ff0553d8264098"
+      "sha256": "df60b3f10719d213b5483b145eeb352ad93b8875076eb46d03582d3c0e9a92ce"
     },
     {
       "path": "es-mx/cocteles/recipe/index.html",
-      "sha256": "bec07728cab058c8cd129042cbedb509a4be304cc2bec15c01f6224480ca11f0"
+      "sha256": "952aff1b71e9e667759c14e457d71bbe4c7fa029fd05304dc1b4e0565ac655fb"
     },
     {
       "path": "es-mx/cocteles/suenos-margarita/index.html",
-      "sha256": "951c7b7647ac76996b4db41841a68d65221860a7632eccb032f31b2aa355bf36"
+      "sha256": "e05b0c73a751127ae962fd1c1ef47360e34392ae295ea852d1404366da79e255"
     },
     {
       "path": "es-mx/cocteles/tequila-old-fashioned/index.html",
-      "sha256": "77aefa6352e94dede5b5d61a0f7896708cc731b1ae53821a40aeabc2bc59ce99"
+      "sha256": "07688a01b5bcb51b51cbccf8ae595deca217418b195431de64dde41b446da687"
     },
     {
       "path": "es-mx/cocteles/tequila-sunrise/index.html",
-      "sha256": "44fdf60f675c2db977aa8f7bf64836e367aec62405fca5405a5e00d63b9e29cb"
+      "sha256": "17d4839698baf73c41d0ad1cc0b5ed48a226d6b673b4dfb004b678059cfeb460"
     },
     {
       "path": "es-mx/como-se-hace/index.html",
-      "sha256": "f3ce801d46c5ed57c796c2e77fcbe84fabc2a0e3fecb0d5c10d7e544ef0656df"
+      "sha256": "5e2ae2c6987170c121ac9fac140a329962d18ad4665df4379a5792566ef0bccd"
     },
     {
       "path": "es-mx/consumo-responsable/index.html",
-      "sha256": "3b40495fd5028cb3f285e74813321711978a1d45d59f961097f96b995aa7cf74"
+      "sha256": "0f8513ad114c69f24b01b0000ed9f5ffa7c156ee805a83c0abcc53602dad95b4"
     },
     {
       "path": "es-mx/contacto/index.html",
-      "sha256": "810a3013cdd14341671a40f062e66453cf30b1fc69b2a31d1ee0b86bfd8639c2"
+      "sha256": "d7d36c94bac629672b9673ee94b1b27502db73fad13cae9223f066c134c56c94"
     },
     {
       "path": "es-mx/encuentra-una-botella/index.html",
-      "sha256": "6e76094f0e478dc9aa2b0dc3a9dfe5ef15605a5c04a777b6941f26f62373f1f2"
+      "sha256": "850cc8a6a0939b8ee22f41f49f3fc35e2e98afddf38b4c42b942cb396ece0d06"
     },
     {
       "path": "es-mx/index.html",
-      "sha256": "7417ac2cd931dd09ba7313fda298012cb870f8aab1b6e5957f307ffdcf35c304"
+      "sha256": "0a032945b8ba794f5387f76f4809de60318aa3a1a9739f6d2dc09739ac41cb4d"
     },
     {
       "path": "es-mx/linea-don-terry/index.html",
-      "sha256": "7c5b4883333d3acfa3c03014051cd8344a01082d1c53693ae1bb2dc6fcab1aae"
+      "sha256": "4b47dc1566db4798b601b8af4b2e67922e279fe128d148c767b0def48b7243c5"
     },
     {
       "path": "es-mx/nuestra-historia/index.html",
-      "sha256": "62c7ff51bde697baa078adedafab694b945065407c0abd3d5d0ba1ccccfb9502"
+      "sha256": "d945077451b635067e50c61e4c8ee50103d9f7c5a729e43c2cf55201b8a36054"
     },
     {
       "path": "es-mx/nuestro-tequila/index.html",
-      "sha256": "8e421e8bc230d22ecff8fc71680c7cb4af9f9569c9f6551c32364f9d0a1ed079"
+      "sha256": "f2f773236b1e6c9e21dab7b5e071253c75e9054f187f33048bec3e96fa961d9f"
     },
     {
       "path": "es-mx/politica-de-privacidad/index.html",
-      "sha256": "7693bdaf2cfb414166bd4a2e974d265c277d94b10f2955bbd455a35bd4c49c1d"
+      "sha256": "0ee6022467b80f349aff4764542b02005ba050e801e6f1919119647a94aa41ca"
     },
     {
       "path": "es-mx/preguntas-frecuentes/index.html",
-      "sha256": "cf3f14215a187d1e31d3866ff4bbd8f4b9da23c34edc82d14a608de475a506c2"
+      "sha256": "cb4ebf267349248ae2e24275b3345f024dddefbc1f2e90ce8c8a928e031eabba"
     },
     {
       "path": "favicon.ico",
@@ -1051,27 +1051,27 @@
     },
     {
       "path": "en-ca/tequila-guide/index.html",
-      "sha256": "c356f5b097eb2f3195283dcfaaba4757a1b895fb0599c1e0015520608b0554c2"
+      "sha256": "9ea9a1fc7ef7cd76348c85d766fd89dd20977487713bc45fa679c7f98d37b060"
     },
     {
       "path": "en-ca/tequila-guide/blanco-vs-reposado-vs-anejo/index.html",
-      "sha256": "245ea20bf4f768b347b2d2a0cd8c446bb36839456787145707edca804bb1dee3"
+      "sha256": "83bb033a0a5352388e1fe56ef0be056f080203dcc774673698e833f64770eaff"
     },
     {
       "path": "en-ca/tequila-guide/what-does-100-percent-agave-mean/index.html",
-      "sha256": "e70afb60cb3c08f62098f4dfeb76ddf293138c79bbe80f419927b713d764fff3"
+      "sha256": "c91010bdfa7b620efeae07d6ab02bd610ebdc58e007b3851dbe0cc039baf36d2"
     },
     {
       "path": "es-mx/guia-del-tequila/index.html",
-      "sha256": "ecd22e672d70552b2197aea62170522059890e19a7b9cf849a2a5ac07edb72d1"
+      "sha256": "b5ec861d36bf842202105b7323e1f444f897dcf891db068b169f47f2e63201cc"
     },
     {
       "path": "es-mx/guia-del-tequila/blanco-reposado-y-anejo/index.html",
-      "sha256": "d29f0d034d62d19941b86846d1a7e16bb675682e2204fb71783d38356ddfb603"
+      "sha256": "64929f4d4b3dcddf1ee8396c55bc78d10008f69090587ef293e73c96ca8b996b"
     },
     {
       "path": "es-mx/guia-del-tequila/que-significa-100-por-ciento-de-agave/index.html",
-      "sha256": "ccaa66135eef1d13b3955e3c45e864b660bc693a9452461fe753d7117eae9cd5"
+      "sha256": "a9a301792d54dec915c71b2bedf825ed97357f5b269631f0e513b3beae4f7f6d"
     },
     {
       "path": "assets/css/tequila-guide.css",
@@ -1132,6 +1132,18 @@
     {
       "path": "assets/video/production/suenos-blanco-bottling.mp4",
       "sha256": "236614ec7693a691a91f6e0c1c9f0141921d8b9d62096ad23eeb84ca9e8c7cf5"
+    },
+    {
+      "path": "assets/images/society-welcome/suenos-grapefruit.jpg",
+      "sha256": "c8f1202d033f62ef383da36d5f2059039bdcb63f9365da47c0787334f3e8e7cf"
+    },
+    {
+      "path": "assets/images/society-welcome/suenos-pineapple.jpg",
+      "sha256": "1ebb53b48dbc3bce4342dd94f8518b805498e31a9b0a7cde98b33fa4453bd855"
+    },
+    {
+      "path": "assets/images/society-welcome/suenos-welcome-hero.jpg",
+      "sha256": "0a8bd232be0bf56ee2306d4b84759965416b9e26621ca003c50a8f5fd0b5f5d2"
     }
   ]
 }
