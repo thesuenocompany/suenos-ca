@@ -883,7 +883,7 @@
     },
     {
       "path": "en-ca/index.html",
-      "sha256": "3821837c5c32e923df415313ea86ed86ff0b3401c22282d0da855f9de47b02fd"
+      "sha256": "121a9e423a697ebf5c3c6202ceb9505d4de6bf833785f3bfdf27d5faf16f4fb5"
     },
     {
       "path": "en-ca/our-story/index.html",
@@ -1144,6 +1144,26 @@
     {
       "path": "assets/images/society-welcome/suenos-welcome-hero.jpg",
       "sha256": "0a8bd232be0bf56ee2306d4b84759965416b9e26621ca003c50a8f5fd0b5f5d2"
+    },
+    {
+      "path": "assets/css/home-vacation.css",
+      "sha256": "a2a2d53a1929091216a16ac873437d2b8a1904067d438b802667fd5205f36e53"
+    },
+    {
+      "path": "assets/images/attention-shoppers-poster.webp",
+      "sha256": "0ebfd98fcf7358b498d840f2546f0b43c124991c60aa8717437ede48f2e3a3fc"
+    },
+    {
+      "path": "assets/images/blanco-home-bottle.webp",
+      "sha256": "d65470fab77842d48f76d011e7a33999275d8d3fa4dda4fbb914a699262e12a0"
+    },
+    {
+      "path": "assets/js/home-vacation.js",
+      "sha256": "96fde9f7b7c3d86ee9ff4284ead8aab3d96c9abea2f4921100e0b3d35da5c782"
+    },
+    {
+      "path": "assets/video/home/attention-shoppers.mp4",
+      "sha256": "108321061972063f4c0a5acdcfb03d9b3fdb9244019cf602151e788becc8c495"
     }
   ]
 }
