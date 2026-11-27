@@ -883,7 +883,7 @@
     },
     {
       "path": "en-ca/index.html",
-      "sha256": "51526b0cc11decbd04838f981517a6762145db4ab9529ee1695f4281ad263a4e"
+      "sha256": "37af1fd891f6a8c00e421a46d312394a71a46e1b79249c0d7e3c45453e965320"
     },
     {
       "path": "en-ca/our-story/index.html",
@@ -1147,7 +1147,7 @@
     },
     {
       "path": "assets/css/home-vacation.css",
-      "sha256": "ed234a9c7391217312d51f79eeaf10f3d5bf9fcd6a14585b79428daeb6ee512e"
+      "sha256": "cd0b5ce74c790fc8b9b5eab4d93b093f932e5fd1a772c7e6429c99c5d616666b"
     },
     {
       "path": "assets/images/attention-shoppers-poster.webp",
@@ -1172,6 +1172,14 @@
     {
       "path": "assets/images/paradise-surf-print.webp",
       "sha256": "cba09622585e766dd3d5a0944d8912ae46af4022fd72abdfa37869c7cb9e0c08"
+    },
+    {
+      "path": "assets/images/blanco-bubble-sticker.webp",
+      "sha256": "5a92e7cb37d6f40fa3be83a185c1b4684d311e00ac4e0085eefd42eb2a62aaa6"
+    },
+    {
+      "path": "assets/images/paradise-complete.webp",
+      "sha256": "761f913d79dc5ed762b38244087d98023b529b24d1f4b12753bd9647b0bf633e"
     }
   ]
 }
